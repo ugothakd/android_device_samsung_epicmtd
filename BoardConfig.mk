@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,20 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# config.mk
+# BoardConfig.mk
 #
 # Product-specific compile-time definitions.
 #
-
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
-
-
-
-
-# inherit from the proprietary version
--include vendor/samsung/SPH-D700/BoardConfigVendor.mk
+# If the BoardConfigVendor.mk exists, inherit it.
+-include vendor/samsung/epic/BoardConfigVendor.mk
 
 TARGET_NO_BOOTLOADER := true
 #TARGET_NO_RECOVERY := true
@@ -46,33 +38,34 @@ ANDROID_ARM_LINKER := true
 
 BOARD_USES_HGL := true
 
-# this is is for gingerbread & CAMERA
-BOARD_USES_OVERLAY := true
-
-#FROYO CAMERA
-BOARD_USES_FROYO := true
-BOARD_USE_FROYO_LIBCAMERA := true
-
-#audio defines 
+# Set Audio related defines below.
 BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_ALSA_AUDIO := true
-BUILD_WITH_ALSA_UTILS := true
-ALSA_DEFAULT_SAMPLE_RATE := 44100
+#BOARD_USES_ALSA_AUDIO := true
+#BUILD_WITH_ALSA_UTILS := true
+#ALSA_DEFAULT_SAMPLE_RATE := 44100
 
+BOARD_NO_RGBX_8888 := true
+
+# Set Camera related defines below.
+#BOARD_USES_OVERLAY := false
+#BOARD_USES_COPYBIT := false
+#DEFAULT_FB_NUM := 0
+
+BOARD_USES_FROYO_GRALLOC := true
+BOARD_USE_FROYO_LIBCAMERA := true
 USE_CAMERA_STUB := false
-USE_CAMERA_STUB := false
+USE_OVERLAY_FORMAT_YCbCr_420_SP := TRUE
+BUILD_PV_VIDEO_ENCODERS := 1
 ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
-#USE_OVERLAY_FORMAT_YCbCr_420_SP := TRUE
-#BUILD_PV_VIDEO_ENCODERS := 1
-# opensource camera from samsung nexus s doesn't compile
-#ifeq ($(USE_CAMERA_STUB),false)
-#BOARD_CAMERA_LIBRARIES := libcamera
-#endif
 
-# WiFi related defines
+BOARD_V4L2_DEVICE := /dev/video1
+BOARD_CAMERA_DEVICE := /dev/video0
+BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
+
+# Set WIFI related defined below
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION := VER_0_6_X
 WIFI_DRIVER_FW_STA_PATH := "/system/etc/wifi/bcm4329_sta.bin"
@@ -81,15 +74,14 @@ BOARD_WLAN_DEVICE := bcm4329
 WIFI_DRIVER_MODULE_PATH := "/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt dhd_watchdog_ms=10 dhd_poll=1"
 WIFI_DRIVER_MODULE_NAME := "dhd"
-WIFI_IFACE_DIR  := "/data/wifi"
-WIFI_SUPP_CONFIG_FILE :=  "/data/wifi/bcm_supp.conf"
+WIFI_IFACE_DIR := "/data/misc/wifi"
 CONFIG_DRIVER_WEXT := true
+BOARD_WEXT_NO_COMBO_SCAN := true
 
-
-#USB tethering
+# Set USB Tether related defines below.
 RNDIS_DEVICE := "/sys/devices/virtual/sec/switch/tethering"
 
-# Bluetooth related defines
+# Set Bluetooth related defines below.
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_HAVE_BLUETOOTH := true
 BT_USE_BTL_IF := true
@@ -101,8 +93,7 @@ WITH_A2DP := true
 # EGL
 BOARD_EGL_CFG := device/samsung/epic/prebuilt/egl.cfg
 
-# Device related defines
-
+# Set Kernel and device related defines below.
 TARGET_PREBUILT_KERNEL := device/samsung/epic/kernel
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
 BOARD_KERNEL_BASE := 0x02e00000
@@ -119,18 +110,8 @@ BOARD_USERDATAIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x04ac0000)
 # The size of a block that can be marked bad.
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-#BOARD_BOOT_DEVICE := /dev/block/bml7
-#BOARD_DATA_DEVICE := /dev/block/stl10
-#BOARD_DATA_FILESYSTEM := auto
-#BOARD_DATA_FILESYSTEM_OPTIONS := llw,check=no,nosuid,nodev
-#BOARD_SYSTEM_DEVICE := /dev/block/stl9
-#BOARD_SYSTEM_FILESYSTEM := auto
-#BOARD_SYSTEM_FILESYSTEM_OPTIONS := llw,check=no
-#BOARD_CACHE_DEVICE := /dev/block/stl11
-#BOARD_CACHE_FILESYSTEM := auto
-#BOARD_CACHE_FILESYSTEM_OPTIONS := llw,check=no,nosuid,nodev
-BOARD_SDCARD_DEVICE_PRIMARY := /dev/block/mmcblk0
-BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk0p1
-BOARD_SDEXT_DEVICE := /dev/block/mmcblk0p2
 BOARD_USES_BMLUTILS := true
+
+# Set ClockworkMod related defines below.
+BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun0/file"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/epic/recovery/recovery_ui.c
