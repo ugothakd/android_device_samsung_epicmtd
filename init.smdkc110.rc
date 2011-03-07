@@ -11,3 +11,5 @@ on boot
     setprop status.battery.level_raw  50
     setprop status.battery.level_scale 9
 
+service smdkc110-setup /system/etc/init.smdkc110.sh
+    oneshot

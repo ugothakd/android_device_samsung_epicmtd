@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2009 The Android Open Source Project
+# Copyright (C) 2011 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 #
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 # The gps config for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
@@ -23,17 +24,21 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 PRODUCT_COPY_FILES += \
     device/samsung/epic/init.smdkc110.rc:root/init.smdkc110.rc
 
-$(call inherit-product-if-exists, vendor/samsung/SPH-D700/SPH-D700-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
 
 ## Property Overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libsec-ril40.so \
-  	rild.libargs=-d[SPACE]/dev/ttyS0 \
+    rild.libargs=-d[SPACE]/dev/ttyS0 \
     wifi.interface=eth0 \
-    wifi.supplicant_scan_interval=15 \
-	ro.wifi.channels=11
+    wifi.supplicant_scan_interval=90 \
+    ro.wifi.channels=11
 
+# Make sure the default network type is CDMA.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=4
+    
 	#sprint cdma stuff
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.com.google.clientidbase=android-sprint-us \
@@ -67,7 +72,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=eth0,ppp0
 	
 	
-# Epic uses high-density artwork where available
+# Use high-density artwork when available
 PRODUCT_LOCALES := hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/epic/overlay
@@ -86,11 +91,6 @@ PRODUCT_PACKAGES += \
 	libOMX.SEC.M4V.Decoder \
 	libOMX.SEC.M4V.Encoder \
 	libOMX.SEC.AVC.Encoder
-
-# Misc other modules
-#PRODUCT_PACKAGES += \
-#	overlay.s5pc110 \
-#	copybit.s5pc110 
 
 # Libs
 PRODUCT_PACKAGES += \
@@ -115,11 +115,13 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
     frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
-
+    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
+    frameworks/base/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+       
  
-
-# Keylayout / Keychars
+# Keylayout and Keychars
 PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
      device/samsung/epic/prebuilt/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
@@ -156,4 +158,3 @@ PRODUCT_DEVICE := epic
 PRODUCT_MODEL := SAMSUNG-SPH-D700
 PRODUCT_BRAND := Samsung
 PRODUCT_MANUFACTURER := Samsung
-TARGET_IS_GALAXYS := true

@@ -1,4 +1,4 @@
-ifeq ($(TARGET_DEVICE),crespo)
+ifeq ($(TARGET_DEVICE),epic)
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)

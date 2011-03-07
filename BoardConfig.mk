@@ -40,25 +40,21 @@ BOARD_USES_HGL := true
 
 # Set Audio related defines below.
 BOARD_USES_GENERIC_AUDIO := false
-#BOARD_USES_ALSA_AUDIO := true
-#BUILD_WITH_ALSA_UTILS := true
-#ALSA_DEFAULT_SAMPLE_RATE := 44100
 
 BOARD_NO_RGBX_8888 := true
 
 # Set Camera related defines below.
 #BOARD_USES_OVERLAY := false
-#BOARD_USES_COPYBIT := false
+#BOARD_USES_COPYBIT := true
 #DEFAULT_FB_NUM := 0
-
 BOARD_USES_FROYO_GRALLOC := true
+
 BOARD_USE_FROYO_LIBCAMERA := true
+BOARD_USE_REVERSE_FFC := true
 USE_CAMERA_STUB := false
-USE_OVERLAY_FORMAT_YCbCr_420_SP := TRUE
+USE_OVERLAY_FORMAT_YCbCr_420_SP := true
 BUILD_PV_VIDEO_ENCODERS := 1
-ifeq ($(USE_CAMERA_STUB),false)
-BOARD_CAMERA_LIBRARIES := libcamera
-endif
+BOARD_CAMERA_LIBRARIES := libcamera libcameraservice
 
 BOARD_V4L2_DEVICE := /dev/video1
 BOARD_CAMERA_DEVICE := /dev/video0
@@ -74,7 +70,7 @@ BOARD_WLAN_DEVICE := bcm4329
 WIFI_DRIVER_MODULE_PATH := "/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt dhd_watchdog_ms=10 dhd_poll=1"
 WIFI_DRIVER_MODULE_NAME := "dhd"
-WIFI_IFACE_DIR := "/data/misc/wifi"
+#WIFI_IFACE_DIR := "/data/misc/wifi"
 CONFIG_DRIVER_WEXT := true
 BOARD_WEXT_NO_COMBO_SCAN := true
 
@@ -94,6 +90,7 @@ WITH_A2DP := true
 BOARD_EGL_CFG := device/samsung/epic/prebuilt/egl.cfg
 
 # Set Kernel and device related defines below.
+USE_YAMAHA_SENSORS := true
 TARGET_PREBUILT_KERNEL := device/samsung/epic/kernel
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
 BOARD_KERNEL_BASE := 0x02e00000
@@ -111,6 +108,9 @@ BOARD_USERDATAIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x04ac0000)
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_USES_BMLUTILS := true
+
+# Setup the release tools. This allows us to build OTA Packages.
+TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/epic
 
 # Set ClockworkMod related defines below.
 BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun0/file"
