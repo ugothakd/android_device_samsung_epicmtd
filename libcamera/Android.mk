@@ -1,7 +1,3 @@
-# When zero we link against libqcamera; when 1, we dlopen libqcamera.
-
-ifeq ($(BOARD_CAMERA_LIBRARIES),libcamera)
-
 DLOPEN_LIBSECCAMERA:=1
 
 LOCAL_PATH:= $(call my-dir)
@@ -56,4 +52,3 @@ LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
 
-endif

@@ -1,6 +1,7 @@
+ifeq ($(TARGET_DEVICE),epic)
+
 LOCAL_PATH:= $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),epic)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES:= aplay.c alsa_pcm.c alsa_mixer.c
@@ -49,5 +50,4 @@ ifeq ($(BOARD_HAVE_BLUETOOTH),true)
   LOCAL_CFLAGS += -DWITH_A2DP
 endif
 include $(BUILD_SHARED_LIBRARY)
-
 endif
