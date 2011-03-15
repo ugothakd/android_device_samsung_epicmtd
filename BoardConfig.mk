@@ -5,14 +5,12 @@
 -include vendor/samsung/epic/BoardConfigVendor.mk
 
 TARGET_NO_BOOTLOADER := true
-#TARGET_NO_RECOVERY := true
-#TARGET_NO_KERNEL := true
 
 TARGET_BOARD := SPH-D700
 TARGET_BOARD_PLATFORM := s5pc110
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 
-# ARMv7-A Cortex-A8 architecture
+# ARMv7-A Cortex-A8
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -24,20 +22,20 @@ ANDROID_ARM_LINKER := true
 # Set Audio related defines below.
 BOARD_USES_GENERIC_AUDIO := false
 
+# The GL userspace driver is partially broken, so we set this to get a functional UI.
 BOARD_NO_RGBX_8888 := true
 
+# We need to use the old sensors libraries, since we don't have source.
+TARGET_USES_OLD_LIBSENSORS_HAL := true
+
 # Set Camera related defines below.
-#BOARD_USES_OVERLAY := false
-#BOARD_USES_COPYBIT := true
+BOARD_USES_OVERLAY := true
 #DEFAULT_FB_NUM := 0
-BOARD_USES_FROYO_GRALLOC := true
 
 BOARD_USE_FROYO_LIBCAMERA := true
-BOARD_USE_REVERSE_FFC := true
 USE_CAMERA_STUB := false
 USE_OVERLAY_FORMAT_YCbCr_420_SP := true
 BUILD_PV_VIDEO_ENCODERS := 1
-BOARD_CAMERA_LIBRARIES := libcamera libcameraservice
 
 BOARD_V4L2_DEVICE := /dev/video1
 BOARD_CAMERA_DEVICE := /dev/video0

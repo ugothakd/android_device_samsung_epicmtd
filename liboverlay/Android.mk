@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(BOARD_USES_OVERLAY),true)
-
 LOCAL_PATH:= $(call my-dir)
 # HAL module implemenation, not prelinked and stored in
 # hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.product.board>.so
@@ -23,13 +21,15 @@ LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 
+ifdef BOARD_V4L2_DEVICE
+    LOCAL_CFLAGS += -DV4L2_DEVICE=\"$(BOARD_V4L2_DEVICE)\"
+endif
+
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../include
 
 LOCAL_SRC_FILES := v4l2_utils.c overlay.cpp
 
-LOCAL_MODULE := overlay.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE := overlay.aries
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
-
-endif
