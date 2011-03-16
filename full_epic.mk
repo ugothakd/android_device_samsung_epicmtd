@@ -108,6 +108,9 @@ PRODUCT_COPY_FILES += \
 # asound.conf
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf
+	
+PRODUCT_COPY_FILES += \
+    device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \

@@ -35,7 +35,7 @@
     <int name="maxImageWidth">1600</int>
 
     <!-- UAProf URL -->
-    <string name="uaProfUrl">http://device.sprintpcs.com/Samsung/</string>
+    <string name="uaProfUrl">http://device.sprintpcs.com/Samsung/SPH-D700/EB13.rdf</string>
 
     <!-- E-mail gateway port -->
     <string name="emailGatewayNumber">6245</string>
