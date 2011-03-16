@@ -2136,6 +2136,11 @@ extern "C" void HAL_getCameraInfo(int cameraId, struct CameraInfo *cameraInfo)
     memcpy(cameraInfo, &sCameraInfo[cameraId], sizeof(CameraInfo));
 }
 
+extern "C" sp<CameraHardwareInterface> openCameraHardware(int cameraId)
+{
+    return CameraHardwareSec::createInstance(cameraId);
+}
+
 extern "C" sp<CameraHardwareInterface> HAL_openCameraHardware(int cameraId)
 {
     return CameraHardwareSec::createInstance(cameraId);
