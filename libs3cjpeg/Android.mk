@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(filter-out s5pc110,$(TARGET_BOARD_PLATFORM)),)
-
 LOCAL_PATH:= $(call my-dir)
-ifeq ($(TARGET_DEVICE),epic)
 include $(CLEAR_VARS)
 
 
@@ -28,12 +25,10 @@ LOCAL_SRC_FILES:= \
 LOCAL_SHARED_LIBRARIES:= liblog
 LOCAL_SHARED_LIBRARIES+= libdl
 
-LOCAL_MODULE:= libs3cjpeg
+LOCAL_MODULE:= libs3cjpeg.aries
 
 LOCAL_MODULE_TAGS := optional
 
 LOCAL_PRELINK_MODULE := false
 
 include $(BUILD_SHARED_LIBRARY)
-endif
-endif

@@ -67,60 +67,15 @@ lib/hw/lights.s5pc110.so
 lib/hw/gralloc.s5pc110.so
 lib/hw/sensors.default.so
 
-lib/libarccamera.so
-lib/libcamerafirmwarejni.so
-lib/libcamera.so
-lib/libseccameraadaptor.so
-lib/libseccamera.so
-lib/libs3cjpeg.so
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-
-
-
 
 lib/libril.so
 lib/libsec-ril40.so
 lib/libsecril-client.so
-bin/rild
-bin/rilclient-test
-lib/libreference-ril.so
 
 lib/libgps.so
 lib/libsecgps.so
-
-lib/libs263domxoc.so
-lib/libs263eomxoc.so
-lib/libs264domxoc.so
-lib/libs264eomxoc.so
-lib/libsaacdomxoc.so
-lib/libsaaceomxoc.so
-lib/libsac3domxoc.so
-lib/libsamrdomxoc.so
-lib/libsamreomxoc.so
-lib/libsdiv3domxoc.so
-lib/libsflacdomxoc.so
-lib/libsmp3domxoc.so
-lib/libsmp4fmocn.so
-lib/libsmp4vdomxoc.so
-lib/libsmp4veomxoc.so
-lib/libsvc1domxoc.so
-lib/libswmadomxoc.so
-lib/libswmv7domxoc.so
-lib/libswmv8domxoc.so
-lib/libsAMRWB.so
-lib/libsAMRNB.so
-
-
-lib/lib_tvoutengine.so
-lib/libtvout_jni.so
-lib/libtvoutfimc.so
-lib/libtvouthdmi.so
-lib/libtvoutservice.so
-lib/libtvout.so
-lib/libs3cjpeg.so
-bin/tvoutserver
-
 
 bin/pppd_runner
 bin/pppd
@@ -149,9 +104,6 @@ lib/libwimaxwtm.so
 etc/wimax_boot.bin
 etc/wimaxfw.bin
 etc/wimaxloader.bin
-
-lib/libdivxdrm.so
-lib/libdivx_jni.so
 
 bin/immvibed
 bin/logwrapper
@@ -212,12 +164,6 @@ done
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Prebuilt libraries that are needed to build open-source libraries
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcamera.so:obj/lib/libcamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libQmageDecoder.so:obj/lib/libQmageDecoder.so
-#    vendor/samsung/__DEVICE__/proprietary/lib/libtvout.so:obj/lib/libtvout.so
-
 #
 # WiFi & Bluetooth
 #
@@ -261,24 +207,10 @@ PRODUCT_COPY_FILES += \\
 # Sensors, Lights etc
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gralloc.s5pc110.so:system/lib/hw/gralloc.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.default.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/gralloc.s5pc110.so:system/lib/hw/gralloc.default.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.default.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
-
-#
-# Camera Related files
-#
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libarccamera.so:system/lib/libarccamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcamerafirmwarejni.so:system/lib/libcamerafirmwarejni.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcamera.so:system/lib/libcamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libseccameraadaptor.so:system/lib/libseccameraadaptor.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libseccamera.so:system/lib/libseccamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/cameradata/datapattern_420sp.yuv:system/cameradata/datapattern_420sp.yuv \\
-    vendor/samsung/__DEVICE__/proprietary/cameradata/datapattern_front_420sp.yuv:system/cameradata/datapattern_front_420sp.yuv \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libQmageDecoder.so:system/lib/libQmageDecoder.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libs3cjpeg.so:system/lib/libs3cjpeg.so
 
 #
 # RIL
@@ -286,10 +218,7 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libril.so:system/lib/libril.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:system/lib/libsec-ril40.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:system/lib/libsecril-client.so \\
-#    vendor/samsung/__DEVICE__/proprietary/bin/rild:system/bin/rild \\
-    vendor/samsung/__DEVICE__/proprietary/bin/rilclient-test:system/bin/rilclient-test \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libreference-ril.so:system/lib/libreference-ril.so
+    vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:system/lib/libsecril-client.so
 
 #
 # GPS
@@ -297,46 +226,6 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libgps.so:system/lib/libgps.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecgps.so:system/lib/libsecgps.so
-
-
-# OMX
-
-#PRODUCT_COPY_FILES += \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libs263domxoc.so:system/lib/libs263domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libs263eomxoc.so:system/lib/libs263eomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libs264domxoc.so:system/lib/libs264domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libs264eomxoc.so:system/lib/libs264eomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsaacdomxoc.so:system/lib/libsaacdomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsaaceomxoc.so:system/lib/libsaaceomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsac3domxoc.so:system/lib/libsac3domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsamrdomxoc.so:system/lib/libsamrdomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsamreomxoc.so:system/lib/libsamreomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsdiv3domxoc.so:system/lib/libsdiv3domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsflacdomxoc.so:system/lib/libsflacdomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsmp3domxoc.so:system/lib/libsmp3domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsmp4fmocn.so:system/lib/libsmp4fmocn.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsmp4vdomxoc.so:system/lib/libsmp4vdomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsmp4veomxoc.so:system/lib/libsmp4veomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsvc1domxoc.so:system/lib/libsvc1domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libswmadomxoc.so:system/lib/libswmadomxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libswmv7domxoc.so:system/lib/libswmv7domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libswmv8domxoc.so:system/lib/libswmv8domxoc.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsAMRNB.so:system/lib/libsAMRNB.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsAMRWB.so:system/lib/libsAMRWB.so
-
-
-#
-# TV-Out
-#
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/lib_tvoutengine.so:system/lib/lib_tvoutengine.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libtvout_jni.so:system/lib/libtvout_jni.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libtvoutfimc.so:system/lib/libtvoutfimc.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libtvouthdmi.so:system/lib/libtvouthdmi.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libtvoutservice.so:system/lib/libtvoutservice.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libtvout.so:system/lib/libtvout.so \\
-    vendor/samsung/__DEVICE__/proprietary/bin/tvoutserver:system/bin/tvoutserver \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libs3cjpeg.so:system/lib/libs3cjpeg.so
 
 #
 # PPP
@@ -395,12 +284,6 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/netcfg:system/bin/netcfg \\
     vendor/samsung/__DEVICE__/proprietary/bin/wlservice:system/bin/wlservice \\
     vendor/samsung/__DEVICE__/proprietary/lib/libnetutils.so:system/lib/libnetutils.so
-#
-# Divx Codec libs
-#
-#PRODUCT_COPY_FILES += \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libdivx_jni.so:system/lib/libdivx_jni.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libdivxdrm.so:system/lib/libdivxdrm.so
 
 #
 # Files for battery charging screen

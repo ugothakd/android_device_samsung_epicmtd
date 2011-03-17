@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
 # The gps config for this device
@@ -30,7 +29,7 @@ $(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libsec-ril40.so \
-    rild.libargs=-d[SPACE]/dev/ttyS0 \
+    rild.libargs=-d /dev/ttyS0 \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=90 \
     ro.wifi.channels=11
@@ -45,7 +44,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.cdma.home.operator.numeric=310120 \
 	ro.cdma.home.operator.alpha=Sprint \
   	net.cdma.pppd.authtype=require-pap \
-	net.cdma.pppd.user=user[SPACE]SprintNextel \
+	net.cdma.pppd.user=user SprintNextel \
 	net.cdma.datalinkinterface=/dev/ttyCDMA0 \
 	net.interfaces.defaultroute=cdma \
 	net.cdma.ppp.interface=ppp0 \
@@ -86,17 +85,21 @@ PRODUCT_COPY_FILES += \
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
-	libSEC_OMX_Core \
-	libOMX.SEC.AVC.Decoder \
-	libOMX.SEC.M4V.Decoder \
-	libOMX.SEC.M4V.Encoder \
-	libOMX.SEC.AVC.Encoder
+    libSEC_OMX_Core.aries \
+    libOMX.SEC.AVC.Decoder.aries \
+    libOMX.SEC.M4V.Decoder.aries \
+    libOMX.SEC.M4V.Encoder.aries \
+    libOMX.SEC.AVC.Encoder.aries
 
+# Misc other modules
+PRODUCT_PACKAGES += \
+    overlay.aries
+    
 # Libs
 PRODUCT_PACKAGES += \
-	libcamera \
-	libstagefrighthw
-
+    libaudio \
+    libstagefrighthw \
+    libcamera
 
 # media config xml file
 PRODUCT_COPY_FILES += \
@@ -105,6 +108,9 @@ PRODUCT_COPY_FILES += \
 # asound.conf
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf
+	
+PRODUCT_COPY_FILES += \
+    device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -148,9 +154,6 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
-
-
-$(call inherit-product, build/target/product/full.mk)
 
 
 PRODUCT_NAME := full_epic
