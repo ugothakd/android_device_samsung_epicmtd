@@ -86,6 +86,9 @@ BOARD_RECOVERY_IGNORE_BOOTABLES := true
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 
+# The below helps to properly switch for mass storage on pre 2.6.35 kernels
+BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+
 # Max image/partition sizes
 BOARD_BOOTIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00280000)
 BOARD_RECOVERYIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00500000)
