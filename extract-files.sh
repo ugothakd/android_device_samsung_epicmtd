@@ -64,8 +64,6 @@ bin/pvrsrvinit
 
 lib/hw/copybit.s5pc110.so
 lib/hw/lights.s5pc110.so
-lib/hw/gralloc.s5pc110.so
-lib/hw/sensors.default.so
 
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
@@ -76,17 +74,6 @@ lib/libsecril-client.so
 
 lib/libgps.so
 lib/libsecgps.so
-
-bin/pppd_runner
-bin/pppd
-etc/init.cdma-pppd
-etc/init.gprs-pppd
-etc/ppp/chap-secrets
-etc/ppp/ip-up
-etc/ppp/ip-down
-etc/ppp/ip-up-vpn
-etc/ppp/pap-secrets
-etc/ppp/options
 
 lib/libsensor_yamaha.so
 lib/libsensor_yamaha_test.so

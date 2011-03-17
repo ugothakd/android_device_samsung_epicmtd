@@ -36,7 +36,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Make sure the default network type is CDMA.
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=4
+        ro.telephony.default_network=4
     
 	#sprint cdma stuff
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -69,8 +69,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #	For date interfaces
 PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=eth0,ppp0
-	
-	
+
 # Use high-density artwork when available
 PRODUCT_LOCALES := hdpi
 
@@ -78,10 +77,6 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/epic/overlay
 
 # media profiles and capabilities spec
 $(call inherit-product, device/samsung/epic/media_a1026.mk)
-
-# These are the OpenMAX IL configuration files
-PRODUCT_COPY_FILES += \
-	device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -100,7 +95,7 @@ PRODUCT_PACKAGES += \
     libaudio \
     libstagefrighthw \
     libcamera
-
+    
 # media config xml file
 PRODUCT_COPY_FILES += \
     device/samsung/epic/media_profiles.xml:system/etc/media_profiles.xml
@@ -110,8 +105,12 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf
 	
 PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml
+    device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
+    device/samsung/epic/prebuilt/gps.xml:system/etc/gps.xml \
+    device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.aries.so \
+    device/samsung/epic/prebuilt/gralloc.aries.so:system/lib/hw/gralloc.aries.so
 
+    
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
