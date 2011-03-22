@@ -149,13 +149,13 @@ PRODUCT_COPY_FILES += \
     
 # We are using a prebuilt kernel for now, to ease building. This will be changed later.
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/samsung/epic/zImage
+LOCAL_KERNEL := device/samsung/epic/kernel
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):zImage
+    $(LOCAL_KERNEL):kernel
 
 
 PRODUCT_NAME := full_epic
