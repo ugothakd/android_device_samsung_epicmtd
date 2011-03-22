@@ -64,6 +64,8 @@ bin/pvrsrvinit
 
 lib/hw/copybit.s5pc110.so
 lib/hw/lights.s5pc110.so
+lib/hw/gralloc.s5pc110.so
+lib/hw/sensors.default.so
 
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
@@ -105,6 +107,7 @@ lib/libnetutils.so
 bin/mfgloader
 bin/wlservice
 bin/netcfg
+bin/pppd_runner
 
 bin/playlpm
 bin/charging_mode
@@ -218,16 +221,7 @@ PRODUCT_COPY_FILES += \\
 # PPP
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/pppd_runner:system/bin/pppd_runner \\
-    vendor/samsung/__DEVICE__/proprietary/bin/pppd:system/bin/pppd \\
-    vendor/samsung/__DEVICE__/proprietary/etc/init.cdma-pppd:system/etc/init.cdma-pppd \\
-    vendor/samsung/__DEVICE__/proprietary/etc/init.gprs-pppd:system/etc/init.gprs-pppd \\
-    vendor/samsung/__DEVICE__/proprietary/etc/ppp/chap-secrets:system/etc/ppp/chap-secrets \\
-    vendor/samsung/__DEVICE__/proprietary/etc/ppp/ip-up:system/etc/ppp/ip-up \\
-    vendor/samsung/__DEVICE__/proprietary/etc/ppp/ip-down:system/etc/ppp/ip-down \\
-    vendor/samsung/__DEVICE__/proprietary/etc/ppp/ip-up-vpn:system/etc/ppp/ip-up-vpn \\
-    vendor/samsung/__DEVICE__/proprietary/etc/ppp/pap-secrets:system/etc/ppp/pap-secrets \\
-    vendor/samsung/__DEVICE__/proprietary/etc/ppp/options:system/etc/ppp/options
+    vendor/samsung/__DEVICE__/proprietary/bin/pppd_runner:system/bin/pppd_runner
 
 #
 #Sensors
@@ -261,10 +255,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/immvibed:system/bin/immvibed \\
     vendor/samsung/__DEVICE__/proprietary/bin/logwrapper:system/bin/logwrapper \\
     vendor/samsung/__DEVICE__/proprietary/bin/immvibed:system/bin/immvibed \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libhardware_legacy.so:system/lib/libhardware_legacy.so \\
     vendor/samsung/__DEVICE__/proprietary/bin/killmediaserver:system/bin/killmediaserver \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libhardware.so:system/lib/libhardware.so \\
-    vendor/samsung/__DEVICE__/proprietary/bin/vold:system/bin/vold \\
     vendor/samsung/__DEVICE__/proprietary/bin/notified_event:system/bin/notified_event \\
     vendor/samsung/__DEVICE__/proprietary/bin/dhcpcd:system/bin/dhcpcd \\
     vendor/samsung/__DEVICE__/proprietary/bin/mfgloader:system/bin/mfgloader \\

@@ -19,13 +19,13 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 # The gps config for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-## Include the smdkc110.rc file
+# Include the smdkc110.rc file
 PRODUCT_COPY_FILES += \
     device/samsung/epic/init.smdkc110.rc:root/init.smdkc110.rc
 
 $(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
 
-## Property Overrides
+# Property Overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libsec-ril40.so \
@@ -38,7 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
         ro.telephony.default_network=4
     
-	#sprint cdma stuff
+# CDMA properties for Sprint
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.com.google.clientidbase=android-sprint-us \
 	ro.cdma.home.operator.numeric=310120 \
@@ -64,12 +64,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.startheapsize=8m \
-    dalvik.vm.heapsize=48m
-	
-#	For date interfaces
+    dalvik.vm.heapsize=32m
+
+# For date interfaces
 PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=eth0,ppp0
-
+    
+# Supported OpenGL version
+PRODUCT_PROPERTY_OVERRIDES := \
+    ro.opengles.version=131072
+    
 # Use high-density artwork when available
 PRODUCT_LOCALES := hdpi
 
@@ -87,15 +91,13 @@ PRODUCT_PACKAGES += \
     libOMX.SEC.AVC.Encoder.aries
 
 # Misc other modules
-PRODUCT_PACKAGES += \
-    overlay.aries
     
 # Libs
 PRODUCT_PACKAGES += \
     libaudio \
     libstagefrighthw \
     libcamera
-    
+        
 # media config xml file
 PRODUCT_COPY_FILES += \
     device/samsung/epic/media_profiles.xml:system/etc/media_profiles.xml
@@ -107,8 +109,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
     device/samsung/epic/prebuilt/gps.xml:system/etc/gps.xml \
-    device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.aries.so \
-    device/samsung/epic/prebuilt/gralloc.aries.so:system/lib/hw/gralloc.aries.so
+    device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.default.so
 
     
 # Install the features available on this device.
@@ -141,18 +142,20 @@ PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/keychars/qt602240_ts_input.kcm.bin:system/usr/keychars/qt602240_ts_input.kcm.bin \
      device/samsung/epic/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin  
 
+# Vold configuration and fstab files
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/vold.conf:system/etc/vold.conf \
     device/samsung/epic/prebuilt/vold.fstab:system/etc/vold.fstab
-# Kernel
+    
+# We are using a prebuilt kernel for now, to ease building. This will be changed later.
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-LOCAL_KERNEL := device/samsung/epic/kernel
+LOCAL_KERNEL := device/samsung/epic/zImage
 else
 LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+    $(LOCAL_KERNEL):zImage
 
 
 PRODUCT_NAME := full_epic
