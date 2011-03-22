@@ -25,7 +25,7 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
 
-# Property Overrides
+## Property Overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libsec-ril40.so \
@@ -110,7 +110,7 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
     device/samsung/epic/prebuilt/gps.xml:system/etc/gps.xml \
     device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.default.so
-
+    device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
     
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
