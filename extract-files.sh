@@ -38,7 +38,6 @@ etc/wifi/nvram_mfg.txt
 etc/wifi/bcm4329_aps.bin
 etc/wifi/bcm4329_mfg.bin
 etc/wifi/bcm4329_sta.bin
-etc/wifi/wifi.conf
 etc/wifi/wpa_supplicant.conf
 bin/BCM4329B1_002.002.023.0417.0430.hcd
 
