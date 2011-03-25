@@ -109,7 +109,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
     device/samsung/epic/prebuilt/gps.xml:system/etc/gps.xml \
-    device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.default.so
+    device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.default.so \
     device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
     
 # Install the features available on this device.
