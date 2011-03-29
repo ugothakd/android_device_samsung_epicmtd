@@ -96,12 +96,8 @@ etc/wimaxloader.bin
 bin/immvibed
 bin/logwrapper
 bin/immvibed
-lib/libhardware_legacy.so
 bin/killmediaserver
-lib/libhardware.so
-bin/vold
 bin/notified_event
-bin/dhcpcd
 lib/libnetutils.so
 bin/mfgloader
 bin/wlservice
@@ -234,16 +230,16 @@ PRODUCT_COPY_FILES += \\
 #
 # WIMAX
 #
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libSECmWiMAXcAPI.so:system/lib/libSECmWiMAXcAPI.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libWiMAXLineTest.so:system/lib/libWiMAXLineTest.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libWiMAXNative.so:system/lib/libWiMAXNative.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libWiMAXNativeODB.so:system/lib/libWiMAXNativeODB.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libwimaxne.so:system/lib/libwimaxne.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libwimaxwtm.so:system/lib/libwimaxwtm.so \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wimax_boot.bin:system/etc/wimax_boot.bin \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wimaxfw.bin:system/etc/wimaxfw.bin \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wimaxloader.bin:system/etc/wimaxloader.bin
+#PRODUCT_COPY_FILES += \\
+#    vendor/samsung/__DEVICE__/proprietary/lib/libSECmWiMAXcAPI.so:system/lib/libSECmWiMAXcAPI.so \\
+#    vendor/samsung/__DEVICE__/proprietary/lib/libWiMAXLineTest.so:system/lib/libWiMAXLineTest.so \\
+#    vendor/samsung/__DEVICE__/proprietary/lib/libWiMAXNative.so:system/lib/libWiMAXNative.so \\
+#    vendor/samsung/__DEVICE__/proprietary/lib/libWiMAXNativeODB.so:system/lib/libWiMAXNativeODB.so \\
+#    vendor/samsung/__DEVICE__/proprietary/lib/libwimaxne.so:system/lib/libwimaxne.so \\
+#    vendor/samsung/__DEVICE__/proprietary/lib/libwimaxwtm.so:system/lib/libwimaxwtm.so \\
+#    vendor/samsung/__DEVICE__/proprietary/etc/wimax_boot.bin:system/etc/wimax_boot.bin \\
+#    vendor/samsung/__DEVICE__/proprietary/etc/wimaxfw.bin:system/etc/wimaxfw.bin \\
+#    vendor/samsung/__DEVICE__/proprietary/etc/wimaxloader.bin:system/etc/wimaxloader.bin
 
 #
 # test binary blobs
@@ -255,7 +251,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/killmediaserver:system/bin/killmediaserver \\
     vendor/samsung/__DEVICE__/proprietary/bin/notified_event:system/bin/notified_event \\
     vendor/samsung/__DEVICE__/proprietary/bin/mfgloader:system/bin/mfgloader \\
-    vendor/samsung/__DEVICE__/proprietary/bin/netcfg:system/bin/netcfg \\
+#    vendor/samsung/__DEVICE__/proprietary/bin/netcfg:system/bin/netcfg \\
     vendor/samsung/__DEVICE__/proprietary/bin/wlservice:system/bin/wlservice \\
     vendor/samsung/__DEVICE__/proprietary/lib/libnetutils.so:system/lib/libnetutils.so
 

@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-SEC_OMX_TOP := $(LOCAL_PATH)
+SEC_OMX_TOP := device/samsung/epic/sec_mm/sec_omx
 SEC_CODECS := $(SEC_OMX_TOP)/sec_codecs/
 
 SEC_OMX_INC := $(SEC_OMX_TOP)/sec_omx_include/

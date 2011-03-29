@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/small_base.mk)
 
 # The gps config for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
@@ -23,8 +23,6 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 PRODUCT_COPY_FILES += \
     device/samsung/epic/init.smdkc110.rc:root/init.smdkc110.rc
 
-$(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
-
 ## Property Overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
@@ -32,47 +30,33 @@ PRODUCT_PROPERTY_OVERRIDES += \
     rild.libargs=-d /dev/ttyS0 \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=90 \
-    ro.wifi.channels=11
-
-# Make sure the default network type is CDMA.
-PRODUCT_PROPERTY_OVERRIDES += \
-        ro.telephony.default_network=4
-    
-# CDMA properties for Sprint
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.com.google.clientidbase=android-sprint-us \
-	ro.cdma.home.operator.numeric=310120 \
-	ro.cdma.home.operator.alpha=Sprint \
-  	net.cdma.pppd.authtype=require-pap \
-	net.cdma.pppd.user=user SprintNextel \
-	net.cdma.datalinkinterface=/dev/ttyCDMA0 \
-	net.interfaces.defaultroute=cdma \
-	net.cdma.ppp.interface=ppp0 \
-	net.connectivity.type=CDMA1 \
-	gsm.operator.alpha=Sprint \
-	gsm.operator.numeric=310120 \
-	gsm.operator.iso-country=us \
-	gsm.operator.isroaming=false \
-	gsm.current.phone-type=2 \
-	ro.csc.sales_code=SPR \
-	ril.sales_code=SPR \
-	ro.carrier=Sprint \
-	net.dns1=8.8.8.8 \
-	net.dns2=8.8.4.4
+    ro.wifi.channels=11 \
+    ro.telephony.default_network=4 \
+    ro.com.google.clientidbase=android-sprint-us \
+    ro.cdma.home.operator.numeric=310120 \
+    ro.cdma.home.operator.alpha=Sprint \
+    net.cdma.pppd.authtype=require-pap \
+    net.cdma.pppd.user=user SprintNextel \
+    net.cdma.datalinkinterface=/dev/ttyCDMA0 \
+    net.interfaces.defaultroute=cdma \
+    net.cdma.ppp.interface=ppp0 \
+    net.connectivity.type=CDMA1 \
+    ro.csc.sales_code=SPR \
+    ril.sales_code=SPR \
+    ro.carrier=Sprint \
+    net.dns1=8.8.8.8 \
+    net.dns2=8.8.4.4 \
+    media.stagefright.enable-player=true \
+    media.stagefright.enable-meta=true \
+    media.stagefright.enable-scan=true \
+    media.stagefright.enable-http=true \
+    dalvik.vm.startheapsize=8m \
+    dalvik.vm.heapsize=32m \
+    mobiledata.interfaces=eth0,ppp0 \
+    ro.opengles.version=131072
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.startheapsize=8m \
-    dalvik.vm.heapsize=32m
-
-# For date interfaces
-PRODUCT_PROPERTY_OVERRIDES += \
-    mobiledata.interfaces=eth0,ppp0
-    
-# Supported OpenGL version
-PRODUCT_PROPERTY_OVERRIDES := \
-    ro.opengles.version=131072
     
 # Use high-density artwork when available
 PRODUCT_LOCALES := hdpi
@@ -82,20 +66,16 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/epic/overlay
 # media profiles and capabilities spec
 $(call inherit-product, device/samsung/epic/media_a1026.mk)
 
-# These are the OpenMAX IL modules
+# Libs
 PRODUCT_PACKAGES += \
     libSEC_OMX_Core.aries \
     libOMX.SEC.AVC.Decoder.aries \
     libOMX.SEC.M4V.Decoder.aries \
     libOMX.SEC.M4V.Encoder.aries \
-    libOMX.SEC.AVC.Encoder.aries
-
-# Misc other modules
-    
-# Libs
-PRODUCT_PACKAGES += \
+    libOMX.SEC.AVC.Encoder.aries \
     libaudio \
     libstagefrighthw \
+    overlay.aries \
     libcamera
         
 # media config xml file
@@ -108,8 +88,8 @@ PRODUCT_COPY_FILES += \
 	
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
-    device/samsung/epic/prebuilt/gps.xml:system/etc/gps.xml \
-    device/samsung/epic/prebuilt/gps.aries.so:system/lib/hw/gps.default.so \
+    device/samsung/epic/prebuilt/glgps_samsungJupiter:system/bin/gpsd/glgps_samsungJupiter \
+    device/samsung/epic/prebuilt/jupiter.xml:system/etc/jupiter.xml \
     device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
     
 # Install the features available on this device.
@@ -163,3 +143,5 @@ PRODUCT_DEVICE := epic
 PRODUCT_MODEL := SAMSUNG-SPH-D700
 PRODUCT_BRAND := Samsung
 PRODUCT_MANUFACTURER := Samsung
+
+$(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
