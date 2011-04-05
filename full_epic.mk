@@ -75,13 +75,13 @@ PRODUCT_PACKAGES += \
     libOMX.SEC.AVC.Encoder \
     libaudio \
     libaudiopolicy \
-    sec_mm \    
+    sec_mm \
     libstagefrighthw \
     overlay.s5pc110 \
     copybit.s5pc110 \
     lights.s5pc110 \
     libcamera
-        
+
 # media config xml file
 PRODUCT_COPY_FILES += \
     device/samsung/epic/media_profiles.xml:system/etc/media_profiles.xml
