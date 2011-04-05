@@ -90,6 +90,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
     device/samsung/epic/prebuilt/glgps_samsungJupiter:system/bin/gpsd/glgps_samsungJupiter \
     device/samsung/epic/prebuilt/jupiter.xml:system/etc/jupiter.xml \
+    device/samsung/epic/prebuilt/libgps.so:system/lib/libgps.so \
+    device/samsung/epic/prebuilt/libgps.so:obj/lib/libgps.so \
+    device/samsung/epic/prebuilt/libsecgps.so:system/lib/libsecgps.so \
+    device/samsung/epic/prebuilt/libsecgps.so:obj/lib/libsecgps.so \
     device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
     
 # Install the features available on this device.
