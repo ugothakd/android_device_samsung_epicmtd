@@ -15,6 +15,30 @@
 # limitations under the License.
 
 DEVICE=epic
+if [ "$1" = "adb" ]
+then
+echo "Using ADB pull to extract files."
+cmd="adb"
+
+elif [ "$1" = "cp" ]
+then
+
+if [ $# -lt 2 ]
+then
+echo "Cannot use copy operation without a path! Path should lead to the base directory of a ROM. ex. /home/user/somerom/"
+exit
+else
+echo "Using copy operation to extract files."
+cmd="cp"
+fi
+
+else
+echo "Invalid syntax. Script must be called with the following parameters..."
+echo "./extract-files.sh adb : This will pull files from your device using ADB."
+echo "./extract-files.sh cp /path/to/ROM : This will copy files from a directory."
+exit
+
+fi
 rm -rf ../../../vendor/samsung/$DEVICE/proprietary
 mkdir -p ../../../vendor/samsung/$DEVICE/proprietary
 
@@ -24,8 +48,9 @@ etc/wifi
 lib/egl
 lib/hw
 media
-firmware
+seh
 cameradata
+bin
 "
 
 for DIR in $DIRS; do
@@ -42,10 +67,10 @@ etc/wifi/wpa_supplicant.conf
 bin/BCM4329B1_002.002.023.0417.0430.hcd
 
 
-firmware/CE147F00.bin
-firmware/CE147F01.bin
-firmware/CE147F02.bin
-firmware/CE147F03.bin
+seh/CE147F00.bin
+seh/CE147F01.bin
+seh/CE147F02.bin
+seh/CE147F03.bin
 
 lib/egl/libEGL_POWERVR_SGX540_120.so
 lib/egl/libGLES_android.so
@@ -131,7 +156,13 @@ media/Disconnected.qmg
 "
 
 for FILE in $FILES; do
-	adb pull system/$FILE ../../../vendor/samsung/$DEVICE/proprietary/$FILE
+if [ "$cmd" = "adb" ]
+then
+	adb pull /system/$FILE ../../../vendor/samsung/$DEVICE/proprietary/$FILE
+elif [ "$cmd" = "cp" ]
+then
+        cp $2/system/$FILE ../../../vendor/samsung/$DEVICE/proprietary/$FILE
+fi
 done
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/samsung/$DEVICE/$DEVICE-vendor-blobs.mk
