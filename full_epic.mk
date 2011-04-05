@@ -68,14 +68,18 @@ $(call inherit-product, device/samsung/epic/media_a1026.mk)
 
 # Libs
 PRODUCT_PACKAGES += \
-    libSEC_OMX_Core.aries \
-    libOMX.SEC.AVC.Decoder.aries \
-    libOMX.SEC.M4V.Decoder.aries \
-    libOMX.SEC.M4V.Encoder.aries \
-    libOMX.SEC.AVC.Encoder.aries \
+    libSEC_OMX_Core \
+    libOMX.SEC.AVC.Decoder \
+    libOMX.SEC.M4V.Decoder \
+    libOMX.SEC.M4V.Encoder \
+    libOMX.SEC.AVC.Encoder \
     libaudio \
+    libaudiopolicy \
+    sec_mm \    
     libstagefrighthw \
-    overlay.aries \
+    overlay.s5pc110 \
+    copybit.s5pc110 \
+    lights.s5pc110 \
     libcamera
         
 # media config xml file
@@ -94,7 +98,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/libgps.so:obj/lib/libgps.so \
     device/samsung/epic/prebuilt/libsecgps.so:system/lib/libsecgps.so \
     device/samsung/epic/prebuilt/libsecgps.so:obj/lib/libsecgps.so \
-    device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+    device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
     
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -109,7 +114,6 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
-       
  
 # Keylayout and Keychars
 PRODUCT_COPY_FILES += \

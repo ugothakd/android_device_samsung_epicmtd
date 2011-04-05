@@ -11,30 +11,28 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-ifeq ($(BOARD_USES_OVERLAY),true)
+ifeq ($(BOARD_USES_COPYBIT),true)
 
-LOCAL_PATH := $(call my-dir)
-# HAL module implemenation, not prelinked and stored in
-# hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.product.board>.so
-
+LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
-
-ifdef BOARD_V4L2_DEVICE
-    LOCAL_CFLAGS += -DV4L2_DEVICE=\"$(BOARD_V4L2_DEVICE)\"
-endif
-
-
-LOCAL_C_INCLUDES:= \
-      $(LOCAL_PATH)/../include
-
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-LOCAL_SHARED_LIBRARIES := liblog libcutils
+LOCAL_SHARED_LIBRARIES := liblog libutils
 
-LOCAL_SRC_FILES := v4l2_utils.c overlay.cpp
+LOCAL_CFLAGS  += -DSLSI_S5PC110
 
-LOCAL_MODULE := overlay.$(TARGET_BOARD_PLATFORM)
+ifdef DEFAULT_FB_NUM
+LOCAL_CFLAGS += -DDEFAULT_FB_NUM=$(DEFAULT_FB_NUM)
+endif
+
+LOCAL_C_INCLUDES := \
+	$(LOCAL_PATH)/../include \
+	hardware/libhardware/modules/gralloc
+
+LOCAL_SRC_FILES := copybit.cpp
+
+LOCAL_MODULE := copybit.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
 

@@ -5,7 +5,6 @@
 
 #ifndef ANDROID_ZOOM_REPO_HARDWARE_SEC_LIBOVERLAY_V4L2_UTILS_H_
 #define ANDROID_ZOOM_REPO_HARDWARE_SEC_LIBOVERLAY_V4L2_UTILS_H_
-
 #include "s5p_fimc.h"
 
 int v4l2_overlay_open(int id);

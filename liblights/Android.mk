@@ -11,31 +11,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-ifeq ($(BOARD_USES_OVERLAY),true)
 
-LOCAL_PATH := $(call my-dir)
+
+LOCAL_PATH:= $(call my-dir)
 # HAL module implemenation, not prelinked and stored in
-# hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.product.board>.so
-
+# hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
 include $(CLEAR_VARS)
 
-ifdef BOARD_V4L2_DEVICE
-    LOCAL_CFLAGS += -DV4L2_DEVICE=\"$(BOARD_V4L2_DEVICE)\"
-endif
-
-
-LOCAL_C_INCLUDES:= \
-      $(LOCAL_PATH)/../include
-
+LOCAL_SRC_FILES := lights.c
 
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
-LOCAL_SHARED_LIBRARIES := liblog libcutils
 
-LOCAL_SRC_FILES := v4l2_utils.c overlay.cpp
+LOCAL_SHARED_LIBRARIES := liblog
 
-LOCAL_MODULE := overlay.$(TARGET_BOARD_PLATFORM)
-LOCAL_MODULE_TAGS := optional
+#LOCAL_MODULE := lights.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE := lights.s5pc110
+
 include $(BUILD_SHARED_LIBRARY)
-
-endif

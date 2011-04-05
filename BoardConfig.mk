@@ -28,6 +28,7 @@ TARGET_USES_OLD_LIBSENSORS_HAL := true
 
 # Camera defines
 BOARD_USES_OVERLAY := true
+BOARD_USES_COPYBIT := true
 #DEFAULT_FB_NUM := 0
 USE_CAMERA_STUB := false
 ifeq ($(USE_CAMERA_STUB),false)

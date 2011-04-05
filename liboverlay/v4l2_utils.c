@@ -20,7 +20,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <cutils/log.h>
-#include <hardware/overlay.h>
+#include "hardware/overlay.h"
 #include <linux/videodev.h>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
@@ -29,8 +29,6 @@
 #ifndef V4L2_DEVICE
 #define V4L2_DEVICE "/dev/video1"
 #endif
-
-
 
 #define LOG_FUNCTION_NAME    LOGV("%s: %s",  __FILE__, __func__);
 
