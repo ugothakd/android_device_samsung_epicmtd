@@ -49,10 +49,7 @@ BOARD_WLAN_DEVICE := bcm4329
 WIFI_DRIVER_MODULE_PATH := "/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt dhd_watchdog_ms=10 dhd_poll=1"
 WIFI_DRIVER_MODULE_NAME := "dhd"
-WIFI_IFACE_DIR := "/data/system/wpa_supplicant"
-CONFIG_DRIVER_WEXT := true
 BOARD_WEXT_NO_COMBO_SCAN := true
-CONFIG_CTRL_IFACE := y
 
 # USB Tether defines
 RNDIS_DEVICE := "/sys/devices/virtual/sec/switch/tethering"
