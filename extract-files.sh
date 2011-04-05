@@ -196,10 +196,10 @@ PRODUCT_COPY_FILES += \\
 # Firmware files
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/firmware/CE147F00.bin:system/firmware/CE147F00.bin \\
-    vendor/samsung/__DEVICE__/proprietary/firmware/CE147F01.bin:system/firmware/CE147F01.bin \\
-    vendor/samsung/__DEVICE__/proprietary/firmware/CE147F02.bin:system/firmware/CE147F02.bin \\
-    vendor/samsung/__DEVICE__/proprietary/firmware/CE147F03.bin:system/firmware/CE147F03.bin
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F00.bin:system/seh/CE147F00.bin \\
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F01.bin:system/seh/CE147F01.bin \\
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F02.bin:system/seh/CE147F02.bin \\
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F03.bin:system/seh/CE147F03.bin
 
 #
 # Display (3D)
