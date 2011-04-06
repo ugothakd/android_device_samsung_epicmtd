@@ -1,5 +1,0 @@
-+Nexus S libs from 2.3.3
-+Working compile
-+Thanks to noobnl for a fix to AudioHardware.cpp - Sound in SHOULD work now.
-+Some of these files use some of noobnl/forcystos work. 
-+All of them will be rewritten in the next few days.

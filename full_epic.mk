@@ -14,20 +14,17 @@
 # limitations under the License.
 #
 
+# First we inherit other products we might need.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/small_base.mk)
-
-# The gps config for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
+$(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
+$(call inherit-product, device/samsung/epic/media_a1026.mk)
 
-# Include the smdkc110.rc file
-PRODUCT_COPY_FILES += \
-    device/samsung/epic/init.smdkc110.rc:root/init.smdkc110.rc
-
-## Property Overrides
+# Property Overrides
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240 \
     rild.libpath=/system/lib/libsec-ril40.so \
-    rild.libargs=-d /dev/ttyS0 \
+    rild.libargs=-d[SPACE]/dev/ttyS0 \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=90 \
     ro.wifi.channels=11 \
@@ -36,7 +33,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.cdma.home.operator.numeric=310120 \
     ro.cdma.home.operator.alpha=Sprint \
     net.cdma.pppd.authtype=require-pap \
-    net.cdma.pppd.user=user SprintNextel \
+    net.cdma.pppd.user=user[SPACE]SprintNextel \
     net.cdma.datalinkinterface=/dev/ttyCDMA0 \
     net.interfaces.defaultroute=cdma \
     net.cdma.ppp.interface=ppp0 \
@@ -63,9 +60,6 @@ PRODUCT_LOCALES := hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/samsung/epic/overlay
 
-# media profiles and capabilities spec
-$(call inherit-product, device/samsung/epic/media_a1026.mk)
-
 # Libs
 PRODUCT_PACKAGES += \
     libSEC_OMX_Core \
@@ -82,15 +76,10 @@ PRODUCT_PACKAGES += \
     lights.s5pc110 \
     libcamera
 
-# media config xml file
+# Copy product specific files
 PRODUCT_COPY_FILES += \
-    device/samsung/epic/media_profiles.xml:system/etc/media_profiles.xml
-
-# asound.conf
-PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf
-	
-PRODUCT_COPY_FILES += \
+    device/samsung/epic/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
+    device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
     device/samsung/epic/prebuilt/glgps_samsungJupiter:system/bin/gpsd/glgps_samsungJupiter \
     device/samsung/epic/prebuilt/jupiter.xml:system/etc/jupiter.xml \
@@ -99,7 +88,10 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/libsecgps.so:system/lib/libsecgps.so \
     device/samsung/epic/prebuilt/libsecgps.so:obj/lib/libsecgps.so \
     device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
+    device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+    device/samsung/epic/prebuilt/vold.conf:system/etc/vold.conf \
+    device/samsung/epic/prebuilt/vold.fstab:system/etc/vold.fstab \
+    device/samsung/epic/prebuilt/init.smdkc110.rc:root/init.smdkc110.rc
     
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -129,11 +121,6 @@ PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
      device/samsung/epic/prebuilt/keychars/qt602240_ts_input.kcm.bin:system/usr/keychars/qt602240_ts_input.kcm.bin \
      device/samsung/epic/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin  
-
-# Vold configuration and fstab files
-PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/vold.conf:system/etc/vold.conf \
-    device/samsung/epic/prebuilt/vold.fstab:system/etc/vold.fstab
     
 # We are using a prebuilt kernel for now, to ease building. This will be changed later.
 ifeq ($(TARGET_PREBUILT_KERNEL),)
@@ -151,5 +138,3 @@ PRODUCT_DEVICE := epic
 PRODUCT_MODEL := SAMSUNG-SPH-D700
 PRODUCT_BRAND := Samsung
 PRODUCT_MANUFACTURER := Samsung
-
-$(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
