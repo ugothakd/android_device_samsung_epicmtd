@@ -68,8 +68,6 @@ PRODUCT_PACKAGES += \
     libOMX.SEC.M4V.Encoder \
     libOMX.SEC.AVC.Encoder \
     libaudio \
-    libaudiopolicy \
-    sec_mm \
     libstagefrighthw \
     overlay.s5pc110 \
     copybit.s5pc110 \

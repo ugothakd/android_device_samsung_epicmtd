@@ -65,13 +65,10 @@ etc/wifi/bcm4329_mfg.bin
 etc/wifi/bcm4329_sta.bin
 etc/wifi/wpa_supplicant.conf
 bin/BCM4329B1_002.002.023.0417.0430.hcd
-
-
 seh/CE147F00.bin
 seh/CE147F01.bin
 seh/CE147F02.bin
 seh/CE147F03.bin
-
 lib/egl/libEGL_POWERVR_SGX540_120.so
 lib/egl/libGLES_android.so
 lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
@@ -85,29 +82,23 @@ lib/libglslcompiler.so
 lib/libpvrANDROID_WSEGL.so
 lib/libQmageDecoder.so
 bin/pvrsrvinit
-
 lib/hw/copybit.s5pc110.so
 lib/hw/lights.s5pc110.so
 lib/hw/gralloc.s5pc110.so
 lib/hw/sensors.default.so
-
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-
 lib/libril.so
 lib/libsec-ril40.so
 lib/libsecril-client.so
-
 lib/libgps.so
 lib/libsecgps.so
-
 lib/libsensor_yamaha.so
 lib/libsensor_yamaha_test.so
 lib/libms3c_yamaha.so
 bin/sensorserver_yamaha
 bin/sensorcalibutil_yamaha
 bin/sensorstatutil_yamaha
-
 lib/libSECmWiMAXcAPI.so
 lib/libWiMAXLineTest.so
 lib/libWiMAXNative.so
@@ -117,7 +108,6 @@ lib/libwimaxwtm.so
 etc/wimax_boot.bin
 etc/wimaxfw.bin
 etc/wimaxloader.bin
-
 bin/immvibed
 bin/logwrapper
 bin/immvibed
@@ -128,7 +118,6 @@ bin/mfgloader
 bin/wlservice
 bin/netcfg
 bin/pppd_runner
-
 bin/playlpm
 bin/charging_mode
 media/battery_charging_5.qmg
@@ -180,9 +169,7 @@ done
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
 # WiFi & Bluetooth
-#
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \\
@@ -191,19 +178,14 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin \\
     vendor/samsung/__DEVICE__/proprietary/bin/BCM4329B1_002.002.023.0417.0430.hcd:system/bin/BCM4329B1_002.002.023.0417.0430.hcd \\
 
-
-#
 # Firmware files
-#
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/seh/CE147F00.bin:system/seh/CE147F00.bin \\
-    vendor/samsung/__DEVICE__/proprietary/seh/CE147F01.bin:system/seh/CE147F01.bin \\
-    vendor/samsung/__DEVICE__/proprietary/seh/CE147F02.bin:system/seh/CE147F02.bin \\
-    vendor/samsung/__DEVICE__/proprietary/seh/CE147F03.bin:system/seh/CE147F03.bin
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F00.bin:system/firmware/CE147F00.bin \\
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F01.bin:system/firmware/CE147F01.bin \\
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F02.bin:system/firmware/CE147F02.bin \\
+    vendor/samsung/__DEVICE__/proprietary/seh/CE147F03.bin:system/firmware/CE147F03.bin
 
-#
 # Display (3D)
-#
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/egl/libEGL_POWERVR_SGX540_120.so:system/lib/egl/libEGL_POWERVR_SGX540_120.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
@@ -217,39 +199,23 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libglslcompiler.so:system/lib/libglslcompiler.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libpvrANDROID_WSEGL.so:system/lib/libpvrANDROID_WSEGL.so \\
     vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit
-#
+
 # Sensors, Lights etc
-#
 PRODUCT_COPY_FILES += \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.default.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/gralloc.s5pc110.so:system/lib/hw/gralloc.s5pc110.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.default.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
 
-#
 # RIL
-#
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libril.so:system/lib/libril.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:system/lib/libsec-ril40.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:system/lib/libsecril-client.so
 
-#
-# GPS
-#
-#PRODUCT_COPY_FILES += \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libgps.so:system/lib/libgps.so \\
-#    vendor/samsung/__DEVICE__/proprietary/lib/libsecgps.so:system/lib/libsecgps.so
-
-#
 # PPP
-#
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/pppd_runner:system/bin/pppd_runner
 
-#
 #Sensors
-#
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
@@ -272,9 +238,7 @@ PRODUCT_COPY_FILES += \\
 #    vendor/samsung/__DEVICE__/proprietary/etc/wimaxfw.bin:system/etc/wimaxfw.bin \\
 #    vendor/samsung/__DEVICE__/proprietary/etc/wimaxloader.bin:system/etc/wimaxloader.bin
 
-#
-# test binary blobs
-#
+# Misc
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/immvibed:system/bin/immvibed \\
     vendor/samsung/__DEVICE__/proprietary/bin/logwrapper:system/bin/logwrapper \\
@@ -286,34 +250,12 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/wlservice:system/bin/wlservice \\
     vendor/samsung/__DEVICE__/proprietary/lib/libnetutils.so:system/lib/libnetutils.so
 
-#
-# Files for battery charging screen
-#
-
+# LPM charging files.
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/playlpm:system/bin/playlpm \\
     vendor/samsung/__DEVICE__/proprietary/bin/charging_mode:system/bin/charging_mode \\
     vendor/samsung/__DEVICE__/proprietary/lib/libQmageDecoder.so:system/lib/libQmageDecoder.so \\
     vendor/samsung/__DEVICE__/proprietary/media/battery_charging_*.qmg:system/media/battery_charging_*.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_10.qmg:system/media/battery_charging_10.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_15.qmg:system/media/battery_charging_15.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_20.qmg:system/media/battery_charging_20.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_25.qmg:system/media/battery_charging_25.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_30.qmg:system/media/battery_charging_30.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_35.qmg:system/media/battery_charging_35.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_40.qmg:system/media/battery_charging_40.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_45.qmg:system/media/battery_charging_45.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_50.qmg:system/media/battery_charging_50.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_55.qmg:system/media/battery_charging_55.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_60.qmg:system/media/battery_charging_60.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_65.qmg:system/media/battery_charging_65.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_70.qmg:system/media/battery_charging_70.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_75.qmg:system/media/battery_charging_75.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_80.qmg:system/media/battery_charging_80.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_85.qmg:system/media/battery_charging_85.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_90.qmg:system/media/battery_charging_90.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_95.qmg:system/media/battery_charging_95.qmg \\
-#    vendor/samsung/__DEVICE__/proprietary/media/battery_charging_100.qmg:system/media/battery_charging_100.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/chargingwarning.qmg:system/media/chargingwarning.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/Disconnected.qmg:system/media/Disconnected.qmg
 
