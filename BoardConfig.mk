@@ -104,3 +104,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/epic
 # ClockworkMod Defines. Define keymapping, and UMS (USB Mounting)
 BOARD_UMS_LUNFILE := "/sys/devices/platform/s3c-usbgadget/gadget/lun0/file"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/epic/recovery/recovery_ui.c
+
+BOARD_GPS_LIBRARIES := libsecgps libgps
+BOARD_USES_GPSSHIM := true
+TARGET_BOOTLOADER_BOARD_NAME := aries

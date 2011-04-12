@@ -73,25 +73,23 @@ PRODUCT_PACKAGES += \
     copybit.s5pc110 \
     lights.s5pc110 \
     libs3cjpeg \
-    libcamera
+    libcamera \
+    gps.aries
 
 # Copy product specific files
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
     device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
-    device/samsung/epic/prebuilt/glgps_samsungJupiter:system/bin/gpsd/glgps_samsungJupiter \
-    device/samsung/epic/prebuilt/jupiter.xml:system/etc/jupiter.xml \
-    device/samsung/epic/prebuilt/libgps.so:system/lib/libgps.so \
-    device/samsung/epic/prebuilt/libgps.so:obj/lib/libgps.so \
-    device/samsung/epic/prebuilt/libsecgps.so:system/lib/libsecgps.so \
-    device/samsung/epic/prebuilt/libsecgps.so:obj/lib/libsecgps.so \
     device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
     device/samsung/epic/prebuilt/vold.conf:system/etc/vold.conf \
     device/samsung/epic/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/samsung/epic/prebuilt/init.smdkc110.rc:root/init.smdkc110.rc
-    
+    device/samsung/epic/prebuilt/init.smdkc110.rc:root/init.smdkc110.rc \
+    vendor/samsung/epic/proprietary/lib/libgps.so:obj/lib/libgps.so \
+    vendor/samsung/epic/proprietary/lib/libsecgps.so:obj/lib/libsecgps.so
+
+
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \

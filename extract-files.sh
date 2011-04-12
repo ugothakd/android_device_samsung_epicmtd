@@ -178,6 +178,12 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin \\
     vendor/samsung/__DEVICE__/proprietary/bin/BCM4329B1_002.002.023.0417.0430.hcd:system/bin/BCM4329B1_002.002.023.0417.0430.hcd \\
 
+#GPS
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libgps.so:system/lib/libgps.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsecgps.so:system/lib/libsecgps.so \\
+
+
 # Firmware files
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/seh/CE147F00.bin:system/firmware/CE147F00.bin \\
