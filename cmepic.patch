@@ -1,0 +1,68 @@
+diff --git a/products/AndroidProducts.mk b/products/AndroidProducts.mk
+index 152e78f..d4a0370 100644
+--- a/products/AndroidProducts.mk
++++ b/products/AndroidProducts.mk
+@@ -9,6 +9,7 @@ PRODUCT_MAKEFILES := \
+     $(LOCAL_DIR)/cyanogen_desirec.mk \
+     $(LOCAL_DIR)/cyanogen_dream_sapphire.mk \
+     $(LOCAL_DIR)/cyanogen_encore.mk \
++    $(LOCAL_DIR)/cyanogen_epic.mk \
+     $(LOCAL_DIR)/cyanogen_espresso.mk \
+     $(LOCAL_DIR)/cyanogen_hero.mk \
+     $(LOCAL_DIR)/cyanogen_heroc.mk \
+diff --git a/products/cyanogen_epic.mk b/products/cyanogen_epic.mk
+new file mode 100644
+index 0000000..fc43711
+--- /dev/null
++++ b/products/cyanogen_epic.mk
+@@ -0,0 +1,38 @@
++# Inherit AOSP device configuration for epic.
++$(call inherit-product, device/samsung/epic/full_epic.mk)
++
++# Inherit some common cyanogenmod stuff.
++$(call inherit-product, vendor/cyanogen/products/common_full.mk)
++
++#
++# Setup device specific product configuration.
++#
++PRODUCT_NAME := cyanogen_epic
++PRODUCT_BRAND := sprint
++PRODUCT_DEVICE := epic
++PRODUCT_MODEL := SPH-D700
++PRODUCT_MANUFACTURER := Samsung
++PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=soju BUILD_ID=GRI40 BUILD_DISPLAY_ID=GRI40 BUILD_FINGERPRINT=google/soju/crespo:2.3.3/GRI40/102588:user/release-keys PRIVATE_BUILD_DESC="soju-user 2.3.3 GRI40 102588 release-keys"
++
++#
++# Set ro.modversion
++#
++ifdef CYANOGEN_NIGHTLY
++    PRODUCT_PROPERTY_OVERRIDES += \
++        ro.modversion=CyanogenMod-7-$(shell date +%m%d%Y)-NIGHTLY-Epic
++else
++    ifdef CYANOGEN_RELEASE
++        PRODUCT_PROPERTY_OVERRIDES += \
++            ro.modversion=CyanogenMod-7.0.0-RC4-Epic
++    else
++        PRODUCT_PROPERTY_OVERRIDES += \
++            ro.modversion=CyanogenMod-7.0.0-RC4-Epic-KANG
++    endif
++endif
++
++#
++# Copy specific prebuilt files
++#
++PRODUCT_COPY_FILES +=  \
++    vendor/cyanogen/prebuilt/hdpi/media/bootanimation.zip:system/media/bootanimation.zip
++ 
+diff --git a/vendorsetup.sh b/vendorsetup.sh
+index 57f44ee..4e4f6fe 100644
+--- a/vendorsetup.sh
++++ b/vendorsetup.sh
+@@ -8,6 +8,7 @@ add_lunch_combo cyanogen_crespo-eng
+ add_lunch_combo cyanogen_desirec-eng
+ add_lunch_combo cyanogen_dream_sapphire-eng
+ add_lunch_combo cyanogen_encore-eng
++add_lunch_combo cyanogen_epic-eng
+ add_lunch_combo cyanogen_espresso-eng
+ add_lunch_combo cyanogen_generic-eng
+ add_lunch_combo cyanogen_glacier-eng
