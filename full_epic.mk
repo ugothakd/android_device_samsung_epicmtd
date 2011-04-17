@@ -28,6 +28,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=90 \
     ro.wifi.channels=11 \
+    ro.config.vc_call_vol_steps \
     ro.telephony.default_network=4 \
     ro.com.google.clientidbase=android-sprint-us \
     ro.cdma.home.operator.numeric=310120 \
