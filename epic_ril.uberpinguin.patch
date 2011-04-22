@@ -1,0 +1,386 @@
+diff --git a/telephony/java/com/android/internal/telephony/DataConnection.java b/telephony/java/com/android/internal/telephony/DataConnection.java
+index 6634017..b73855f 100644
+--- a/telephony/java/com/android/internal/telephony/DataConnection.java
++++ b/telephony/java/com/android/internal/telephony/DataConnection.java
+@@ -420,9 +420,16 @@ public abstract class DataConnection extends HierarchicalStateMachine {
+                 cid = Integer.parseInt(response[0]);
+                 interfaceName = response[1];
+                 if (response.length > 2) {
+-                    ipAddress = response[2];
+-                    String prefix = "net." + interfaceName + ".";
+-                    gatewayAddress = SystemProperties.get(prefix + "gw");
++		    String prefix = "";
++                    if (SystemProperties.get("ro.ril.samsung").equals("1")) {
++		        prefix = "net.cdma";
++			ipAddress = SystemProperties.get(prefix + "local-ip");
++			gatewayAddress = SystemProperties.get(prefix + "remote-ip");
++		    } else {
++		        ipAddress = response[2];
++			prefix = "net." + interfaceName + ".";
++			gatewayAddress = SystemProperties.get(prefix + "gw");
++		    }
+                     dnsServers[0] = SystemProperties.get(prefix + "dns1");
+                     dnsServers[1] = SystemProperties.get(prefix + "dns2");
+                     if (DBG) {
+@@ -443,7 +450,8 @@ public abstract class DataConnection extends HierarchicalStateMachine {
+                 result = SetupResult.ERR_Other;
+             }
+         }
+-
++	
++	if (result == SetupResult.SUCCESS) SystemProperties.set("net.cdma.data_ready", "true"); // Samsung Addition, shouldn't break anything.
+         if (DBG) log("DataConnection setup result='" + result + "' on cid=" + cid);
+         return result;
+     }
+diff --git a/telephony/java/com/android/internal/telephony/DriverCall.java b/telephony/java/com/android/internal/telephony/DriverCall.java
+index 663c284..78f7267 100644
+--- a/telephony/java/com/android/internal/telephony/DriverCall.java
++++ b/telephony/java/com/android/internal/telephony/DriverCall.java
+@@ -19,12 +19,14 @@ package com.android.internal.telephony;
+ import android.util.Log;
+ import java.lang.Comparable;
+ import android.telephony.PhoneNumberUtils;
++import android.os.SystemProperties;
+ 
+ /**
+  * {@hide}
+  */
+ public class DriverCall implements Comparable {
+     static final String LOG_TAG = "RILB";
++    static final String NO_VIDEO = "nonvid"; // Samsung Addition; deprecated?
+ 
+     public enum State {
+         ACTIVE,
+@@ -49,6 +51,7 @@ public class DriverCall implements Comparable {
+     public int numberPresentation;
+     public String name;
+     public int namePresentation;
++    // public int np;  NEEDINFO: Why is Dameon using 'np' instead of numberPresentation?
+     public UUSInfo uusInfo;
+ 
+     /** returns null on error */
+@@ -103,16 +106,32 @@ public class DriverCall implements Comparable {
+ 
+     public String
+     toString() {
+-        return "id=" + index + ","
+-                + state + ","
+-                + "toa=" + TOA + ","
+-                + (isMpty ? "conf" : "norm") + ","
+-                + (isMT ? "mt" : "mo") + ","
+-                + als + ","
+-                + (isVoice ? "voc" : "nonvoc") + ","
+-                + (isVoicePrivacy ? "evp" : "noevp") + ","
+-                /*+ "number=" + number */ + ",cli=" + numberPresentation + ","
+-                /*+ "name="+ name */ + "," + namePresentation;
++        if (SystemProperties.get("ro.ril.samsung").equals("1")) {
++	    return "id=" + index + ","
++	        + state + ","
++		+ "toa=" + TOA + ","
++		+ (isMpty ? "conf" : "norm") + ","
++		+ (isMT ? "mt" : "mo") + ","
++		+ als + ","
++		+ (isVoice ? "voc" : "nonvoc") + ","
++		+ (isVideo ? "vid" : "nonvid") + ","
++		+ (isVoicePrivacy ? "evp" : "noevp") + ","
++		+ "number=" + number + ","
++		+ "cli=" + numberPresentation + "," // NEEDINFO: Dameon's original patch used np here. Why?
++		+ "name="+ name + ","
++		+ namePresentation;
++	} else {
++            return "id=" + index + ","
++	        + state + ","
++		+ "toa=" + TOA + ","
++		+ (isMpty ? "conf" : "norm") + ","
++		+ (isMT ? "mt" : "mo") + ","
++		+ als + ","
++		+ (isVoice ? "voc" : "nonvoc") + ","
++		+ (isVoicePrivacy ? "evp" : "noevp") + ","
++		/*+ "number=" + number */ + ",cli=" + numberPresentation + ","
++		/*+ "name="+ name */ + "," + namePresentation;
++	}
+     }
+ 
+     public static State
+diff --git a/telephony/java/com/android/internal/telephony/RIL.java b/telephony/java/com/android/internal/telephony/RIL.java
+index 99e673c..75ebbb7 100644
+--- a/telephony/java/com/android/internal/telephony/RIL.java
++++ b/telephony/java/com/android/internal/telephony/RIL.java
+@@ -1403,6 +1403,14 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+         rr.mp.writeInt(1);
+         rr.mp.writeInt(on ? 1 : 0);
+ 
++        // Samsung Addition for Airplane mode
++	if (!(on)) {
++	    rr.mp.writeInt(2);
++	    rr.mp.writeInt(0);
++	    rr.mp.writeInt(0);
++	}
++	// End Samsung Additions for Airplane Mode
++	
+         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
+ 
+         send(rr);
+@@ -2432,6 +2440,14 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+             case RIL_UNSOL_OEM_HOOK_RAW: ret = responseRaw(p); break;
+             case RIL_UNSOL_RINGBACK_TONE: ret = responseInts(p); break;
+             case RIL_UNSOL_RESEND_INCALL_MUTE: ret = responseVoid(p); break;
++	    // Samsung Additions
++	    case RIL_UNSOL_HSDPA_STATE_CHANGED: ret = responseVoid(p); break;
++	    case RIL_UNSOL_O2_HOME_ZONE_INFO: ret = responseVoid(p); break;
++	    case RIL_UNSOL_SAMSUNG_UNKNOWN_MAGIC_REQUEST: ret = responseVoid(p); break;
++	    case RIL_UNSOL_STK_SEND_SMS_RESULT: ret = responseVoid(p); break;
++	    case RIL_UNSOL_DEVICE_READY_NOTI: ret = responseVoid(p); break;
++	    case RIL_UNSOL_SAMSUNG_UNKNOWN_MAGIC_REQUEST_2: ret = responseVoid(p); break;
++	    // End Samsung additions
+ 
+             default:
+                 throw new RuntimeException("Unrecognized unsol response: " + response);
+@@ -2456,6 +2472,15 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+                 mCallStateRegistrants
+                     .notifyRegistrants(new AsyncResult(null, null, null));
+             break;
++	    // Samsung Additions
++	    case RIL_UNSOL_HSDPA_STATE_CHANGED:
++	        if (RILJ_LOGD) unsljLog(response);
++
++		mNetworkStateRegistrants
++		    .notifyRegistrants(new AsyncResult(null, null, null));
++            break;
++	    // End Samsung Additions
++
+             case RIL_UNSOL_RESPONSE_NETWORK_STATE_CHANGED:
+                 if (RILJ_LOGD) unsljLog(response);
+ 
+@@ -2750,6 +2775,19 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+             response[i] = p.readInt();
+         }
+ 
++	// Samsung Additions
++	if (SystemProperties.get("ro.ril.samsung") == "1") {
++	    response[0] = response[0] & 0xFF; //gsmDbm
++	    response[1] = -1; //gsmEcio
++	    response[2] = (response[2] < 0)?-120:-response[2]; //cdmaDbm
++	    response[3] = (response[3] < 0)?-160:-response[3]; //cdmaEcio
++	    response[4] = (response[4] < 0)?-120:-response[4]; //evdoRssi
++	    response[5] = (response[5] < 0)?-1:-response[5]; //evdoEcio
++	    if(response[6] < 0 || response[6] > 8)
++	        response[6] = -1;
++        }
++	// End Samsung Additions
++
+         return response;
+     }
+ 
+@@ -2913,6 +2951,11 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+         int voiceSettings;
+         ArrayList<DriverCall> response;
+         DriverCall dc;
++	// Samsung Additions
++	int dataAvail = p.dataAvail();
++	int pos = p.dataPosition();
++	int size = p.dataSize();
++	//End Samsung additions
+ 
+         num = p.readInt();
+         response = new ArrayList<DriverCall>(num);
+@@ -2928,6 +2971,8 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+             dc.als = p.readInt();
+             voiceSettings = p.readInt();
+             dc.isVoice = (0 == voiceSettings) ? false : true;
++	    videoSettings = p.readInt();
++	    dc.isVideo = (0 == videoSettings) ? false : true; // NEEDINFO: How is this handled in Samsung's code?
+             dc.isVoicePrivacy = (0 != p.readInt());
+             dc.number = p.readString();
+             int np = p.readInt();
+@@ -3118,6 +3163,18 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+             for (int i = 1 ; i < numInts; i++) {
+                  response[i] = p.readInt();
+              }
++	     // Samsung Additions
++	     if (SystemProperties.get("ro.ril.samsung") == "1") {
++	         response[0] = response[0] & 0xFF; //gsmDbm
++		 response[1] = -1; //gsmEcio
++		 response[2] = (response[2] < 0)?-120:-response[2]; //cdmaDbm
++		 response[3] = (response[3] < 0)?-160:-response[3]; //cdmaEcio
++		 response[4] = (response[4] < 0)?-120:-response[4]; //evdoRssi
++		 response[5] = (response[5] < 0)?-1:-response[5]; //evdoEcio
++		 if(response[6] < 0 || response[6] > 8)
++		     response[6] = -1;
++		 }
++	     // End Samsung Additions
+         }
+ 
+         return response;
+diff --git a/telephony/java/com/android/internal/telephony/RILConstants.java b/telephony/java/com/android/internal/telephony/RILConstants.java
+index 888f721..805bbe5 100644
+--- a/telephony/java/com/android/internal/telephony/RILConstants.java
++++ b/telephony/java/com/android/internal/telephony/RILConstants.java
+@@ -269,4 +269,12 @@ cat include/telephony/ril.h | \
+     int RIL_UNSOL_OEM_HOOK_RAW = 1028;
+     int RIL_UNSOL_RINGBACK_TONE = 1029;
+     int RIL_UNSOL_RESEND_INCALL_MUTE = 1030;
++    // Samsung Additional States
++    int RIL_UNSOL_STK_SEND_SMS_RESULT = 11002;
++    int RIL_UNSOL_O2_HOME_ZONE_INFO = 11007;
++    int RIL_UNSOL_DEVICE_READY_NOTI = 11008;
++    int RIL_UNSOL_SAMSUNG_UNKNOWN_MAGIC_REQUEST_2 = 11011;
++    int RIL_UNSOL_HSDPA_STATE_CHANGED = 11016;
++    int RIL_UNSOL_SAMSUNG_UNKNOWN_MAGIC_REQUEST = 11012;
++    // End Samsung Additions
+ }
+diff --git a/telephony/java/com/android/internal/telephony/cdma/CDMAPhone.java b/telephony/java/com/android/internal/telephony/cdma/CDMAPhone.java
+index fdc279f..16a64ad 100755
+--- a/telephony/java/com/android/internal/telephony/cdma/CDMAPhone.java
++++ b/telephony/java/com/android/internal/telephony/cdma/CDMAPhone.java
+@@ -899,6 +899,8 @@ public class CDMAPhone extends PhoneBase {
+             needsProvisioning = (cdmaMin.equals(UNACTIVATED_MIN_VALUE)
+                     || cdmaMin.substring(0,6).equals(UNACTIVATED_MIN2_VALUE))
+                     || SystemProperties.getBoolean("test_cdma_setup", false);
++		    if (SystemProperties.get("net.cdma.provision").equals("false")) // NEEDINFO: Why are we overriding this?
++		        SystemProperties.set("net.cdma.provision", "true");
+         }
+         if (DBG) Log.d(LOG_TAG, "needsOtaServiceProvisioning: ret=" + needsProvisioning);
+         return needsProvisioning;
+@@ -1030,6 +1032,10 @@ public class CDMAPhone extends PhoneBase {
+                 String[] respId = (String[])ar.result;
+                 mEsn  =  respId[2];
+                 mMeid =  respId[3];
++		// Samsung Addition - If we are using Samsung RIL, we grab the proper MEID from property.
++		//if (SystemProperties.get("ro.ril.samsung").equals("1"))  // NEEDINFO: Why does this check fail?
++		mMeid =  SystemProperties.get("ro.ril.MEID");
++		// End Samsung Addition
+             }
+             break;
+ 
+diff --git a/telephony/java/com/android/internal/telephony/cdma/CdmaDataConnectionTracker.java b/telephony/java/com/android/internal/telephony/cdma/CdmaDataConnectionTracker.java
+index 9f2a44b..bd9be2a 100644
+--- a/telephony/java/com/android/internal/telephony/cdma/CdmaDataConnectionTracker.java
++++ b/telephony/java/com/android/internal/telephony/cdma/CdmaDataConnectionTracker.java
+@@ -382,8 +382,11 @@ public final class CdmaDataConnectionTracker extends DataConnectionTracker {
+         }
+ 
+         setState(State.DISCONNECTING);
+-
+-        boolean notificationDeferred = false;
++	// Samsung Addition - After setting state to disconnecting, we set data ready to false
++	SystemProperties.set("net.cdma.data_ready", "false");
++	// End Samsung Addition
++        
++	boolean notificationDeferred = false;
+         for (DataConnection conn : dataConnectionList) {
+             if(conn != null) {
+                 if (tearDown) {
+diff --git a/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java b/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java
+index d2a4bd8..2ce97e0 100755
+--- a/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java
++++ b/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java
+@@ -410,7 +410,7 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+ 
+             if (ar.exception == null) {
+                 String cdmaSubscription[] = (String[])ar.result;
+-                if (cdmaSubscription != null && cdmaSubscription.length >= 5) {
++                if (cdmaSubscription != null && cdmaSubscription.length >= 4) {
+                     mMdn = cdmaSubscription[0];
+                     if (cdmaSubscription[1] != null) {
+                         String[] sid = cdmaSubscription[1].split(",");
+@@ -438,7 +438,25 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+                     }
+                     Log.d(LOG_TAG,"GET_CDMA_SUBSCRIPTION NID=" + cdmaSubscription[2] );
+                     mMin = cdmaSubscription[3];
+-                    mPrlVersion = cdmaSubscription[4];
++		    // Samsung RIL PRL Additions
++		    if (cdmaSubscription.length >= 5) {
++		        if (cdmaSubscription[4] != null) {
++			    mPrlVersion = cdmaSubscription[4];
++			} else {
++			    String[] prl = (SystemProperties.get("ril.prl_ver_1").split(":"));
++			    mPrlVersion = prl[1];
++			    if (mPrlVersion == null)
++			        Log.w(LOG_TAG,"error parsing cdmaSubscription params num="
++				    + cdmaSubscription.length);
++		        }
++		    } else {
++		        String[] prl = (SystemProperties.get("ril.prl_ver_1").split(":"));
++			mPrlVersion = prl[1];
++			if (mPrlVersion == null)
++			    Log.w(LOG_TAG,"error parsing cdmaSubscription params num="
++			        + cdmaSubscription.length);
++		    }
++		    // End Samsung Additions
+                     Log.d(LOG_TAG,"GET_CDMA_SUBSCRIPTION MDN=" + mMdn);
+                     //Notify apps subscription info is ready
+                     if (cdmaForSubscriptionInfoReadyRegistrants != null) {
+@@ -699,6 +717,7 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+                 int systemIsInPrl = 0;         //[11] Indicates if current system is in PRL
+                 int defaultRoamingIndicator = 0;  //[12] Is default roaming indicator from PRL
+                 int reasonForDenial = 0;       //[13] Denial reason if registrationState = 3
++		String samsungril = "1";	// NEEDINFO: Shouldn't this be conditional?
+ 
+                 if (states.length == 14) {
+                     try {
+@@ -709,13 +728,25 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+                             radioTechnology = Integer.parseInt(states[3]);
+                         }
+                         if (states[4] != null) {
+-                            baseStationId = Integer.parseInt(states[4]);
++			    if (samsungril.equals("1")) {
++			        baseStationId = Integer.parseInt(states[4], 16);
++			    } else {
++			        baseStationId = Integer.parseInt(states[4]);
++			    }
+                         }
+                         if (states[5] != null) {
+-                            baseStationLatitude = Integer.parseInt(states[5]);
++			    if (samsungril.equals("1")) {
++                                baseStationLatitude = Integer.parseInt(states[5], 16);
++			    } else {
++			        baseStationLatitude = Integer.parseInt(states[5]);
++			    }
+                         }
+                         if (states[6] != null) {
+-                            baseStationLongitude = Integer.parseInt(states[6]);
++			    if (samsungril.equals("1")) {
++			        baseStationLongitude = Integer.parseInt(states[6], 16);
++			    } else {
++			        baseStationLongitude = Integer.parseInt(states[6]);
++			    }
+                         }
+                         // Some carriers only return lat-lngs of 0,0
+                         if (baseStationLatitude == 0 && baseStationLongitude == 0) {
+@@ -1225,12 +1256,13 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+             setSignalStrengthDefaultValues();
+         } else {
+             int[] ints = (int[])ar.result;
+-            int offset = 2;
++            int offset = 0;  // NEEDINFO : Why change this from 2 to 0? Does it break other phones?
+             int cdmaDbm = (ints[offset] > 0) ? -ints[offset] : -120;
+-            int cdmaEcio = (ints[offset+1] > 0) ? -ints[offset+1] : -160;
+-            int evdoRssi = (ints[offset+2] > 0) ? -ints[offset+2] : -120;
+-            int evdoEcio = (ints[offset+3] > 0) ? -ints[offset+3] : -1;
+-            int evdoSnr  = ((ints[offset+4] > 0) && (ints[offset+4] <= 8)) ? ints[offset+4] : -1;
++            int cdmaEcio = (ints[offset+2] > 0) ? -ints[offset+2] : -160;
++            int evdoRssi = cdmaDbm;
++            int evdoEcio = (ints[offset+4] > 0) ? -ints[offset+4] : -1;
++            int evdoSnr = cdmaDbm/15;
++	    if(evdoSnr < 0) evdoSnr = -evdoSnr;
+ 
+             //log(String.format("onSignalStrengthResult cdmaDbm=%d cdmaEcio=%d evdoRssi=%d evdoEcio=%d evdoSnr=%d",
+             //        cdmaDbm, cdmaEcio, evdoRssi, evdoEcio, evdoSnr));
+diff --git a/wifi/java/android/net/wifi/WifiStateTracker.java b/wifi/java/android/net/wifi/WifiStateTracker.java
+index 9b3ff90..3a8e4c7 100644
+--- a/wifi/java/android/net/wifi/WifiStateTracker.java
++++ b/wifi/java/android/net/wifi/WifiStateTracker.java
+@@ -393,7 +393,11 @@ public class WifiStateTracker extends NetworkStateTracker {
+ 
+         mSettingsObserver = new SettingsObserver(new Handler());
+ 
+-        mInterfaceName = SystemProperties.get("wifi.interface", "tiwlan0");
++        if (SystemProperties.get("ro.ril.samsung") == "1") {
++	    mInterfaceName = SystemProperties.get("wifi.interface", "eth0");
++	} else {
++	    mInterfaceName = SystemProperties.get("wifi.interface", "tiwlan0");
++	}
+         sDnsPropNames = new String[] {
+             "dhcp." + mInterfaceName + ".dns1",
+             "dhcp." + mInterfaceName + ".dns2"
