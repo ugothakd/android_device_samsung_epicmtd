@@ -33,7 +33,7 @@ index 6634017..b73855f 100644
          return result;
      }
 diff --git a/telephony/java/com/android/internal/telephony/DriverCall.java b/telephony/java/com/android/internal/telephony/DriverCall.java
-index 663c284..78f7267 100644
+index 663c284..253f5ac 100644
 --- a/telephony/java/com/android/internal/telephony/DriverCall.java
 +++ b/telephony/java/com/android/internal/telephony/DriverCall.java
 @@ -19,12 +19,14 @@ package com.android.internal.telephony;
@@ -51,7 +51,16 @@ index 663c284..78f7267 100644
  
      public enum State {
          ACTIVE,
-@@ -49,6 +51,7 @@ public class DriverCall implements Comparable {
+@@ -43,12 +45,16 @@ public class DriverCall implements Comparable {
+     public boolean isMpty;
+     public String number;
+     public int TOA;
++    // Samsung Addition
++    public boolean isVideo;
++    // End Samsung Addition
+     public boolean isVoice;
+     public boolean isVoicePrivacy;
+     public int als;
      public int numberPresentation;
      public String name;
      public int namePresentation;
@@ -59,7 +68,7 @@ index 663c284..78f7267 100644
      public UUSInfo uusInfo;
  
      /** returns null on error */
-@@ -103,16 +106,32 @@ public class DriverCall implements Comparable {
+@@ -103,16 +109,32 @@ public class DriverCall implements Comparable {
  
      public String
      toString() {
@@ -103,7 +112,7 @@ index 663c284..78f7267 100644
  
      public static State
 diff --git a/telephony/java/com/android/internal/telephony/RIL.java b/telephony/java/com/android/internal/telephony/RIL.java
-index 99e673c..75ebbb7 100644
+index 99e673c..1e46eae 100644
 --- a/telephony/java/com/android/internal/telephony/RIL.java
 +++ b/telephony/java/com/android/internal/telephony/RIL.java
 @@ -1403,6 +1403,14 @@ public final class RIL extends BaseCommands implements CommandsInterface {
@@ -172,11 +181,12 @@ index 99e673c..75ebbb7 100644
          return response;
      }
  
-@@ -2913,6 +2951,11 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+@@ -2913,6 +2951,12 @@ public final class RIL extends BaseCommands implements CommandsInterface {
          int voiceSettings;
          ArrayList<DriverCall> response;
          DriverCall dc;
 +	// Samsung Additions
++	int videoSettings;
 +	int dataAvail = p.dataAvail();
 +	int pos = p.dataPosition();
 +	int size = p.dataSize();
@@ -184,7 +194,7 @@ index 99e673c..75ebbb7 100644
  
          num = p.readInt();
          response = new ArrayList<DriverCall>(num);
-@@ -2928,6 +2971,8 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+@@ -2928,6 +2972,8 @@ public final class RIL extends BaseCommands implements CommandsInterface {
              dc.als = p.readInt();
              voiceSettings = p.readInt();
              dc.isVoice = (0 == voiceSettings) ? false : true;
@@ -193,7 +203,7 @@ index 99e673c..75ebbb7 100644
              dc.isVoicePrivacy = (0 != p.readInt());
              dc.number = p.readString();
              int np = p.readInt();
-@@ -3118,6 +3163,18 @@ public final class RIL extends BaseCommands implements CommandsInterface {
+@@ -3118,6 +3164,18 @@ public final class RIL extends BaseCommands implements CommandsInterface {
              for (int i = 1 ; i < numInts; i++) {
                   response[i] = p.readInt();
               }
