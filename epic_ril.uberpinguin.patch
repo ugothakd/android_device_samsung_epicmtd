@@ -282,10 +282,44 @@ index 9f2a44b..bd9be2a 100644
              if(conn != null) {
                  if (tearDown) {
 diff --git a/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java b/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java
-index d2a4bd8..2ce97e0 100755
+index d2a4bd8..832f0be 100755
 --- a/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java
 +++ b/telephony/java/com/android/internal/telephony/cdma/CdmaServiceStateTracker.java
-@@ -410,7 +410,7 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+@@ -361,17 +361,30 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+                 int baseStationLongitude = CdmaCellLocation.INVALID_LAT_LONG;
+                 int systemId = -1;
+                 int networkId = -1;
++		String samsungril = "1"; // NEEDINFO : Shouldn't this be conditional?
+ 
+                 if (states.length > 9) {
+                     try {
+                         if (states[4] != null) {
+-                            baseStationId = Integer.parseInt(states[4]);
++			    if (samsungril.equals("1")) {
++			        baseStationId = Integer.parseInt(states[4], 16);
++			    } else {
++			        baseStationId = Integer.parseInt(states[4]);
++			    }
+                         }
+                         if (states[5] != null) {
+-                            baseStationLatitude = Integer.parseInt(states[5]);
++			    if (samsungril.equals("1")) {
++			        baseStationLatitude = Integer.parseInt(states[5], 16);
++			    } else {
++			        baseStationLatitude = Integer.parseInt(states[5]);
++			    }
+                         }
+                         if (states[6] != null) {
+-                            baseStationLongitude = Integer.parseInt(states[6]);
++			    if (samsungril.equals("1")) {
++			        baseStationLongitude = Integer.parseInt(states[6], 16);
++			    } else {
++				baseStationLongitude = Integer.parseInt(states[6]);
++			    }
+                         }
+                         // Some carriers only return lat-lngs of 0,0
+                         if (baseStationLatitude == 0 && baseStationLongitude == 0) {
+@@ -410,7 +423,7 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
  
              if (ar.exception == null) {
                  String cdmaSubscription[] = (String[])ar.result;
@@ -294,7 +328,7 @@ index d2a4bd8..2ce97e0 100755
                      mMdn = cdmaSubscription[0];
                      if (cdmaSubscription[1] != null) {
                          String[] sid = cdmaSubscription[1].split(",");
-@@ -438,7 +438,25 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+@@ -438,7 +451,25 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
                      }
                      Log.d(LOG_TAG,"GET_CDMA_SUBSCRIPTION NID=" + cdmaSubscription[2] );
                      mMin = cdmaSubscription[3];
@@ -321,7 +355,7 @@ index d2a4bd8..2ce97e0 100755
                      Log.d(LOG_TAG,"GET_CDMA_SUBSCRIPTION MDN=" + mMdn);
                      //Notify apps subscription info is ready
                      if (cdmaForSubscriptionInfoReadyRegistrants != null) {
-@@ -699,6 +717,7 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+@@ -699,6 +730,7 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
                  int systemIsInPrl = 0;         //[11] Indicates if current system is in PRL
                  int defaultRoamingIndicator = 0;  //[12] Is default roaming indicator from PRL
                  int reasonForDenial = 0;       //[13] Denial reason if registrationState = 3
@@ -329,7 +363,7 @@ index d2a4bd8..2ce97e0 100755
  
                  if (states.length == 14) {
                      try {
-@@ -709,13 +728,25 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+@@ -709,13 +741,25 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
                              radioTechnology = Integer.parseInt(states[3]);
                          }
                          if (states[4] != null) {
@@ -358,7 +392,7 @@ index d2a4bd8..2ce97e0 100755
                          }
                          // Some carriers only return lat-lngs of 0,0
                          if (baseStationLatitude == 0 && baseStationLongitude == 0) {
-@@ -1225,12 +1256,13 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
+@@ -1225,12 +1269,13 @@ final class CdmaServiceStateTracker extends ServiceStateTracker {
              setSignalStrengthDefaultValues();
          } else {
              int[] ints = (int[])ar.result;
