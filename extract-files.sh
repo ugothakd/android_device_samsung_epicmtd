@@ -49,12 +49,8 @@ lib/egl
 lib/hw
 media
 seh
-sem
 cameradata
 bin
-vendor/bin
-vendor/etc
-vendor/firmware
 "
 
 for DIR in $DIRS; do
@@ -86,23 +82,12 @@ lib/libglslcompiler.so
 lib/libpvrANDROID_WSEGL.so
 lib/libQmageDecoder.so
 bin/pvrsrvinit
-lib/hw/sensors.default.so
 lib/hw/copybit.s5pc110.so
-lib/hw/gps.s5pc110.so
-lib/hw/gralloc.default.so
 lib/hw/lights.s5pc110.so
-lib/hw/overlay.s5pc110.so
 lib/hw/gralloc.s5pc110.so
+lib/hw/sensors.default.so
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
-lib/libcameraservice.so
-lib/libseccamera.so
-lib/libcamera_client.so
-lib/libs3cjpeg.so
-lib/libarccamera.so
-lib/libseccameraadaptor.so
-lib/libcamera.so
-lib/libsensorservice.so
 lib/libril.so
 lib/libsec-ril40.so
 lib/libsecril-client.so
@@ -126,6 +111,7 @@ etc/wimaxloader.bin
 bin/immvibed
 bin/logwrapper
 bin/immvibed
+bin/killmediaserver
 bin/notified_event
 lib/libnetutils.so
 bin/mfgloader
@@ -156,9 +142,6 @@ media/battery_charging_95.qmg
 media/battery_charging_100.qmg
 media/chargingwarning.qmg
 media/Disconnected.qmg
-vendor/etc/gps_ExtLNA.xml
-vendor/bin/gpsd
-vendor/bin/launch_gps.sh
 "
 
 for FILE in $FILES; do
@@ -193,13 +176,13 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_aps.bin:system/etc/wifi/bcm4329_aps.bin \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_mfg.bin:system/etc/wifi/bcm4329_mfg.bin \\
     vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin \\
-    vendor/samsung/__DEVICE__/proprietary/bin/BCM4329B1_002.002.023.0417.0430.hcd:system/bin/BCM4329B1_002.002.023.0417.0430.hcd
+    vendor/samsung/__DEVICE__/proprietary/bin/BCM4329B1_002.002.023.0417.0430.hcd:system/bin/BCM4329B1_002.002.023.0417.0430.hcd \\
 
 #GPS
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/bin/gpsd:system/vendor/bin/gpsd \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/bin/launch_gps.sh:system/vendor/bin/launch_gps.sh
+    vendor/samsung/__DEVICE__/proprietary/lib/libgps.so:system/lib/libgps.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsecgps.so:system/lib/libsecgps.so \\
+
 
 # Firmware files
 PRODUCT_COPY_FILES += \\
@@ -226,20 +209,7 @@ PRODUCT_COPY_FILES += \\
 # Sensors, Lights etc
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/gralloc.s5pc110.so:system/lib/hw/gralloc.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gralloc.default.so:system/lib/hw/gralloc.default.so
-
-# Camera
-PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcamera.so:system/lib/libcamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libseccameraadaptor.so:system/lib/libseccameraadaptor.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcameraservice.so:system/lib/libcameraservice.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libseccamera.so:system/lib/libseccamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libarccamera.so:system/lib/libarccamera.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcamera_client.so:system/lib/libcamera_client.so
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so
 
 # RIL
 PRODUCT_COPY_FILES += \\
@@ -253,8 +223,12 @@ PRODUCT_COPY_FILES += \\
 
 #Sensors
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so
+    vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha.so:system/lib/libsensor_yamaha.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libms3c_yamaha.so:system/lib/libms3c_yamaha.so \\
+    vendor/samsung/__DEVICE__/proprietary/bin/sensorserver_yamaha:system/bin/sensorserver_yamaha \\
+    vendor/samsung/__DEVICE__/proprietary/bin/sensorcalibutil_yamaha:system/bin/sensorcalibutil_yamaha \\
+    vendor/samsung/__DEVICE__/proprietary/bin/sensorstatutil_yamaha:system/bin/sensorstatutil_yamaha
 
 #
 # WIMAX
@@ -275,6 +249,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/immvibed:system/bin/immvibed \\
     vendor/samsung/__DEVICE__/proprietary/bin/logwrapper:system/bin/logwrapper \\
     vendor/samsung/__DEVICE__/proprietary/bin/immvibed:system/bin/immvibed \\
+    vendor/samsung/__DEVICE__/proprietary/bin/killmediaserver:system/bin/killmediaserver \\
     vendor/samsung/__DEVICE__/proprietary/bin/notified_event:system/bin/notified_event \\
     vendor/samsung/__DEVICE__/proprietary/bin/mfgloader:system/bin/mfgloader \\
     vendor/samsung/__DEVICE__/proprietary/bin/netcfg:system/bin/netcfg \\
