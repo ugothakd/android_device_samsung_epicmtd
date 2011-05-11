@@ -108,3 +108,6 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/epic/recovery/recovery_
 BOARD_GPS_LIBRARIES := libsecgps libgps
 BOARD_USES_GPSSHIM := true
 TARGET_BOOTLOADER_BOARD_NAME := aries
+
+# Include aries specific stuff
+-include device/samsung/common/aries.mk

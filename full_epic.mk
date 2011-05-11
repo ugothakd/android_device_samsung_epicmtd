@@ -83,7 +83,7 @@ PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf \
     device/samsung/epic/prebuilt/apns-conf.xml:system/etc/apns-conf.xml \
     device/samsung/epic/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+    device/samsung/common/aries/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
     device/samsung/epic/prebuilt/vold.conf:system/etc/vold.conf \
     device/samsung/epic/prebuilt/vold.fstab:system/etc/vold.fstab \
     device/samsung/epic/prebuilt/init.smdkc110.rc:root/init.smdkc110.rc \
