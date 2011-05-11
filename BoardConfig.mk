@@ -5,7 +5,7 @@
 
 # Board and platform defines
 TARGET_BOARD := SPH-D700
-TARGET_BOARD_PLATFORM := s5pc110
+TARGET_BOARD_PLATFORM := aries
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 
 # Processor optimizations
