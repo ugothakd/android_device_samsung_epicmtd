@@ -6,6 +6,7 @@
 # Board and platform defines
 TARGET_BOARD := SPH-D700
 TARGET_BOARD_PLATFORM := aries
+TARGET_BOOTLOADER_BOARD_NAME := aries
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 
 # Processor optimizations
@@ -107,7 +108,6 @@ BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/epic/recovery/recovery_
 
 BOARD_GPS_LIBRARIES := libsecgps libgps
 BOARD_USES_GPSSHIM := true
-TARGET_BOOTLOADER_BOARD_NAME := aries
 
 # Include aries specific stuff
 -include device/samsung/common/aries.mk
