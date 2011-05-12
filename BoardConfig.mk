@@ -1,6 +1,9 @@
 # Samsung Epic4G compile definitions.
 
-# If BoardConfigVendor.mk exists, inherit it.
+# Set this up here so that BoardVendorConfig.mk can override it
+BOARD_USES_GENERIC_AUDIO := false
+
+# Use the non-open-source parts, if they exist
 -include vendor/samsung/epic/BoardConfigVendor.mk
 
 # Board and platform defines
@@ -28,19 +31,16 @@ BOARD_NO_RGBX_8888 := true
 TARGET_USES_OLD_LIBSENSORS_HAL := true
 
 # Camera defines
-BOARD_USES_OVERLAY := true
-BOARD_USES_COPYBIT := true
-DEFAULT_FB_NUM := 0
 USE_CAMERA_STUB := false
 ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
 
-USE_OVERLAY_FORMAT_YCbCr_420_SP := true
-BUILD_PV_VIDEO_ENCODERS := 1
+# Video Devices
+BOARD_USES_OVERLAY := true
 BOARD_V4L2_DEVICE := /dev/video1
 BOARD_CAMERA_DEVICE := /dev/video0
-#BOARD_SECOND_CAMERA_DEVICE := /dev/video2	// FIX ME: FFC
+BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # WIFI defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT

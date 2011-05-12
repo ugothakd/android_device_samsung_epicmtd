@@ -72,6 +72,13 @@ EOF
 
 BOARD_GPS_LIBRARIES := libsecgps libgps
 
+USE_CAMERA_STUB := false
+
+BOARD_USES_GENERIC_AUDIO := false
+
+BOARD_NO_PAGE_FLIPPING := false
+BOARD_NO_32BPP := false
+
 EOF
 
 mkdir -p ../../../vendor/samsung/epic/overlay/packages/apps/Launcher2/res/layout
