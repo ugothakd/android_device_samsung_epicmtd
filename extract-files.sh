@@ -69,6 +69,17 @@ seh/CE147F00.bin
 seh/CE147F01.bin
 seh/CE147F02.bin
 seh/CE147F03.bin
+lib/libActionShot.so
+lib/libCaMotion.so
+lib/libcaps.so
+lib/libPanoraMax1.so
+lib/libPlusMe.so
+lib/libarccamera.so
+lib/libcamerafirmwarejni.so
+lib/libcamera.so
+lib/libcameraservice.so
+lib/libseccamera.so
+lib/libseccameraadaptor.so
 lib/egl/libEGL_POWERVR_SGX540_120.so
 lib/egl/libGLES_android.so
 lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
@@ -168,6 +179,23 @@ done
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# Camera
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
+    vendor/samsung/__DEVICE__/proprietary/libActionShot.so:system/lib/libActionShot.so \\
+    vendor/samsung/__DEVICE__/proprietary/libCaMotion.so:system/lib/libCaMotion.so \\
+    vendor/samsung/__DEVICE__/proprietary/libcaps.so:system/lib/libcaps.so \\
+    vendor/samsung/__DEVICE__/proprietary/libPanoraMax1.so:system/lib/libPanoraMax1.so \\
+    vendor/samsung/__DEVICE__/proprietary/libPlusMe.so:system/lib/libPlusMe.so \\
+    vendor/samsung/__DEVICE__/proprietary/libarccamera.so:system/lib/libarccamera.so \\
+    vendor/samsung/__DEVICE__/proprietary/libcamera_client.so:system/lib/libcamera_client.so \\
+    vendor/samsung/__DEVICE__/proprietary/libcamerafirmwarejni.so:system/lib/libcamerafirmwarejni.so \\
+    vendor/samsung/__DEVICE__/proprietary/libcameraservice.so:system/lib/libcameraservice.so \\
+    vendor/samsung/__DEVICE__/proprietary/libseccamera.so:system/lib/libseccamera.so \\
+    vendor/samsung/__DEVICE__/proprietary/libseccameraadaptor.so:system/lib/libseccameraadaptor.so \\
+    vendor/samsung/__DEVICE__/proprietary/datapattern_420sp.yuv:system/cameradata/datapattern_420sp.yuv \\
+    vendor/samsung/__DEVICE__/proprietary/datapattern_front_420sp.yuv:system/cameradata/datapattern_front_420sp.yuv \\
 
 # WiFi & Bluetooth
 PRODUCT_COPY_FILES += \\
