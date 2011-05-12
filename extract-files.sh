@@ -77,6 +77,7 @@ lib/libPlusMe.so
 lib/libarccamera.so
 lib/libcamerafirmwarejni.so
 lib/libcamera.so
+lib/libcamera_client.so
 lib/libcameraservice.so
 lib/libseccamera.so
 lib/libseccameraadaptor.so
