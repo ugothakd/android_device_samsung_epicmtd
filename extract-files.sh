@@ -182,6 +182,7 @@ done
 
 # Camera
 PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/libcamera.so:obj/lib/libcamera.so \\
     vendor/samsung/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
     vendor/samsung/__DEVICE__/proprietary/libActionShot.so:system/lib/libActionShot.so \\
     vendor/samsung/__DEVICE__/proprietary/libCaMotion.so:system/lib/libCaMotion.so \\
