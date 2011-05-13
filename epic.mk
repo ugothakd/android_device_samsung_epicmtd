@@ -152,8 +152,8 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # Copy product specific files
 PRODUCT_COPY_FILES += \
     device/samsung/epic/prebuilt/init.smdkc110.rc:root/init.smdkc110.rc \
-    vendor/samsung/epic/proprietary/lib/libgps.so:obj/lib/libgps.so \
-    vendor/samsung/epic/proprietary/lib/libsecgps.so:obj/lib/libsecgps.so
+    vendor/samsung/epic/proprietary/libgps.so:obj/lib/libgps.so \
+    vendor/samsung/epic/proprietary/libsecgps.so:obj/lib/libsecgps.so
 
 # We are using a prebuilt kernel for now, to ease building. This will be changed later.
 ifeq ($(TARGET_PREBUILT_KERNEL),)
