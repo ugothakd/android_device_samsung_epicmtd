@@ -110,13 +110,24 @@ than the size of the config_autoBrightnessLevels array.
     <!-- An Array of "[Connection name],[ConnectivityManager connection type],
          [associated radio-type],[priority]  -->
     <string-array translatable="false" name="networkAttributes">
-        <item>"wifi,1,1,1"</item>
-        <item>"wimax,6,6,2"</item>
-	<item>"mobile,0,0,0"</item>
-        <item>"mobile_mms,2,0,2"</item>
-        <item>"mobile_supl,3,0,2"</item>
-        <item>"mobile_dun,4,0,4"</item>
-        <item>"mobile_hipri,5,0,3"</item>
+        <item>"wimax,6,6,1"</item>
+        <item>"wifi,1,1,2"</item>
+        <item>"mobile,0,0,0"</item>
+        <item>"mobile_mms,2,0,3"</item>
+        <item>"mobile_supl,3,0,3"</item>
+        <item>"mobile_dun,4,0,5"</item>
+        <item>"mobile_hipri,5,0,4"</item>
+    </string-array>
+
+    <!-- This string array should be overridden by the device to present a list of radio
+         attributes.  This is used by the connectivity manager to decide which networks can coexist
+         based on the hardware -->
+    <!-- An Array of "[ConnectivityManager connectionType],
+                      [# simultaneous connection types]"  -->
+    <string-array translatable="false" name="radioAttributes">
+        <item>"6,1"</item>
+        <item>"1,1"</item>
+        <item>"0,1"</item>
     </string-array>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
@@ -155,4 +166,17 @@ than the size of the config_autoBrightnessLevels array.
     </integer-array>
     <!-- Boolean indicating whether the TV animation should be used on screen on and off -->
     <bool name="config_animateScreenLights">false</bool>
+
+    <!-- Set and Unsets WiMAX -->
+    <bool name="config_wimaxEnabled">true</bool>
+    <!-- Location of the wimax framwork jar location -->
+    <string name="config_wimaxServiceJarLocation">/vendor/lib/wimax_service.jar</string>
+    <!-- Location of the wimax native library locaiton -->
+    <string name="config_wimaxNativeLibLocation">/vendor/lib/libSECmWiMAXcAPI.so</string>
+    <!-- Name of the wimax manager class -->
+    <string name="config_wimaxManagerClassname">android.net.wimax.WimaxManager</string>
+    <!-- Name of the wimax service class -->
+    <string name="config_wimaxServiceClassname">com.android.server.WimaxService</string>
+    <!-- Name of the wimax state tracker clas -->
+    <string name="config_wimaxStateTrackerClassname">android.net.wimax.WimaxStateTracker</string>
 </resources>
