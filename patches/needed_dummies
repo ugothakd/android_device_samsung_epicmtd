@@ -1,0 +1,71 @@
+# These symbols are defined in NS and NS4G gpio-aries.h, but not in Epic.
+# Some of the GPIO pins are assigned differently, and some aren't used in Epic.
+# They're used in mach-aries.c, though, so we need functional aliases or dummies for them.
+
+Symbol			NS #define	  Epic Conflict		    Solution								 Implemented
+---------------------+-----------------+-------------------------+---------------------------------------------------------------------+
+GPIO_OLED_DET        | S5PV210_GPJ2(2) | GPIO_WIMAX_USB_EN	 | See Footnote 2                                                      | x
+GPIO_DIC_ID          | S5PV210_MP01(5) | GPIO_MP015		 | Change Epic's to "#define GPIO_DIC_ID S5PV210_MP01(5)"              | x
+GPIO_AP_SDA_28V      | S5PV210_GPJ3(6) | GPIO_AP_PMIC_SCL	 | See Footnote 1                                                      | x
+GPIO_AP_SCL_28V      | S5PV210_GPJ3(7) | GPIO_AP_PMIC_SDA	 | See Footnote 1                                                      | x
+GPIO_PS_ON           | S5PV210_GPJ1(4) | GPIO_HALL_SW		 | ifndef around this function                                         | x
+GPIO_PS_VOUT         | S5PV210_GPH0(2) | --------		 | Add "#define GPIO_PS_VOUT S5PV210_GPH0(2)" to gpio-aries-epic.h     | x
+GPIO_EAR_SEND_END    | S5PV210_GPH3(6) | GPIO_EAR_SEND_END_SHORT | Rename Epic variable to GPIO_EAR_SEND_END.                          | x
+GPIO_EAR_SEND_END_AF | 0xFF	       | --------		 | Rename Epic variable to GIO_EAR_SEND_END_AF                         | x
+GPIO_WLAN_WAKE_AF    | 1	       | --------		 | Add "#define GPIO_WLAN_WAKE_AF 1" to gpio-aries-epic.h              | x
+GPIO_HWREV_MODE0     | S5PV210_GPJ0(2) | GPIO_BOOT		 | ifndef around this function                                         | x
+GPIO_HWREV_MODE1     | S5PV210_GPJ0(3) | GPIO_WLAN_BT_EN	 | ifndef around this function                                         | x
+GPIO_HWREV_MODE2     | S5PV210_GPJ0(4) | GPIO_BT_nRST		 | ifndef around this function                                         | x
+GPIO_HWREV_MODE3     | S5PV210_GPJ0(7) | --------		 | ifndef around this function					       | x
+---------------------+-----------------+-------------------------+---------------------------------------------------------------------+
+
+Footnote 1: arch/arm/mach-s5pv210/mach-aries.c:1040 :
+static struct i2c_gpio_platform_data i2c5_platdata = {
+#ifndef CONFIG_SAMSUNG_EPIC
+        .sda_pin                = GPIO_AP_SDA_28V, // S5PV210_GPJ3(6)
+        .scl_pin                = GPIO_AP_SCL_28V, // S5PV210_GPJ3(7)
+#else
+	.sda_pin		= GPIO_AP_PMIC_SDA, // S5PV210_GPJ3(7)
+	.scl_pin		= GPIO_AP_PMIC_SCL, // S5PV210_GPJ3(6)
+#endif
+        .udelay                 = 2, /* 250KHz */
+        .sda_is_open_drain      = 0,
+        .scl_is_open_drain      = 0,
+        .scl_is_output_only     = 0,
+};
+
+Footnote 2: arch/arm/mach-s5pv210/mach-aries.c:895 :
+#ifdef CONFIG_FB_S3C_MDNIE
+        writel(0x1, S5P_MDNIE_SEL);
+#else
+        writel(0x2, S5P_MDNIE_SEL);
+#endif
+#ifndef CONFIG_SAMSUNG_EPIC
+        s3c_gpio_setpull(GPIO_OLED_DET, S3C_GPIO_PULL_NONE);
+        s3c_gpio_setpull(GPIO_OLED_ID, S3C_GPIO_PULL_NONE);
+        s3c_gpio_setpull(GPIO_DIC_ID, S3C_GPIO_PULL_NONE);
+#else
+        writel(0xffffffff, S3C_ADDR(0x00500000) + 0x12c);
+        writel(0xffffffff, S3C_ADDR(0x00500000) + 0x14c);
+        writel(0xffffffff, S3C_ADDR(0x00500000) + 0x16c);
+        writel(0x000000ff, S3C_ADDR(0x00500000) + 0x18c);
+
+        /* DISPLAY_CS */
+        s3c_gpio_cfgpin(S5PV210_MP01(1), S3C_GPIO_SFN(1));
+        /* DISPLAY_CLK */
+        s3c_gpio_cfgpin(S5PV210_MP04(1), S3C_GPIO_SFN(1));
+        /* DISPLAY_SO */
+        s3c_gpio_cfgpin(S5PV210_MP04(2), S3C_GPIO_SFN(1));
+        /* DISPLAY_SI */
+        s3c_gpio_cfgpin(S5PV210_MP04(3), S3C_GPIO_SFN(1));
+
+        /* DISPLAY_CS */
+        s3c_gpio_setpull(S5PV210_MP01(1), S3C_GPIO_PULL_NONE);
+        /* DISPLAY_CLK */
+        s3c_gpio_setpull(S5PV210_MP04(1), S3C_GPIO_PULL_NONE);
+        /* DISPLAY_SO */
+        s3c_gpio_setpull(S5PV210_MP04(2), S3C_GPIO_PULL_NONE);
+        /* DISPLAY_SI */
+        s3c_gpio_setpull(S5PV210_MP04(3), S3C_GPIO_PULL_NONE);
+#endif
+}
