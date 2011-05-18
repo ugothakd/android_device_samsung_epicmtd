@@ -27,7 +27,6 @@ TARGET_BOOTLOADER_BOARD_NAME := aries
 ##FIXME#TARGET_RECOVERY_INITRC := device/samsung/epic/recovery.rc
 
 # Releasetools
-TARGET_PROVIDES_RELEASETOOLS := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_ota_from_target_files
 TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_img_from_target_files
 
