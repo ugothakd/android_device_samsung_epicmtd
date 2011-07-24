@@ -91,6 +91,4 @@ TARGET_NO_RECOVERY := true
 TARGET_RECOVERY_PRE_COMMAND="echo 1 > /cache/.startrecovery; sync;"
 
 # Include aries specific stuff
--include device/samsung/aries-common/aries.mk
-
-#TARGET_OTA_ASSERT_DEVICE := aries,fascinate,fascinatemtd,SCH-I500
+-include device/samsung/common/aries.mk
