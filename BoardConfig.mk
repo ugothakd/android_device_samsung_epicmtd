@@ -91,4 +91,6 @@ TARGET_NO_RECOVERY := true
 TARGET_RECOVERY_PRE_COMMAND="echo 1 > /cache/.startrecovery; sync;"
 
 # Include aries specific stuff
--include device/samsung/common/aries.mk
+-include device/samsung/aries-common/aries.mk
+
+##FIXME#TARGET_OTA_ASSERT_DEVICE := aries,epic,epicmtd,SPH-D700
