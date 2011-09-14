@@ -34,6 +34,7 @@ else
 fi
 
 DIRS="
+vendor/bin
 bin
 cameradata
 etc/wifi
@@ -82,7 +83,7 @@ lib/libril.so
 lib/libsec-ril40.so
 lib/libsecril-client.so
 
-bin/gpsd
+vendor/bin/gpsd
 lib/hw/gps.s5pc110.so
 
 bin/pvrsrvinit
@@ -231,7 +232,7 @@ PRODUCT_COPY_FILES += \\
 # GPS
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/gpsd:system/bin/gpsd \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/bin/gpsd:system/vendor/bin/gpsd \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
 
 #
