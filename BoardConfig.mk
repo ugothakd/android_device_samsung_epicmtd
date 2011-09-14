@@ -20,15 +20,10 @@ ANDROID_ARM_LINKER := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
-TARGET_PROVIDES_INIT := true
-TARGET_PROVIDES_INIT_TARGET_RC := true
 TARGET_BOARD_PLATFORM := s5pv210
-TARGET_BOOTLOADER_BOARD_NAME := aries
-##FIXME#TARGET_RECOVERY_INITRC := device/samsung/epic/recovery.rc
 
-# Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_img_from_target_files
+# Provide our own libaudio
+TARGET_PROVIDES_LIBAUDIO := true
 
 # Camera defines
 USE_CAMERA_STUB := false
@@ -74,23 +69,20 @@ WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_
 WIFI_DRIVER_MODULE_NAME := "dhd"
 BOARD_WEXT_NO_COMBO_SCAN := true
 
+# Because fuck you, that's why
+BOARD_USES_PREBUILT_LIBNETUTILS := true
+
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Recovery
-TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_NO_RECOVERY_PARTITION := true
 BOARD_HAS_MTD_CACHE := true
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
-BOARD_USES_BML_OVER_MTD := true
 BOARD_USES_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/aries-common/shbootimg.mk
 TARGET_NO_RECOVERY := true
-TARGET_RECOVERY_PRE_COMMAND="echo 1 > /cache/.startrecovery; sync;"
 
 # Include aries specific stuff
 -include device/samsung/aries-common/aries.mk
-
-##FIXME#TARGET_OTA_ASSERT_DEVICE := aries,epic,epicmtd,SPH-D700
