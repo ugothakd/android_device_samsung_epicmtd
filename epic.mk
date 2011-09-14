@@ -51,6 +51,12 @@ PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/keychars/qt602240_ts_input.kcm.bin:system/usr/keychars/qt602240_ts_input.kcm.bin \
      device/samsung/epic/prebuilt/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
+# extra stuff
+PRODUCT_COPY_FILES += \
+	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite \
+	device/samsung/epic/prebuilt/xbin/ro:system/xbin/ro \
+	device/samsung/epic/prebuilt/xbin/rw:system/xbin/rw
+
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
     cypress-touchkey.kcm \
