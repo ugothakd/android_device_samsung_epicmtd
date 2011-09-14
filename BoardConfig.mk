@@ -25,6 +25,9 @@ TARGET_BOARD_PLATFORM := s5pv210
 # Provide our own libaudio
 TARGET_PROVIDES_LIBAUDIO := true
 
+# Samsung still doesn't love its ugly stepchild
+BOARD_NO_RGBX_8888 := true
+
 # Camera defines
 USE_CAMERA_STUB := false
 ifeq ($(USE_CAMERA_STUB),false)
