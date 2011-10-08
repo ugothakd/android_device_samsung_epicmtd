@@ -18,7 +18,7 @@ loglevel 3
     export EXTERNAL_STORAGE /mnt/sdcard
     export EXTERNAL_STORAGE2 /mnt/sdcard
     export USBHOST_STORAGE /mnt/sdcard/usbStorage
-
+    export TERMINFO /system/etc/terminfo
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
@@ -45,7 +45,7 @@ loglevel 3
 
     mkdir /system
     mkdir /data 0771 system system
-    mkdir /cache 0770 system cache
+    mkdir /cache 0771 system cache
     mkdir /config 0500 root root
 
     # Directory for putting things only root should see.
@@ -163,9 +163,6 @@ on fs
 		# samsung module
     insmod /lib/modules/storage.ko
 
-    # SEC_DMCRYPT efs or cache or lfs partition required
-    exec apply_sec_devenc_init
-
 #  Wimax modules
  	
     insmod /lib/modules/wimax_gpio.ko
@@ -203,12 +200,12 @@ on post-fs
 
     # Same reason as /data above
     chown system cache /cache
-    chmod 0770 /cache
+    chmod 0771 /cache
 
     # cache folder for bigger file than /cache
     mkdir /data/cache
     chown system cache /data/cache
-    chmod 0770 /data/cache
+    chmod 0771 /data/cache
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery

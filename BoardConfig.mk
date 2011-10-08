@@ -47,8 +47,6 @@ BOARD_CAMERA_DEVICE := /dev/video0
 BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 
 # Max image/partition sizes
-#Increase partition size since our image is larger than 128MB default... has to be a multiple of 4096
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 150003712
 BOARD_BOOTIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00280000)
 BOARD_RECOVERYIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00500000)
 BOARD_SYSTEMIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x07500000)
