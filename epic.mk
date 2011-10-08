@@ -23,7 +23,9 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/epic/overlay
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.cdma.home.operator.numeric=310120 \
     ro.cdma.home.operator.alpha=Sprint \
-    ro.telephony.default_network=4
+    ro.telephony.default_network=4 \
+    ro.telephony.ril_class=samsung \
+    ro.ril.samsung_cdma=true
 
 # WiMAX Property setting for checking WiMAX interface
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -31,11 +33,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
-    device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf \
-    device/samsung/epic/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/samsung/epic/prebuilt/vold.conf:system/etc/vold.conf \
-    device/samsung/epic/prebuilt/asound.conf:system/etc/asound.conf \
-    device/samsung/epic/prebuilt/egl.cfg:system/lib/egl/egl.cfg
+    device/samsung/epic/prebuilt/etc/asound.conf:system/etc/asound.conf \
+    device/samsung/epic/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
+    device/samsung/epic/prebuilt/etc/egl.cfg:system/lib/egl/egl.cfg
+
+# WiFi
+PRODUCT_COPY_FILES += \
+     device/samsung/epic/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # Keylayout and Keychars
 PRODUCT_COPY_FILES += \
@@ -53,43 +57,16 @@ PRODUCT_COPY_FILES += \
 
 # extra stuff
 PRODUCT_COPY_FILES += \
-	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite \
-	device/samsung/epic/prebuilt/xbin/ro:system/xbin/ro \
-	device/samsung/epic/prebuilt/xbin/rw:system/xbin/rw
+	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
     cypress-touchkey.kcm \
     s3c-keypad.kcm
 
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    make_ext4fs \
-    setup_fs
-
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/aries-common/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
     device/samsung/epic/prebuilt/media_profiles.xml:system/etc/media_profiles.xml
-
-# These are the OpenMAX IL modules
-PRODUCT_PACKAGES += \
-    libSEC_OMX_Core.aries \
-    libOMX.SEC.AVC.Decoder.aries \
-    libOMX.SEC.M4V.Decoder.aries \
-    libOMX.SEC.M4V.Encoder.aries \
-    libOMX.SEC.AVC.Encoder.aries
-
-# Misc other modules
-PRODUCT_PACKAGES += \
-    lights.aries \
-    overlay.aries \
-    sensors.aries
-
-# Libs
-PRODUCT_PACKAGES += \
-    libcamera \
-    libstagefrighthw
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -138,10 +115,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.checkjni=false
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# Copy product specific files
-PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/init.smdkc110.rc:root/init.smdkc110.rc \
 
 # We are using a prebuilt kernel for now, to ease building. This will be changed later.
 ifeq ($(TARGET_PREBUILT_KERNEL),)
