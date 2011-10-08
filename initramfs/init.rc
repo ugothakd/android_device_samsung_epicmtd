@@ -120,16 +120,6 @@ on fs
 # mount mtd partitions
     mount rfs /dev/block/stl9 /system check=no
 
-    # Temp add for FY -> GB update problem 
-    # After update GB, need to remove
-    copy /tmp/linker /system/bin/linker
-    copy /tmp/libc.so /system/lib/libc.so
-    copy /tmp/libcutils.so /system/lib/libcutils.so
-    copy /tmp/liblog.so /system/lib/liblog.so
-    copy /tmp/libz.so /system/lib/libz.so
-    copy /tmp/libstdc++.so /system/lib/libstdc++.so
-
-
 # use movinand second partition as /data. d.moskvitin
     #temp
     chown root root /sbin/fat.format
@@ -138,9 +128,6 @@ on fs
     mkdir /data
     chown system system /data
     chmod 0771 /data    
-
-    #mkdir /dbdata
-  #SEC_DMCRYPT crypt flag added
     mount rfs /dev/block/stl10 /data nosuid nodev check=no
     chown system system /data
     chmod 0771 /data
@@ -176,8 +163,6 @@ on post-fs
     # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
-    #chown system system /dbdata
-    #chmod 0777 /dbdata
 
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
