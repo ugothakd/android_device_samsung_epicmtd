@@ -21,8 +21,6 @@ on init
 
     mkdir /mnt 0775 root root
 
-    #mount /tmp /tmp tmpfs   
-
 on early-fs
 
     # rfs drivers
@@ -40,9 +38,6 @@ on early-fs
 on fs
     mount tmpfs tmpfs /tmp
     mount rfs /dev/block/stl9 /system check=no
-    #mount rfs /dev/block/stl9 /system ro remount
-
-    exec apply_disk_policy
 
 on boot
 
@@ -58,6 +53,10 @@ service ueventd /sbin/ueventd
 service console /system/bin/sh
     console
 
+# adbd is controlled by the persist.service.adb.enable system property
+service adbd /sbin/adbd
+    disabled
+
 service playlpm /system/bin/playlpm
     user root
     oneshot
@@ -72,6 +71,6 @@ service lpmkey /system/bin/charging_mode
 on property:persist.service.adb.enable=1
     start adbd
 
-#on property:persist.service.adb.enable=0
-#    stop adbd
+on property:persist.service.adb.enable=0
+    stop adbd
 
