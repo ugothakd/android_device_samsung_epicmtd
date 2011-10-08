@@ -19,18 +19,6 @@
 # application settings that are stored in resourced.
 DEVICE_PACKAGE_OVERLAYS := device/samsung/epic/overlay
 
-# Telephony property for CDMA
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cdma.home.operator.numeric=310120 \
-    ro.cdma.home.operator.alpha=Sprint \
-    ro.telephony.default_network=4 \
-    ro.telephony.ril_class=samsung \
-    ro.ril.samsung_cdma=true
-
-# WiMAX Property setting for checking WiMAX interface
-PRODUCT_PROPERTY_OVERRIDES += \
-       ro.wimax.interface=uwbr0
-
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
     device/samsung/epic/prebuilt/etc/asound.conf:system/etc/asound.conf \
@@ -91,6 +79,27 @@ PRODUCT_COPY_FILES += \
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.opengles.version=131072
+
+# Telephony property for CDMA
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.vc_call_vol_steps=15 \
+    ro.telephony.default_network=4 \
+    ro.com.google.clientidbase=android-sprint-us \
+    ro.cdma.home.operator.numeric=310120 \
+    ro.cdma.home.operator.alpha=Sprint \
+    net.cdma.pppd.authtype=require-pap \
+    net.cdma.pppd.user=user[SPACE]SprintNextel \
+    net.cdma.datalinkinterface=/dev/ttyCDMA0 \
+    net.interfaces.defaultroute=cdma \
+    net.cdma.ppp.interface=ppp0 \
+    net.connectivity.type=CDMA1 \
+    mobiledata.interfaces=eth0,ppp0 \
+    ro.telephony.ril_class=samsung \
+    ro.ril.samsung_cdma=true
+
+# WiMAX Property setting for checking WiMAX interface
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.wimax.interface=uwbr0
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to

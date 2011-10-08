@@ -79,6 +79,7 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epic/recovery_ui.c
 
 # Override cyanogen squisher to customize our update zip package
 TARGET_CUSTOM_RELEASETOOL := ./device/samsung/epic/releasetools/squisher
