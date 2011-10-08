@@ -61,7 +61,9 @@ lib/libActionShot.so
 lib/libcamera.so
 lib/libarccamera.so
 lib/libcamera_client.so
+lib/libcamerafirmwarejni.so
 lib/libcameraservice.so
+lib/libCamera_gingerbread.so
 lib/libCaMotion.so
 lib/libcaps.so
 lib/libPanoraMax1.so
@@ -78,7 +80,6 @@ lib/libtvoutservice.so
 
 bin/pppd_runner
 bin/rild
-lib/libnetutils.so
 lib/libril.so
 lib/libsec-ril40.so
 lib/libsecril-client.so
@@ -93,6 +94,7 @@ lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
 lib/egl/libGLESv2_POWERVR_SGX540_120.so
 lib/libsrv_um.so
 lib/libsrv_init.so
+lib/libIMGegl.so
 lib/libpvr2d.so
 lib/libpvrANDROID_WSEGL.so
 lib/libglslcompiler.so
@@ -113,6 +115,28 @@ lib/hw/overlay.s5pc110.so
 bin/playlpm
 bin/charging_mode
 lib/libQmageDecoder.so
+media/battery_charging_5.qmg
+media/battery_charging_10.qmg
+media/battery_charging_15.qmg
+media/battery_charging_20.qmg
+media/battery_charging_25.qmg
+media/battery_charging_30.qmg
+media/battery_charging_35.qmg
+media/battery_charging_40.qmg
+media/battery_charging_45.qmg
+media/battery_charging_50.qmg
+media/battery_charging_55.qmg
+media/battery_charging_60.qmg
+media/battery_charging_65.qmg
+media/battery_charging_70.qmg
+media/battery_charging_75.qmg
+media/battery_charging_80.qmg
+media/battery_charging_85.qmg
+media/battery_charging_90.qmg
+media/battery_charging_95.qmg
+media/battery_charging_100.qmg
+media/chargingwarning.qmg
+media/Disconnected.qmg
 "
 
 for FILE in $FILES; do
@@ -147,7 +171,7 @@ if [ "$ZIP" ]; then rm -rf tmp ; fi
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libcamera.so:obj/lib/libcamera.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:obj/lib/libsecrilclient.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:obj/lib/libsec-ril40.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:obj/lib/libsec-ril40.so
 
 #
 # Wifi
@@ -202,9 +226,11 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libcamera.so:system/lib/libcamera.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libarccamera.so:system/lib/libarccamera.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libcamera_client.so:system/lib/libcamera_client.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libcamerafirmwarejni.so:system/lib/libcamerafirmwarejni.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libcameraservice.so:system/lib/libcameraservice.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libCamera_gingerbread.so:system/lib/libCamera_gingerbread.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libCaMotion.so:system/lib/libCaMotion.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libcaps.so:system/lib/libcaps.so \\/libedid.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libcaps.so:system/lib/libcaps.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libPanoraMax1.so:system/lib/libPanoraMax1.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libPlusMe.so:system/lib/libPlusMe.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libs3cjpeg.so:system/lib/libs3cjpeg.so \\
@@ -223,7 +249,6 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/pppd_runner:system/bin/pppd_runner \\
     vendor/samsung/__DEVICE__/proprietary/bin/rild:system/bin/rild \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libnetutils.so:system/lib/libnetutils.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril40.so:system/lib/libsec-ril40.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:system/lib/libsecril-client.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libril.so:system/lib/libril.so
@@ -263,6 +288,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/media/battery_charging_95.qmg:system/media/battery_charging_95.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/battery_charging_100.qmg:system/media/battery_charging_100.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/chargingwarning.qmg:system/media/chargingwarning.qmg \\
+    vendor/samsung/__DEVICE__/proprietary/media/Disconnected.qmg:system/media/Disconnected.qmg
 
 EOF
 

@@ -34,7 +34,7 @@ BOARD_CAMERA_LIBRARIES := libcamera
 endif
 
 # OpenGL stuff
-BOARD_EGL_CFG := device/samsung/epic/egl.cfg
+BOARD_EGL_CFG := device/samsung/epic/prebuilt/etc/egl.cfg
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -79,10 +79,8 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_HAS_NO_RECOVERY_PARTITION := true
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
-TARGET_NO_RECOVERY := true
 
 # Override cyanogen squisher to customize our update zip package
 TARGET_CUSTOM_RELEASETOOL := ./device/samsung/epic/releasetools/squisher

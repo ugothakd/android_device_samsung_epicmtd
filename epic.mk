@@ -66,7 +66,7 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/media_profiles.xml:system/etc/media_profiles.xml
+    device/samsung/epic/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # apns config file
 PRODUCT_COPY_FILES += \
