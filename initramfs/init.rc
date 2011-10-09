@@ -526,7 +526,7 @@ on boot
     setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
     setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-    setprop net.tcp.buffersize.wimax   4092,87380,1520768,4092,16384,1520768
+    #setprop net.tcp.buffersize.wimax   4092,87380,1520768,4092,16384,1520768
     
 # +++++++++++++++++++++++++++++++++++++++++++
 # for Bluetooth
@@ -759,21 +759,21 @@ service gps-daemon /system/vendor/bin/gpsd
 
 #end of PCInternet share
 # [Yagya for Victory WiMAX DHCP 20100208
-service dhcpcd_wimax /system/bin/dhcpcd uwbr0 -ABK
-    disabled
-    oneshot
+#service dhcpcd_wimax /system/bin/dhcpcd uwbr0 -ABK
+#    disabled
+#    oneshot
 # Yagya for Victory WiMAX DHCP 20100208]
 
 # Yagya for Victory "sprintpcs.com" realm issue as below.
 # wimax cannot send and receive data packet before add route, when subnet mask is 255.255.255.255
-service wimax_route /system/bin/route add default dev uwbr0
-        disabled
-        oneshot
+#service wimax_route /system/bin/route add default dev uwbr0
+#        disabled
+#        oneshot
 
 # Yagya, for ip renew.
-service wimax_renew /system/bin/dhcpcd -n uwbr0
-        disabled
-        oneshot	
+#service wimax_renew /system/bin/dhcpcd -n uwbr0
+#        disabled
+#        oneshot	
 
 on property:ril.cdma.data_ready=true
     start pppd_cdma

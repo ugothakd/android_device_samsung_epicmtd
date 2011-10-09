@@ -98,8 +98,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.samsung_cdma=true
 
 # WiMAX Property setting for checking WiMAX interface
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.wimax.interface=uwbr0
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.wimax.interface=uwbr0
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
