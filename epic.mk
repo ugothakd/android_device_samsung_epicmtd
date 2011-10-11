@@ -45,6 +45,23 @@ PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/usr/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
      device/samsung/epic/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
+# These are the OpenMAX IL configuration files
+PRODUCT_COPY_FILES += \
+    device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
+
+# These are the OpenMAX IL modules
+PRODUCT_PACKAGES += \
+    libSEC_OMX_Core.s5pc110 \
+    libOMX.SEC.AVC.Decoder.s5pc110 \
+    libOMX.SEC.M4V.Decoder.s5pc110 \
+    libOMX.SEC.M4V.Encoder.s5pc110 \
+    libOMX.SEC.AVC.Encoder.s5pc110
+
+# Libs
+PRODUCT_PACKAGES += \
+    libstagefrighthw \
+    overlay.s5pc110
+
 # extra stuff
 PRODUCT_COPY_FILES += \
 	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite

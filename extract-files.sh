@@ -86,6 +86,7 @@ lib/libril.so
 lib/libsec-ril40.so
 lib/libsecril-client.so
 
+etc/gps.conf
 vendor/bin/gpsd
 lib/hw/gps.s5pc110.so
 
@@ -214,8 +215,8 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so
+#    vendor/samsung/__DEVICE__/proprietary/lib/hw/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so
 
 #
 # Bluetooth
@@ -266,6 +267,7 @@ PRODUCT_COPY_FILES += \\
 #
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/vendor/bin/gpsd:system/vendor/bin/gpsd \\
+    vendor/samsung/__DEVICE__/proprietary/etc/gps.conf:system/etc/gps.conf \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
 
 #
