@@ -113,7 +113,6 @@ lib/hw/sensors.default.so
 lib/hw/copybit.s5pc110.so
 lib/hw/lights.s5pc110.so
 lib/hw/gralloc.s5pc110.so
-lib/hw/overlay.s5pc110.so
 
 bin/playlpm
 bin/charging_mode

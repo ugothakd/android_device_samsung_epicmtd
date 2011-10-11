@@ -45,6 +45,19 @@ PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/usr/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
      device/samsung/epic/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
+# extra stuff
+PRODUCT_COPY_FILES += \
+	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
+
+# Generated kcm keymaps
+PRODUCT_PACKAGES := \
+    cypress-touchkey.kcm \
+    s3c-keypad.kcm
+
+# These are the OpenMAX IL configuration files
+PRODUCT_COPY_FILES += \
+    device/samsung/epic/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
     device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
@@ -61,19 +74,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstagefrighthw \
     overlay.s5pc110
-
-# extra stuff
-PRODUCT_COPY_FILES += \
-	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
-
-# Generated kcm keymaps
-PRODUCT_PACKAGES := \
-    cypress-touchkey.kcm \
-    s3c-keypad.kcm
-
-# These are the OpenMAX IL configuration files
-PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # apns config file
 PRODUCT_COPY_FILES += \
