@@ -1,1 +1,107 @@
-Please remember to comment EVERY commit. More information will be added to this file, as needed.
+##This is a quick tutorial on building an ota package for Samsung Epic using ##the CyanogenMod Android repo.
+
+This tutorial begins with a belief that you have already sync'd down CyanogenMod sources and have set up your build environment.
+
+The first thing that will need to be done, is that you will need to pull down the device vendor from github.
+
+So, cd to device/samsung/
+
+git clone git://github.com/Decad3nce/android_device_samsung_epic.git
+
+This will create an android_device_samsung_epic directory in device/samsung
+
+Rename it:
+mv android_device_samsung_epic epic
+
+Next, we'll have to generate and include cyanogenmod_epic in vendor/cyanogen to begin building.
+
+cd to vendor/cyanogen
+Add the following lunch combo in vendorsetup.sh:
+
+add_lunch_combo cyanogen_droid2we-eng
+add_lunch_combo cyanogen_encore-eng
++add_lunch_combo cyanogen_epic-eng
+add_lunch_combo cyanogen_es209ra-eng
+add_lunch_combo cyanogen_espresso-eng
+add_lunch_combo cyanogen_fascinatemtd-eng
+
+Next, we'll create and add a cyanogenmod_epic makefile to android products
+
+cd vendor/cyanogen/products
+Add the following makefile call to AndroidProducts.mk:
+
+    $(LOCAL_DIR)/cyanogen_droid2we.mk \
+    $(LOCAL_DIR)/cyanogen_encore.mk \
++   $(LOCAL_DIR)/cyanogen_epic.mk \
+    $(LOCAL_DIR)/cyanogen_espresso.mk \
+    $(LOCAL_DIR)/cyanogen_es209ra.mk \
+    $(LOCAL_DIR)/cyanogen_fascinatemtd.mk \
+
+Lastly, we'll create a new file at vendor/cyanogen/products/cyanogen_epic.mk as follows:
+
+----BEGIN----
+
+# Inherit AOSP device configuration for epic.
+$(call inherit-product, device/samsung/epic/full_epic.mk)
+
+# Inherit some common cyanogenmod stuff.
+$(call inherit-product, vendor/cyanogen/products/common_full.mk)
+
+#
+# Setup device specific product configuration.
+#
+PRODUCT_NAME := cyanogen_epic
+PRODUCT_BRAND := samsung
+PRODUCT_DEVICE := epic
+PRODUCT_MODEL := SPH-D700
+PRODUCT_MANUFACTURER := samsung
+PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=soju BUILD_ID=GRJ22 BUILD_DISPLAY_ID=GWK74 BUILD_FINGERPRINT=google/soju/crespo:2.3.4/GRJ22/121341:user/release-keys PRIVATE_BUILD_DESC="soju-user 2.3.4 GRJ22 121341 release-keys"
+
+# Extra epic overlay
+PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/epic
+
+# Add the Torch app
+PRODUCT_PACKAGES += Torch
+
+#
+# Set ro.modversion
+#
+ifdef CYANOGEN_NIGHTLY
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.modversion=CyanogenMod-7-$(shell date +%m%d%Y)-NIGHTLY-Epic
+else
+    ifdef CYANOGEN_RELEASE
+        PRODUCT_PROPERTY_OVERRIDES += \
+            ro.modversion=CyanogenMod-7.1.0-Epic
+    else
+        PRODUCT_PROPERTY_OVERRIDES += \
+            ro.modversion=CyanogenMod-7.1.0-Epic-KANG-$(shell date +%m%d)
+    endif
+endif
+
+#
+# Copy galaxys specific prebuilt files
+#
+PRODUCT_COPY_FILES +=  \
+    vendor/cyanogen/prebuilt/hdpi/media/bootanimation.zip:system/media/bootanimation.zip
+
+----EOF----
+
+To set up the vendor tree, you'll need to cd to device/samsung/epic:
+
+1. Run extract-files.sh while phone is connected via usb to pull proprietaries from device. The script will then call setup-makefiles to generate vendor/samsung/epic/ and the necessary makefiles for blob manipulation
+
+2. Next, from the root android directory, you'll need to:
+	repo sync
+	make clobber
+	brunch epic
+
+and the build will begin!
+
+At the end of the compile, the generate ota package will be in out/target/product/epic/
+
+
+ 
+
+
+
