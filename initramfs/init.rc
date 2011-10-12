@@ -622,7 +622,7 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wif
     disabled
     oneshot
 
-service dhcpcd /system/bin/dhcpcd
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     disabled
     oneshot
 
