@@ -100,8 +100,6 @@ loglevel 3
     insmod /lib/modules/rfs_fat.ko
     insmod /lib/modules/dpram.ko
     insmod /lib/modules/j4fs.ko
-    insmod /lib/modules/mbcache.ko
-    insmod /lib/modules/ext4.ko
 
     insmod /lib/modules/Si4709_driver.ko
 
@@ -121,7 +119,6 @@ loglevel 3
 on fs
 # mount mtd partitions
     mount rfs /dev/block/stl9 /system check=no
-    mount ext4 /dev/block/stl9 /system noatime nodiratime errors=continue nobh data=writeback barrier=0 noauto_da_alloc
 
 # use movinand second partition as /data. d.moskvitin
     #temp
@@ -132,7 +129,6 @@ on fs
     chown system system /data
     chmod 0771 /data    
     mount rfs /dev/block/stl10 /data nosuid nodev check=no
-    mount ext4 /dev/block/stl10 /data noatime nodiratime errors=continue nobh data=writeback barrier=0 noauto_da_alloc
     chown system system /data
     chmod 0771 /data
     chmod 0771 /data
@@ -146,7 +142,6 @@ on fs
     chown system system /data/db-journal
     chmod 0777 /data/db-journal
     mount rfs /dev/block/stl11 /cache nosuid nodev check=no
-    mount ext4 /dev/block/stl11 /cache noatime nodiratime errors=continue nobh data=writeback barrier=0 noauto_da_alloc
 
     mkdir /mnt/.lfs 0755 root root
     mount j4fs /dev/block/stl6 /mnt/.lfs
