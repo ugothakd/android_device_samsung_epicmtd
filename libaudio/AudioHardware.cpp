@@ -670,17 +670,17 @@ const char *AudioHardware::getOutputRouteFromDevice(uint32_t device)
         return "RCV";
     case AudioSystem::DEVICE_OUT_SPEAKER:
         if (mMode == AudioSystem::MODE_RINGTONE) return "SPK";
-        else return "RING_SPK";
+        else return "SPK";
     case AudioSystem::DEVICE_OUT_WIRED_HEADPHONE:
         if (mMode == AudioSystem::MODE_RINGTONE) return "HP_NO_MIC";
-        else return "RING_NO_MIC";
+        else return "HP_NO_MIC";
     case AudioSystem::DEVICE_OUT_WIRED_HEADSET:
         if (mMode == AudioSystem::MODE_RINGTONE) return "HP";
         else return "HP";
     case (AudioSystem::DEVICE_OUT_SPEAKER|AudioSystem::DEVICE_OUT_WIRED_HEADPHONE):
     case (AudioSystem::DEVICE_OUT_SPEAKER|AudioSystem::DEVICE_OUT_WIRED_HEADSET):
         if (mMode == AudioSystem::MODE_RINGTONE) return "HP";
-        else return "SPK_HP";
+        else return "HP";
     case AudioSystem::DEVICE_OUT_BLUETOOTH_SCO:
     case AudioSystem::DEVICE_OUT_BLUETOOTH_SCO_HEADSET:
     case AudioSystem::DEVICE_OUT_BLUETOOTH_SCO_CARKIT:
