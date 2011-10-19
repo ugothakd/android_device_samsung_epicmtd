@@ -2,90 +2,28 @@
 
 This tutorial begins with a belief that you have already sync'd down CyanogenMod sources and have set up your build environment.
 
-The first thing that will need to be done, is that you will need to pull down the device vendor from github.
+The first thing that will need to be done, is that you will need to create a local_manifest.xml for the EpicCM device and to override cyanogen vendor.
 
-So, cd to device/samsung/
+-------BEGIN-----------
 
-git clone git://github.com/Decad3nce/android_device_samsung_epic.git
+<?xml version="1.0" encoding="UTF-8"?>
+  <manifest>
 
-This will create an android_device_samsung_epic directory in device/samsung
+<remote  name = "EpicCM"
+           fetch="git@github.com:" />
 
-Rename it:
-mv android_device_samsung_epic epic
+    <project path="device/samsung/epic"
+      name="EpicCM/android_device_samsung_epic"
+      remote="EpicCM"
+      revision="gingerbread"/>
 
-Next, we'll have to generate and include cyanogenmod_epic in vendor/cyanogen to begin building.
+    <project path="vendor/cyanogen"
+      name="EpicCM/android_vendor_cyanogen"
+      remote="EpicCM"
+      revision="teamhacksung-merge"/>
+ </manifest>
 
-cd to vendor/cyanogen
-Add the following lunch combo in vendorsetup.sh:
-
-add_lunch_combo cyanogen_droid2we-eng
-add_lunch_combo cyanogen_encore-eng
-+add_lunch_combo cyanogen_epic-eng
-add_lunch_combo cyanogen_es209ra-eng
-add_lunch_combo cyanogen_espresso-eng
-add_lunch_combo cyanogen_fascinatemtd-eng
-
-Next, we'll create and add a cyanogenmod_epic makefile to android products
-
-cd vendor/cyanogen/products
-Add the following makefile call to AndroidProducts.mk:
-
-    $(LOCAL_DIR)/cyanogen_droid2we.mk \
-    $(LOCAL_DIR)/cyanogen_encore.mk \
-+   $(LOCAL_DIR)/cyanogen_epic.mk \
-    $(LOCAL_DIR)/cyanogen_espresso.mk \
-    $(LOCAL_DIR)/cyanogen_es209ra.mk \
-    $(LOCAL_DIR)/cyanogen_fascinatemtd.mk \
-
-Lastly, we'll create a new file at vendor/cyanogen/products/cyanogen_epic.mk as follows:
-
-----BEGIN----
-
-# Inherit AOSP device configuration for epic.
-$(call inherit-product, device/samsung/epic/full_epic.mk)
-
-# Inherit some common cyanogenmod stuff.
-$(call inherit-product, vendor/cyanogen/products/common_full.mk)
-
-#
-# Setup device specific product configuration.
-#
-PRODUCT_NAME := cyanogen_epic
-PRODUCT_BRAND := samsung
-PRODUCT_DEVICE := epic
-PRODUCT_MODEL := SPH-D700
-PRODUCT_MANUFACTURER := samsung
-PRODUCT_BUILD_PROP_OVERRIDES += PRODUCT_NAME=soju BUILD_ID=GRJ22 BUILD_DISPLAY_ID=GWK74 BUILD_FINGERPRINT=google/soju/crespo:2.3.4/GRJ22/121341:user/release-keys PRIVATE_BUILD_DESC="soju-user 2.3.4 GRJ22 121341 release-keys"
-
-# Extra epic overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/cyanogen/overlay/epic
-
-# Add the Torch app
-PRODUCT_PACKAGES += Torch
-
-#
-# Set ro.modversion
-#
-ifdef CYANOGEN_NIGHTLY
-    PRODUCT_PROPERTY_OVERRIDES += \
-        ro.modversion=CyanogenMod-7-$(shell date +%m%d%Y)-NIGHTLY-Epic
-else
-    ifdef CYANOGEN_RELEASE
-        PRODUCT_PROPERTY_OVERRIDES += \
-            ro.modversion=CyanogenMod-7.1.0-Epic
-    else
-        PRODUCT_PROPERTY_OVERRIDES += \
-            ro.modversion=CyanogenMod-7.1.0-Epic-KANG-$(shell date +%m%d)
-    endif
-endif
-
-#
-# Copy galaxys specific prebuilt files
-#
-PRODUCT_COPY_FILES +=  \
-    vendor/cyanogen/prebuilt/hdpi/media/bootanimation.zip:system/media/bootanimation.zip
-
-----EOF----
+-------EOF------------
 
 To set up the vendor tree, you'll need to cd to device/samsung/epic:
 
