@@ -89,7 +89,7 @@ than the size of the config_autoBrightnessLevels array.
     <integer name="config_carDockKeepsScreenOn">1</integer>
 
     <!-- Default color for notification LED is white -->
-    <color name="config_defaultNotificationColor">#ffffffff</color>
+    <color name="config_defaultNotificationColor">#ffff0000</color>
 
     <!-- Default blink frequency for notification LED is 9 seconds. -->
     <integer name="config_defaultNotificationLedOff">9000</integer>
