@@ -24,8 +24,16 @@ TARGET_BOARD_PLATFORM := s5pv210
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 
+TARGET_PROVIDES_INIT := true
+TARGET_PROVIDES_INIT_TARGET_RC := true
+TARGET_RECOVERY_INITRC := device/samsung/epic/recovery.rc
+
 # Provide our own libaudio
 TARGET_PROVIDES_LIBAUDIO := true
+
+# Releasetools
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_img_from_target_files
 
 # Camera defines
 USE_CAMERA_STUB := false
@@ -80,7 +88,6 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epic/recovery_ui.c
-
-# Override cyanogen squisher to customize our update zip package
-TARGET_CUSTOM_RELEASETOOL := ./device/samsung/epic/releasetools/squisher
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/epic/shbootimg.mk
+TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 

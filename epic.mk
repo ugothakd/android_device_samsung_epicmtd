@@ -25,6 +25,19 @@ PRODUCT_COPY_FILES := \
     device/samsung/epic/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/samsung/epic/prebuilt/etc/egl.cfg:system/lib/egl/egl.cfg
 
+# Init files
+PRODUCT_COPY_FILES += \
+  device/samsung/epic/init.rc:root/init.rc \
+  device/samsung/epic/ueventd.rc:root/ueventd.rc \
+  device/samsung/epic/lpm.rc:root/lpm.rc
+
+# kernel modules for ramdisk
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,device/samsung/epic/modules,root/lib/modules)
+
+PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,device/samsung/epic/modules,recovery/root/lib/modules)
+
 # WiFi
 PRODUCT_COPY_FILES += \
      device/samsung/epic/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
@@ -74,6 +87,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstagefrighthw \
     overlay.s5pc110
+
+# update utilities
+PRODUCT_PACKAGES += \
+  make_ext4fs \
+  bootmenu_busybox
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -153,6 +171,10 @@ endif
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
+
+# copy the filesystem converter
+PRODUCT_COPY_FILES += \
+  device/samsung/epic/updater.sh:updater.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
