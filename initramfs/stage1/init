@@ -41,7 +41,7 @@ load_len=$boot_len
 
 mount -t ext4 /dev/block/stl11 /cache
 
-if test -e /cache/.startrecovery || grep -q bootmode=2 /proc/cmdline ; then
+if test -e /cache/.startrecovery || grep -q bootmode=2 /proc/cmdline || grep -q bootmode=3 /proc/cmdline ; then
 	# recovery boot
 	rm -fr /cache/.startrecovery
 	load_offset=$recovery_offset
