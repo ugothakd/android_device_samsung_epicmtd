@@ -85,6 +85,7 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_USES_BML_OVER_MTD := true
 BOARD_HAS_SDCARD_INTERNAL := false
 #BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epic/recovery_ui.c
