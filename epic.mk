@@ -91,7 +91,8 @@ PRODUCT_PACKAGES += \
 # update utilities
 PRODUCT_PACKAGES += \
   make_ext4fs \
-  bootmenu_busybox
+  bootmenu_busybox \
+  setup_fs
 
 # apns config file
 PRODUCT_COPY_FILES += \
