@@ -39,7 +39,6 @@ on fs
     mount tmpfs tmpfs /tmp
     mount rfs /dev/block/stl9 /system check=no
     mount ext4 /dev/block/stl9 /system
-    mount yaffs2 mtd@system /system
 on boot
 
     ifup lo
