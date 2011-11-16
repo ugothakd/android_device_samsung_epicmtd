@@ -15,8 +15,8 @@ if /tmp/busybox test -e /dev/block/bml7 ; then
 # make sure sdcard is mounted
 if ! /tmp/busybox grep -q /mnt/sdcard /proc/mounts ; then
 /tmp/busybox mkdir -p /mnt/sdcard
-/tmp/busybox umount -l /dev/block/mmcblk1p1
-if ! /tmp/busybox mount -t vfat /dev/block/mmcblk1p1 /mnt/sdcard ; then
+/tmp/busybox umount -l /dev/block/mmcblk0p1
+if ! /tmp/busybox mount -t vfat /dev/block/mmcblk0p1 /mnt/sdcard ; then
 /tmp/busybox echo "Cannot mount sdcard."
 exit 1
 fi
