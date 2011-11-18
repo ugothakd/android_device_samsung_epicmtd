@@ -97,20 +97,12 @@ loglevel 3
     write /dev/cpuctl/bg_non_interactive/cpu.shares 52
 
 
-    #insmod /lib/modules/fsr.ko
-    #insmod /lib/modules/fsr_stl.ko
-    #insmod /lib/modules/rfs_glue.ko
-    #insmod /lib/modules/rfs_fat.ko
     insmod /lib/modules/dpram.ko
-    #insmod /lib/modules/j4fs.ko
 
-    insmod /lib/modules/Si4709_driver.ko
-
-    # ko files for vibrator
+     # ko files for vibrator
     insmod /lib/modules/vibrator.ko
 
-    # ko files for bthid
-    insmod /lib/modules/bthid.ko
+
 
 # SprintHotspot
     insmod /lib/modules/hotspot_event_monitoring.ko
@@ -146,12 +138,8 @@ on fs
     chmod 0777 /data/db-journal
     mount yaffs2 mtd@cache /cache nosuid nodev
 
-    #mkdir /mnt/.lfs 0755 root root
-    #mount j4fs /dev/block/stl6 /mnt/.lfs
     insmod /lib/modules/param.ko
     
-		# samsung module
-    insmod /lib/modules/storage.ko
 
 #  Wimax modules
  	
