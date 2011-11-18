@@ -21,9 +21,6 @@ mkdir /cache
 mkdir /proc
 mkdir /sys
 
-#insmod /lib/modules/fsr.ko
-#insmod /lib/modules/fsr_stl.ko
-
 date >>/boot.txt
 exec >>/boot.txt 2>&1
 cd /
@@ -38,7 +35,8 @@ eval $(grep -m 1 -A 1 BOOT_IMAGE_OFFSETS /stage1/boot.bin | tail -n 1)
 
 load_offset=$boot_offset
 load_len=$boot_len
-
+ 
+#todo: figure out mtd mount
 #mount -t ext4 /dev/block/stl11 /cache
 
 if test -e /cache/.startrecovery || grep -q bootmode=2 /proc/cmdline || grep -q bootmode=3 /proc/cmdline ; then
