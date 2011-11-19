@@ -6,7 +6,7 @@ BOARD_USES_GENERIC_AUDIO := false
 BOARD_USES_LIBSECRIL_STUB := true
 
 # Use the non-open-source parts, if they exist
--include vendor/samsung/epic/BoardConfigVendor.mk
+-include vendor/samsung/epicmtd/BoardConfigVendor.mk
 
 # Processor optimizations
 TARGET_CPU_ABI := armeabi-v7a
@@ -26,14 +26,14 @@ TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 
 TARGET_PROVIDES_INIT := true
 TARGET_PROVIDES_INIT_TARGET_RC := true
-TARGET_RECOVERY_INITRC := device/samsung/epic/recovery.rc
+TARGET_RECOVERY_INITRC := device/samsung/epicmtd/recovery.rc
 
 # Provide our own libaudio
 TARGET_PROVIDES_LIBAUDIO := true
 
 # Releasetools
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epic/releasetools/epic_img_from_target_files
+TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/epicmtd/releasetools/epicmtd_ota_from_target_files
+TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/epicmtd/releasetools/epicmtd_img_from_target_files
 
 # Camera defines
 USE_CAMERA_STUB := false
@@ -42,7 +42,7 @@ BOARD_CAMERA_LIBRARIES := libcamera
 endif
 
 # OpenGL stuff
-BOARD_EGL_CFG := device/samsung/epic/prebuilt/etc/egl.cfg
+BOARD_EGL_CFG := device/samsung/epicmtd/prebuilt/etc/egl.cfg
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -67,7 +67,7 @@ BOARD_NAND_PAGE_SIZE := 4096 -s 128
 BOARD_KERNEL_BASE := 0x02e00000
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
 BOARD_KERNEL_PAGESIZE := 4096
-TARGET_PREBUILT_KERNEL := device/samsung/epic/kernel
+TARGET_PREBUILT_KERNEL := device/samsung/epicmtd/kernel
 
 # WIFI defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
@@ -88,7 +88,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USES_BML_OVER_MTD := true
 BOARD_HAS_SDCARD_INTERNAL := false
 #BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epic/recovery_ui.c
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/epic/shbootimg.mk
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epicmtd/recovery_ui.c
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/epicmtd/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 

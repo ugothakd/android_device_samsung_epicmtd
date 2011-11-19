@@ -23,7 +23,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
-$(call inherit-product, device/samsung/epic/epic.mk)
+$(call inherit-product, device/samsung/epicmtd/epicmtd.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 
 # Screen density is actually considered a locale (since it is taken into account
@@ -33,8 +33,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
 PRODUCT_LOCALES += hdpi
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_epic
-PRODUCT_DEVICE := epic
+PRODUCT_NAME := full_epicmtd
+PRODUCT_DEVICE := epicmtd
 PRODUCT_BRAND := Samsung
 PRODUCT_MANUFACTURER := Samsung
 PRODUCT_MODEL := SPH-D700

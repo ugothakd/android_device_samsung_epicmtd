@@ -17,51 +17,51 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS := device/samsung/epic/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
-    device/samsung/epic/prebuilt/etc/asound.conf:system/etc/asound.conf \
-    device/samsung/epic/prebuilt/modules/dhd.ko:system/modules/dhd.ko \
-    device/samsung/epic/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
-    device/samsung/epic/prebuilt/etc/egl.cfg:system/lib/egl/egl.cfg
+    device/samsung/epicmtd/prebuilt/etc/asound.conf:system/etc/asound.conf \
+    device/samsung/epicmtd/prebuilt/modules/dhd.ko:system/modules/dhd.ko \
+    device/samsung/epicmtd/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
+    device/samsung/epicmtd/prebuilt/etc/egl.cfg:system/lib/egl/egl.cfg
 
 # Init files
 PRODUCT_COPY_FILES += \
-  device/samsung/epic/init.rc:root/init.rc \
-  device/samsung/epic/ueventd.rc:root/ueventd.rc \
-  device/samsung/epic/lpm.rc:root/lpm.rc
+  device/samsung/epicmtd/init.rc:root/init.rc \
+  device/samsung/epicmtd/ueventd.rc:root/ueventd.rc \
+  device/samsung/epicmtd/lpm.rc:root/lpm.rc
 
 # kernel modules for ramdisk
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/epic/modules,root/lib/modules)
+    $(call find-copy-subdir-files,*,device/samsung/epicmtd/modules,root/lib/modules)
 
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/epic/modules,recovery/root/lib/modules)
+    $(call find-copy-subdir-files,*,device/samsung/epicmtd/modules,recovery/root/lib/modules)
 
 # WiFi
 PRODUCT_COPY_FILES += \
-     device/samsung/epic/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+     device/samsung/epicmtd/prebuilt/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # Keylayout and Keychars
 PRODUCT_COPY_FILES += \
-     device/samsung/epic/prebuilt/usr/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
-     device/samsung/epic/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-     device/samsung/epic/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
-     device/samsung/epic/prebuilt/usr/keylayout/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
-     device/samsung/epic/prebuilt/usr/keylayout/melfas_touchkey.kl:system/usr/keylayout/melfas_touchkey.kl \
-     device/samsung/epic/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
-     device/samsung/epic/prebuilt/usr/keylayout/Broadcom_Bluetooth_HID.kl:system/usr/keylayout/Broadcom_Bluetooth_HID.kl \
-     device/samsung/epic/prebuilt/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin:system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin \
-     device/samsung/epic/prebuilt/usr/keychars/s3c-keypad.kcm.bin:system/usr/keychars/s3c-keypad.kcm.bin \
-     device/samsung/epic/prebuilt/usr/keychars/melfas_touchkey.kcm.bin:system/usr/keychars/melfas_touchkey.kcm.bin \
-     device/samsung/epic/prebuilt/usr/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-     device/samsung/epic/prebuilt/usr/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
-     device/samsung/epic/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
+     device/samsung/epicmtd/prebuilt/usr/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
+     device/samsung/epicmtd/prebuilt/usr/keylayout/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+     device/samsung/epicmtd/prebuilt/usr/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+     device/samsung/epicmtd/prebuilt/usr/keylayout/aries-keypad.kl:system/usr/keylayout/aries-keypad.kl \
+     device/samsung/epicmtd/prebuilt/usr/keylayout/melfas_touchkey.kl:system/usr/keylayout/melfas_touchkey.kl \
+     device/samsung/epicmtd/prebuilt/usr/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
+     device/samsung/epicmtd/prebuilt/usr/keylayout/Broadcom_Bluetooth_HID.kl:system/usr/keylayout/Broadcom_Bluetooth_HID.kl \
+     device/samsung/epicmtd/prebuilt/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin:system/usr/keychars/Broadcom_Bluetooth_HID.kcm.bin \
+     device/samsung/epicmtd/prebuilt/usr/keychars/s3c-keypad.kcm.bin:system/usr/keychars/s3c-keypad.kcm.bin \
+     device/samsung/epicmtd/prebuilt/usr/keychars/melfas_touchkey.kcm.bin:system/usr/keychars/melfas_touchkey.kcm.bin \
+     device/samsung/epicmtd/prebuilt/usr/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
+     device/samsung/epicmtd/prebuilt/usr/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
+     device/samsung/epicmtd/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
 # extra stuff
 PRODUCT_COPY_FILES += \
-	device/samsung/epic/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
+	device/samsung/epicmtd/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -70,11 +70,11 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/epic/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+    device/samsung/epicmtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/epic/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
+    device/samsung/epicmtd/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -97,7 +97,7 @@ PRODUCT_PACKAGES += \
 
 # apns config file
 PRODUCT_COPY_FILES += \
-        device/samsung/epic/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
+        device/samsung/epicmtd/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -166,7 +166,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # We are using a prebuilt kernel for now, to ease building. This will be changed later.
 ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/epic/kernel
+    LOCAL_KERNEL := device/samsung/epicmtd/kernel
 else
     LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
@@ -176,10 +176,10 @@ PRODUCT_COPY_FILES += \
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \
-  device/samsung/epic/updater.sh:updater.sh
+  device/samsung/epicmtd/updater.sh:updater.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product-if-exists, vendor/samsung/epic/epic-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/epicmtd/epicmtd-vendor.mk)

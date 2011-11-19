@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_epic.mk
+    $(LOCAL_DIR)/full_epicmtd.mk

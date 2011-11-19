@@ -12,8 +12,8 @@ The first thing that will need to be done, is that you will need to create a loc
 <remote  name = "EpicCM"
            fetch="git@github.com:" />
 
-    <project path="device/samsung/epic"
-      name="EpicCM/android_device_samsung_epic"
+    <project path="device/samsung/epicmtd"
+      name="EpicCM/android_device_samsung_epicmtd"
       remote="EpicCM"
       revision="gingerbread"/>
 
@@ -25,18 +25,18 @@ The first thing that will need to be done, is that you will need to create a loc
 
 -------EOF------------
 
-To set up the vendor tree, you'll need to cd to device/samsung/epic:
+To set up the vendor tree, you'll need to cd to device/samsung/epicmtd:
 
-1. Run extract-files.sh while phone is connected via usb to pull proprietaries from device. The script will then call setup-makefiles to generate vendor/samsung/epic/ and the necessary makefiles for blob manipulation
+1. Run extract-files.sh while phone is connected via usb to pull proprietaries from device. The script will then call setup-makefiles to generate vendor/samsung/epicmtd/ and the necessary makefiles for blob manipulation
 
 2. Next, from the root android directory, you'll need to:
 	repo sync
 	make clobber
-	brunch epic
+	brunch epicmtd
 
 and the build will begin!
 
-At the end of the compile, the generate ota package will be in out/target/product/epic/
+At the end of the compile, the generate ota package will be in out/target/product/epicmtd/
 
 
  
