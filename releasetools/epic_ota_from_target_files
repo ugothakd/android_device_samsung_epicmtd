@@ -44,6 +44,7 @@ def CopyUpdaterFiles(output_zip):
   output_zip.write(os.path.join(UTILITIES_DIR, "make_ext4fs"),"make_ext4fs")
   output_zip.write(os.path.join(UTILITIES_DIR, "busybox"),"busybox")
   output_zip.write(os.path.join(LOCAL_DIR, "updater.sh"),"updater.sh")
+  output_zip.write(os.path.join(TARGET_DIR, "recovery.bin"),"recovery.bin")
 
 def WriteFullOTAPackage(input_zip, output_zip):
   # TODO: how to determine this?  We don't know what version it will
@@ -99,7 +100,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   script.ShowProgress(0.2, 10)
   script.BMLWriteRawImage("boot", "boot.img")
-  script.BMLWriteRawImage("recovery", "boot.img")
+  script.BMLWriteRawImage("recovery", "recovery.bin")
 
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()

@@ -170,7 +170,8 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
+    $(LOCAL_KERNEL):kernel \
+    device/samsung/epic/recovery.bin:recovery.bin
 
 # copy the filesystem converter
 PRODUCT_COPY_FILES += \
