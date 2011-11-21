@@ -52,7 +52,7 @@ fi
 /tmp/busybox sync 
 /tmp/kexec -e
 /sbin/reboot now
-
+exit 0
 elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
 # we're running on a mtd device
 
