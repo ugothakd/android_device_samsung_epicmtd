@@ -94,7 +94,7 @@ fi
 /tmp/erase_image efs
 
 # flash boot image
-/tmp/bml_over_mtd.sh boot 72 reservoir 4022 /tmp/boot.img
+/tmp/bml_over_mtd.sh boot 72 reservoir 4012 /tmp/boot.img
 
 exit 0
 fi
