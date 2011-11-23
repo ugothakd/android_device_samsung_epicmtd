@@ -90,8 +90,4 @@ BOARD_HAS_SDCARD_INTERNAL := false
 #BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epicmtd/recovery_ui.c
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/epicmtd/shbootimg.mk
-<<<<<<< HEAD
-=======
 TARGET_RECOVERY_PRE_COMMAND := "busybox devmem 0x57fff800 32 0x5EC0B007"
->>>>>>> Reboot recovery using unused  memory portion that is persistent warm boor
-
