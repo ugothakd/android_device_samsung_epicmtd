@@ -95,10 +95,6 @@ fi
 /tmp/busybox umount -l /data
 /tmp/erase_image data
 
-# erase partitions anyways
-/tmp/erase_image radio
-/tmp/erase_image efs
-
 # flash boot image
 /tmp/bml_over_mtd.sh boot 72 reservoir 4012 /tmp/boot.img
 
