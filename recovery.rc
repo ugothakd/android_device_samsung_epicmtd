@@ -31,7 +31,7 @@ on init
 
 on early-fs
     mount tmpfs nodev /tmp
-
+    insmod /lib/modules/dpram_recovery.ko
     insmod /lib/modules/param.ko
 
 
