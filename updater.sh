@@ -93,7 +93,7 @@ fi
 
 # unmount and format datadata
 /tmp/busybox umount -l /data
-/tmp/erase_image data
+/tmp/erase_image userdata
 
 # flash boot image
 /tmp/bml_over_mtd.sh boot 72 reservoir 4012 /tmp/boot.img
