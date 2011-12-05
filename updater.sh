@@ -37,21 +37,15 @@ fi
 # Scorch any ROM Manager settings to require the user to reflash recovery
 /tmp/busybox rm -f /mnt/sdcard/clockworkmod/.settings
 
-/tmp/busybox echo "Remount partitions read-only."
-/tmp/busybox mount -ro remount /mnt/.lfs
-/tmp/busybox mount -ro remount /system
-/tmp/busybox mount -ro remount /data
-/tmp/busybox mount -ro remount /cache
-/tmp/busybox echo  "Load kexec kernel"
-/tmp/kexec --load-hardboot --mem-min=0x50000000 --append=bootmode=2 console=ttySAC2,115200 loglevel=4 /tmp/boot.img
-
+# write new kernel to boot partition
+/tmp/flash_image boot /tmp/boot.img
 if [ "$?" != "0" ] ; then
 exit 3
 fi
+/tmp/busybox sync
 
-/tmp/busybox sync 
-/tmp/kexec -e
 /sbin/reboot now
+exit 0
 
 elif /tmp/busybox test -e /dev/block/mtdblock0 ; then
 # we're running on a mtd device

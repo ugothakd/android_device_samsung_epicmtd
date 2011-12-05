@@ -172,8 +172,6 @@ else
 endif
 
 PRODUCT_COPY_FILES += \
-    device/samsung/epicmtd/kexec:kexec
-PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel \
     device/samsung/epicmtd/recovery.bin:recovery.bin
 
