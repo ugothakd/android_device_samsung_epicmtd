@@ -19,7 +19,7 @@ bml_over_mtd dump boot 72 reservoir 4012 /stage1/boot.bin
 eval $(grep -m 1 -A 1 BOOT_IMAGE_OFFSETS /stage1/boot.bin | tail -n 1)
 
 busybox mount -t yaffs2 /dev/block/mtdblock2 /system
-busybox mount -t yaffs2 /dev/block/mtdblock3 /cache
+busybox mount -t yaffs2 /dev/block/mtdblock4 /cache
 
 load_offset=$boot_offset
 load_len=$boot_len
