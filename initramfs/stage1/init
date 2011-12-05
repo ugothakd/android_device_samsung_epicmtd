@@ -2,21 +2,6 @@
 export _PATH="$PATH"
 export PATH="/stage1"
 
-mkdir -p /dev/block
-mknod -m 0644 /dev/block/bml7 b 137 7
-mknod -m 0644 /dev/block/bml8 b 137 8
-mknod -m 0644 /dev/block/bml9 b 137 9
-mknod -m 0644 /dev/block/bml10 b 137 10
-mknod -m 0644 /dev/block/bml11 b 137 11
-mknod -m 0644 /dev/block/stl7 b 138 7
-mknod -m 0644 /dev/block/stl8 b 138 8
-mknod -m 0644 /dev/block/stl9 b 138 9
-mknod -m 0644 /dev/block/stl10 b 138 10
-mknod -m 0644 /dev/block/stl11 b 138 11
-
-mknod -m 0644 /dev/block/mmcblk0 b 179 0
-mknod -m 0644 /dev/block/mmcblk0p1 b 179 1
-
 mkdir /cache
 mkdir /proc
 mkdir /sys
@@ -29,9 +14,12 @@ mount -t sysfs sysfs /sys
 
 rm /init
 
-dd bs=512 if=/dev/block/bml7 of=/stage1/boot.bin
+bml_over_mtd dump boot 72 reservoir 4012 /stage1/boot.bin
 
 eval $(grep -m 1 -A 1 BOOT_IMAGE_OFFSETS /stage1/boot.bin | tail -n 1)
+
+busybox mount -t yaffs2 /dev/block/mtdblock2 /system
+busybox mount -t yaffs2 /dev/block/mtdblock3 /cache
 
 load_offset=$boot_offset
 load_len=$boot_len
@@ -47,10 +35,27 @@ if test `devmem "$REC_BOOT_ADDR" 32` = "$REC_BOOT_MAGIC" || grep -q bootmode=2 /
 
 	# disable lpm
 	echo 0 > /sys/class/power_supply/battery/charging_mode_booting
-fi
+elif ! busybox test -e /system/build.prop ; then
+	# emergency boot
+        busybox umount /cache
+        erase_image cache
+        busybox mount -t yaffs2 /dev/block/mtdblock4 /cache
+        busybox mkdir /cache/recovery
 
-umount /cache
-rm -rf /cache
+	busybox mount -t vfat /dev/block/mmcblk0p1 /sdcard	
+
+	UPDATE=$(busybox cat /sdcard/cyanogenmod.cfg)
+
+	if busybox test -e $UPDATE ; then
+		busybox echo "install_zip(\"`echo $UPDATE`\");" > /cache/recovery/extendedcommand
+  	fi
+
+	load_offset=$recovery_offset
+	load_len=$recovery_len
+
+	# disable lpm
+	busybox echo 0 > /sys/class/power_supply/battery/charging_mode_booting
+fi
 
 dd bs=512 if=/stage1/boot.bin skip=$load_offset count=$load_len | zcat | cpio -i
 
@@ -59,6 +64,10 @@ if grep -q 1 /sys/class/power_supply/battery/charging_mode_booting ; then
 	cp lpm.rc init.rc
 fi
 
+busybox umount /cache
+busybox umount /system
+busybox umount /sdcard
+busybox rmdir /sdcard
 umount /sys
 umount /proc
 date >> /boot.txt
