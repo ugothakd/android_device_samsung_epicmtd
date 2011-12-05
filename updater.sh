@@ -43,7 +43,7 @@ fi
 /tmp/busybox mount -ro remount /data
 /tmp/busybox mount -ro remount /cache
 /tmp/busybox echo  "Load kexec kernel"
-/tmp/kexec --load-hardboot --mem-min=0x50000000 --append=bootmode=2 console=ttySAC2,115200 loglevel=4 /tmp/boot.img
+/tmp/kexec --load-hardboot --mem-min=0x50000000 console=ttySAC2,115200 loglevel=4 /tmp/boot.img
 
 if [ "$?" != "0" ] ; then
 exit 3
