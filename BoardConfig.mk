@@ -80,14 +80,10 @@ WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_
 WIFI_DRIVER_MODULE_NAME := "dhd"
 BOARD_WEXT_NO_COMBO_SCAN := true
 
-# Vold
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
 
 # Recovery
-BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_RECOVERY_HANDLES_MOUNT := true
 BOARD_USES_BML_OVER_MTD := true
-BOARD_HAS_SDCARD_INTERNAL := false
-#BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epicmtd/recovery_ui.c
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/epicmtd/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "busybox devmem 0x57fff800 32 0x5EC0B007"
