@@ -14,64 +14,73 @@
  * limitations under the License.
  */
 
+/* Edited by DRockstar for the Samsung Epic 4G Gingerbread ClockworkMod */
+
 #include <linux/input.h>
 
 #include "recovery_ui.h"
 #include "common.h"
 #include "extendedcommands.h"
 
-char* MENU_HEADERS[] = { "Use vol keys to highlight and menu to select.",
+char* MENU_HEADERS[] = { "Use vol keys to highlight and home to select.",
                          "",
                          NULL };
 
-char* MENU_ITEMS[] = { "reboot system now",
-                       "apply sdcard:update.zip",
-                       "wipe data/factory reset",
-                       "wipe cache partition",
-                       "install zip from sdcard",
-                       "backup and restore",
-                       "mounts and storage",
-                       "advanced",
-                       NULL };
+char* MENU_ITEMS[] = { "Reboot system now",
+                       "Apply sdcard:update.zip",
+                       "Wipe data/factory reset",
+                       "Wipe cache partition",
+                       "Install zip from sdcard",
+                       "Backup and Restore",
+                       "Mounts and Storage",
+                       "Advanced",
+                       "Power Off",
+			NULL };
 
 int device_recovery_start() {
     return 0;
 }
 
-int device_toggle_display(volatile char* key_pressed, int key_code) {
-    int alt = key_pressed[KEY_LEFTALT] || key_pressed[KEY_RIGHTALT];
-    if (alt && key_code == KEY_L)
-        return 1;
-    // allow toggling of the display if the correct key is pressed, and the display toggle is allowed or the display is currently off
-    if (ui_get_showing_back_button()) {
-        return get_allow_toggle_display() && (key_code == KEY_MENU || key_code == KEY_END);
-    }
-    return get_allow_toggle_display() && (key_code == KEY_MENU || key_code == KEY_POWER || key_code == KEY_END);
+int device_toggle_display(volatile char* key_pressed, int key_code) { 
+    return key_code == 23; // keypad d key
 }
 
 int device_reboot_now(volatile char* key_pressed, int key_code) {
-    return 0;
+    // Reboot if the power key is pressed five times in a row, with
+    // no other keys in between.
+    static int presses = 0;
+    if (key_code == 116) { // power button
+        ++presses;
+        return presses == 5;
+    } else {
+        presses = 0;
+        return 0;
+    }
 }
 
 int device_handle_key(int key_code, int visible) {
     if (visible) {
         switch (key_code) {
-            case 51:
-            case 39:
+            case 51:  // side volume up button
+            case 48:  // keypad left key
+            case 39:  // keypad up key
                 return HIGHLIGHT_UP;
 
-            case 52:
-            case 49:
+            case 52:  // side volume down button
+            case 50:  // keypad right key
+            case 49:  // keypad down key
                 return HIGHLIGHT_DOWN;
 
-            case 158:
-            case 46:
-            case 40:
+            case 102: // menu cap key
+            case 53:  // keypad home key 
+            case 46:  // side camera button full press 
+            case 40:  // keypad enter/return key
                 return SELECT_ITEM;
             
-            case 102:
-            case 58:
-            case 30:
+            case 158: // back cap key
+            case 116: // side power button
+            case 57:  // keypad back key 
+            case 30:  // keypad delete key
                 if (!get_allow_toggle_display())
                     return GO_BACK;
         }
