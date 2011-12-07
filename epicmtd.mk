@@ -58,9 +58,6 @@ PRODUCT_COPY_FILES += \
      device/samsung/epicmtd/prebuilt/usr/keychars/aries-keypad.kcm.bin:system/usr/keychars/aries-keypad.kcm.bin \
      device/samsung/epicmtd/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
-# extra stuff
-PRODUCT_COPY_FILES += \
-	device/samsung/epicmtd/prebuilt/xbin/bmlwrite:system/xbin/bmlwrite
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -90,9 +87,8 @@ PRODUCT_PACKAGES += \
 
 # update utilities
 PRODUCT_PACKAGES += \
-  make_ext4fs \
-  bootmenu_busybox \
-  setup_fs
+	bml_over_mtd \
+	setup_fs
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -117,6 +113,10 @@ PRODUCT_COPY_FILES += \
 # This is a 16.16 fixed point number
 PRODUCT_PROPERTY_OVERRIDES := \
     ro.opengles.version=131072
+
+# Device-specific packages
+	PRODUCT_PACKAGES += \
+	AriesParts
 
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
