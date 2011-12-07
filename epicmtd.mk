@@ -22,7 +22,6 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
     device/samsung/epicmtd/prebuilt/etc/asound.conf:system/etc/asound.conf \
-    device/samsung/epicmtd/prebuilt/modules/dhd.ko:system/modules/dhd.ko \
     device/samsung/epicmtd/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/samsung/epicmtd/prebuilt/etc/egl.cfg:system/lib/egl/egl.cfg
 
