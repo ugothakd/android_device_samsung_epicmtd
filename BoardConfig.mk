@@ -86,4 +86,4 @@ BOARD_RECOVERY_HANDLES_MOUNT := true
 BOARD_USES_BML_OVER_MTD := true
 BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/samsung/epicmtd/recovery_ui.c
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/epicmtd/shbootimg.mk
-TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /sdcard/.startrecovery; sync;"
+TARGET_RECOVERY_PRE_COMMAND := "busybox devmem 0x57fff800 32 0x5EC0B007"
