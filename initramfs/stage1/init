@@ -31,6 +31,7 @@ busybox mknod -m 0666 /dev/block/mtdblock2 b 31 2
 busybox mknod -m 0666 /dev/block/mtdblock3 b 31 3
 busybox mknod -m 0666 /dev/block/mtdblock4 b 31 4
 busybox mknod -m 0666 /dev/block/mtdblock5 b 31 5
+busybox mknod -m 0666 /dev/mem     c 1 1
 
 busybox date >>boot.txt
 exec >>boot.txt 2>&1
