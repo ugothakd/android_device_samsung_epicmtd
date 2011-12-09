@@ -51,7 +51,7 @@ busybox mount -t yaffs2 /dev/block/mtdblock4 /cache
 REC_BOOT_ADDR="0x57fff800"
 REC_BOOT_MAGIC="0x5EC0B007" # Must be in caps.
 
-if busybox test -e /cache/.startrecovery || busybox grep -q bootmode=2 /proc/cmdline || busybox grep -q bootmode=3 /proc/cmdline ; then
+if busybox test -e /cache/.startrecovery || grep -q bootmode=2 /proc/cmdline || grep -q bootmode=3 /proc/cmdline ; then
 	# recovery boot
 	busybox devmem "$REC_BOOT_ADDR" 32 0x0
 	load_offset=$recovery_offset
