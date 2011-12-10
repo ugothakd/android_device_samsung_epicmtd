@@ -82,19 +82,6 @@ loglevel 3
     write /proc/sys/kernel/sched_compat_yield 1
     write /proc/sys/kernel/sched_child_runs_first 0
 
-# fake some battery state
-    setprop status.battery.state Slow
-    setprop status.battery.level 5
-    setprop status.battery.level_raw  50
-    setprop status.battery.level_scale 9
-
-# wi-fi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-
-# phone
-    setprop ro.telephony.call_ring.multiple 0
-
 # Create cgroup mount points for process groups
     mkdir /dev/cpuctl
     mount cgroup none /dev/cpuctl cpu
@@ -229,8 +216,8 @@ on post-fs
     mkdir /data/misc/wifi 0771 wifi wifi  
     chmod 0777 /data/misc/wifi/
     chmod 0777 /data/wifi/
-    mkdir /data/misc/dhcp 0777 dhcp dhcp
-    mkdir /data/misc/wifi/sockets 0777 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     chmod 0664 /system/etc/wifi/wpa_supplicant.conf
     chown dhcp dhcp /data/misc/dhcp
     mkdir /data/misc/dhcpcd 0771 dhcp dhcp 
@@ -349,6 +336,15 @@ on boot
 
 # set RLIMIT_NICE to allow priorities from 19 to -20
     setrlimit 13 40 40
+
+# fake some battery state
+    setprop status.battery.state Slow
+    setprop status.battery.level 5
+    setprop status.battery.level_raw  50
+    setprop status.battery.level_scale 9
+
+# phone
+    setprop ro.telephony.call_ring.multiple 0
 
 # Define the oom_adj values for the classes of processes that can be
 # killed by the kernel.  These are used in ActivityManagerService.
