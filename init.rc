@@ -48,9 +48,6 @@ loglevel 3
 # Backwards Compat - XXX: Going away in G*
     symlink /mnt/sdcard /sdcard
 
-# Include extra init file
-    import /system/etc/init.local.rc
-
     mkdir /system
     mkdir /data 0771 system system
     mkdir /cache 0771 system cache
@@ -110,11 +107,11 @@ loglevel 3
 
 
 # SprintHotspot
-    insmod /lib/modules/hotspot_event_monitoring.ko
+    #insmod /lib/modules/hotspot_event_monitoring.ko
 
     #temp
-    chown root root /sbin/fat.format
-    chmod 750 /sbin/fat.format
+    #chown root root /sbin/fat.format
+    #chmod 750 /sbin/fat.format
 
 on fs
 # mount mtd partitions
@@ -360,6 +357,8 @@ on boot
 
 # to enable wifi
      setprop wifi.interface "eth0"
+     setprop wifi.driver.status "ok"
+
 
 # Define the memory thresholds at which the above process classes will
 # be killed.  These numbers are in pages (4k).
@@ -530,6 +529,13 @@ on boot
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
     #setprop net.tcp.buffersize.wimax   4092,87380,1520768,4092,16384,1520768
     
+
+# Include extra init file
+    import /system/etc/init.local.rc
+
+# Run sysinit for cm stuffs
+    exec /system/bin/sysinit
+
 # +++++++++++++++++++++++++++++++++++++++++++
 # for Bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -626,12 +632,15 @@ service pvrsrvinit /system/bin/pvrsrvinit
     group root
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
-    socket wpa_eth0 dgram 0660 wifi wifi
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
+    socket wpa_eth0 dgram 0660 wifi wifi
     disabled
     oneshot
 
@@ -664,8 +673,6 @@ service pppd_cdma /system/bin/pppd_runner
     group radio cache inet misc system
     disabled
     oneshot
-
-service iprenew_eth0 /system/bin/dhcpcd -n
 
 service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
     socket zygote stream 666
