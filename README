@@ -9,7 +9,7 @@ The first thing that will need to be done, is that you will need to create a loc
 <?xml version="1.0" encoding="UTF-8"?>
   <manifest>
 
-    <remote  name="EpicCM" fetch="git+ssh://git@github.com" />
+    <remote  name="EpicCM" fetch="https://github.com" />
 
     <project path="device/samsung/epicmtd" name="EpicCM/android_device_samsung_epicmtd" remote="EpicCM" revision="gingerbread"/>
     <project path="vendor/cyanogen" name="EpicCM/android_vendor_cyanogen" remote="EpicCM" revision="teamhacksung-merge"/>
