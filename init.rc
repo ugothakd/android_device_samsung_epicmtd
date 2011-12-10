@@ -107,11 +107,11 @@ loglevel 3
 
 
 # SprintHotspot
-    #insmod /lib/modules/hotspot_event_monitoring.ko
+    insmod /lib/modules/hotspot_event_monitoring.ko
 
     #temp
-    #chown root root /sbin/fat.format
-    #chmod 750 /sbin/fat.format
+    chown root root /sbin/fat.format
+    chmod 750 /sbin/fat.format
 
 on fs
 # mount mtd partitions
@@ -357,7 +357,7 @@ on boot
 
 # to enable wifi
      setprop wifi.interface "eth0"
-     setprop wifi.driver.status "ok"
+     #setprop wifi.driver.status "ok"
 
 
 # Define the memory thresholds at which the above process classes will
@@ -632,17 +632,16 @@ service pvrsrvinit /system/bin/pvrsrvinit
     group root
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
-    disabled
-    oneshot
-
-
-service iprenew_eth0 /system/bin/dhcpcd -n
-
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
     socket wpa_eth0 dgram 0660 wifi wifi
     disabled
     oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -ABKL eth0
+    disabled
+    oneshot
+
+#service iprenew_eth0 /system/bin/dhcpcd -n
 
 service servicemanager /system/bin/servicemanager
     user system
