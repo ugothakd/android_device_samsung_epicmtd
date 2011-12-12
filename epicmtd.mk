@@ -90,10 +90,6 @@ PRODUCT_PACKAGES += \
 	bml_over_mtd \
 	setup_fs
 
-# apns config file
-PRODUCT_COPY_FILES += \
-        device/samsung/epicmtd/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
-
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -120,24 +116,17 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.vc_call_vol_steps=15 \
-    ro.telephony.default_network=4 \
-    ro.com.google.clientidbase=android-sprint-us \
     ro.cdma.home.operator.numeric=310120 \
     ro.cdma.home.operator.alpha=Sprint \
-    net.cdma.pppd.authtype=require-pap \
-    net.cdma.pppd.user=user[SPACE]SprintNextel \
-    net.cdma.datalinkinterface=/dev/ttyCDMA0 \
-    net.interfaces.defaultroute=cdma \
-    net.cdma.ppp.interface=ppp0 \
-    net.connectivity.type=CDMA1 \
-    mobiledata.interfaces=eth0,ppp0 \
-    ro.telephony.ril_class=samsung \
-    ro.ril.samsung_cdma=true
+    ro.telephony.default_network=4
 
 # WiMAX Property setting for checking WiMAX interface
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.wimax.interface=uwbr0
+PRODUCT_PROPERTY_OVERRIDES += \
+       ro.wimax.interface=uwbr0
+
+# APNs for 3G network access
+PRODUCT_COPY_FILES += \
+    device/samsung/epicmtd/4g-apns-conf.xml:system/etc/apns-conf.xml
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
