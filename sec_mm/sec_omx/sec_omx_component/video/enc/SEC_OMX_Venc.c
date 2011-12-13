@@ -846,7 +846,7 @@ OMX_BOOL SEC_Postprocess_OutputData(OMX_COMPONENTTYPE *pOMXComponent)
             ret = OMX_TRUE;
             goto EXIT;
         }
-        SEC_OSAL_Log(SEC_LOG_ERROR, "output buffer = %d | encoded data size = %d", (outputUseBuffer->allocSize - outputUseBuffer->dataLen), outputData->remainDataLen);
+
         if (outputData->remainDataLen <= (outputUseBuffer->allocSize - outputUseBuffer->dataLen)) {
             copySize = outputData->remainDataLen;
             if (copySize > 0)
