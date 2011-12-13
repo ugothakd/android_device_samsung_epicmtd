@@ -1,5 +1,4 @@
-ifeq ($(TARGET_DEVICE),epicmtdboobs)
-
+ifeq ($(TARGET_DEVICE),epicmtd)
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
@@ -27,5 +26,4 @@ LOCAL_MODULE := libstagefrighthw
 
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
-
 endif

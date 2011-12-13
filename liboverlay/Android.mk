@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(TARGET_DEVICE),epicmtdboobs)
+ifeq ($(TARGET_DEVICE),epicmtd)
 
 LOCAL_PATH:= $(call my-dir)
 # HAL module implemenation, not prelinked and stored in
@@ -35,5 +35,4 @@ LOCAL_SRC_FILES := v4l2_utils.c overlay.cpp
 LOCAL_MODULE := overlay.s5pc110
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
-
 endif

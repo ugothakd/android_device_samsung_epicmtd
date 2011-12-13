@@ -1,3 +1,3 @@
-ifeq ($(TARGET_DEVICE),epicmtdboobs)
+ifeq ($(TARGET_DEVICE),epicmtd)
 include $(all-subdir-makefiles)
 endif
