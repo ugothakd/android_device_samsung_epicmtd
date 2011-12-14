@@ -51,10 +51,6 @@ FILES="
 bin/BCM4329B1_002.002.023.0746.0832.hcd
 
 etc/wifi/nvram_net.txt
-etc/wifi/nvram_mfg.txt
-etc/wifi/bcm4329_aps.bin
-etc/wifi/bcm4329_mfg.bin
-etc/wifi/bcm4329_sta.bin
 
 bin/tvoutserver
 cameradata/datapattern_420sp.yuv
@@ -179,11 +175,7 @@ PRODUCT_COPY_FILES += \\
 # Wifi
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_aps.bin:system/etc/wifi/bcm4329_aps.bin \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_mfg.bin:system/etc/wifi/bcm4329_mfg.bin \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt
 
 #
 # Display (3D)
