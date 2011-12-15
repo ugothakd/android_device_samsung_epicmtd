@@ -98,7 +98,7 @@ than the size of the config_autoBrightnessLevels array.
     <integer name="config_defaultNotificationLedOff">2000</integer>
 
     <!-- Default value for led color when battery is low on charge -->
-    <integer name="config_notificationsBatteryLowARGB">0xFF0000FF</integer>
+    <integer name="config_notificationsBatteryLowARGB">0xFFFF00FF</integer>
 
     <!-- Default value for led color when battery is medium charged -->
     <integer name="config_notificationsBatteryMediumARGB">0xFFFF0000</integer>
