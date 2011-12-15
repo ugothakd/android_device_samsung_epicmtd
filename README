@@ -11,8 +11,8 @@ The first thing that will need to be done, is that you will need to create a loc
 
     <remote  name="EpicCM" fetch="https://github.com" />
 
-    <project path="device/samsung/epicmtd" name="EpicCM/android_device_samsung_epicmtd" remote="EpicCM" revision="gingerbread"/>
-    <project path="vendor/cyanogen" name="EpicCM/android_vendor_cyanogen" remote="EpicCM" revision="teamhacksung-merge"/>
+    <project path="device/samsung/epicmtd" name="EpicCM/android_device_samsung_epicmtd" remote="EpicCM" revision="blob-overlay"/>
+    <project path="vendor/cyanogen" name="EpicCM/android_vendor_cyanogen" remote="EpicCM" revision="epiccm-rebase"/>
 
   </manifest>
 
