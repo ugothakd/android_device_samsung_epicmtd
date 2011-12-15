@@ -17,6 +17,8 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
+
+include device/samsung/aries-common/AriesParts/Android.mk
 DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
 
 # These are the hardware-specific configuration files
@@ -66,11 +68,8 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/epicmtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
-
-# These are the OpenMAX IL configuration files
-PRODUCT_COPY_FILES += \
-    device/samsung/epicmtd/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
+	device/samsung/epicmtd/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
+	device/samsung/epicmtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \

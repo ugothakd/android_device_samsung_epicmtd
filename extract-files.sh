@@ -51,10 +51,6 @@ FILES="
 bin/BCM4329B1_002.002.023.0746.0832.hcd
 
 etc/wifi/nvram_net.txt
-etc/wifi/nvram_mfg.txt
-etc/wifi/bcm4329_aps.bin
-etc/wifi/bcm4329_mfg.bin
-etc/wifi/bcm4329_sta.bin
 
 bin/tvoutserver
 cameradata/datapattern_420sp.yuv
@@ -113,7 +109,6 @@ lib/hw/sensors.default.so
 lib/hw/copybit.s5pc110.so
 lib/hw/lights.s5pc110.so
 lib/hw/gralloc.s5pc110.so
-lib/hw/overlay.s5pc110.so
 
 bin/playlpm
 bin/charging_mode
@@ -180,11 +175,7 @@ PRODUCT_COPY_FILES += \\
 # Wifi
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_aps.bin:system/etc/wifi/bcm4329_aps.bin \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_mfg.bin:system/etc/wifi/bcm4329_mfg.bin \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt
 
 #
 # Display (3D)
@@ -215,8 +206,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so
 
 #
 # Bluetooth
