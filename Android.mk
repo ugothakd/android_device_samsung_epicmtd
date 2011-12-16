@@ -15,4 +15,4 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
-
+include device/samsung/aries-common/libs3cjpeg/Android.mk
