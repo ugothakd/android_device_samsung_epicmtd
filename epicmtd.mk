@@ -18,7 +18,6 @@
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
 
-include device/samsung/aries-common/AriesParts/Android.mk
 DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
 
 # These are the hardware-specific configuration files
@@ -83,6 +82,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstagefrighthw \
     overlay.s5pc110
+
+# Camera
+PRODUCT_PACKAGES += \
+	libs3cjpeg
 
 # update utilities
 PRODUCT_PACKAGES += \
