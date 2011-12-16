@@ -37,7 +37,7 @@ This tutorial begins with a belief that you have already sync'd down CyanogenMod
 ```
 repo sync
 make clobber
-brunch epicmtd
+make brunch epicmtd
 ```
 
 and the build will begin!
