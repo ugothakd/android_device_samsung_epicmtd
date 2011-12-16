@@ -799,3 +799,11 @@ on property:ril.cdma.data_ready=true
 on property:ril.cdma.data_ready=false
     stop pppd_cdma
 
+service tvout /system/bin/tvoutserver
+    user system
+    group graphics
+
+service tvouthack /system/bin/tvouthack
+    user system
+    group graphics
+    disabled

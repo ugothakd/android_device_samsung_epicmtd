@@ -17,6 +17,9 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ANDROID_ARM_LINKER := true
 
+#build libs3cjpeg
+Y_U_NO_HAVE_CAMERA := true 
+
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 

@@ -21,6 +21,7 @@
 
 DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
 
+
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
     device/samsung/epicmtd/prebuilt/etc/asound.conf:system/etc/asound.conf \
@@ -91,7 +92,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-libs3cjpeg
+    libs3cjpeg
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -119,7 +120,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # Device-specific packages
 	PRODUCT_PACKAGES += \
-	AriesParts
+	EpicParts
 
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \

@@ -23,10 +23,9 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # This is where we'd set a backup provider if we had one
 #$(call inherit-product, device/sample/products/backup_overlay.mk)
-$(call inherit-product, device/samsung/aries-common/libs3cjpeg/Android.mk)
 $(call inherit-product, device/samsung/epicmtd/epicmtd.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full.mk)
-
+$(call inherit-product, device/samsung/epicmtd/import.mk)
 # Screen density is actually considered a locale (since it is taken into account
 # the the build-time selection of resources). The product definitions including
 # this file must pay attention to the fact that the first entry in the final
