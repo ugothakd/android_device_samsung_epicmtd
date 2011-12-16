@@ -89,6 +89,10 @@ PRODUCT_PACKAGES += \
 	bml_over_mtd \
 	setup_fs
 
+# Camera
+PRODUCT_PACKAGES += \
+libs3cjpeg
+
 # apns config file
 PRODUCT_COPY_FILES += \
         device/samsung/epicmtd/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
