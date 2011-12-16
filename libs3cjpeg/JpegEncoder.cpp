@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * JPEG DRIVER MODULE (JpegEncoder.cpp)
+* JPEG DRIVER MODULE (JpegEncoder.cpp)
  * Author  : ge.lee       -- initial version
  * Date    : 03 June 2010
  * Purpose : This file implements the JPEG encoder APIs as needed by Camera HAL

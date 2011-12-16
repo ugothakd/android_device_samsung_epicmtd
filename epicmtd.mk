@@ -92,7 +92,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    libs3cjpeg
+    libs3cjpeg.s5pc110
 
 # apns config file
 PRODUCT_COPY_FILES += \
