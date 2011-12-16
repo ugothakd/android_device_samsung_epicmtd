@@ -66,6 +66,7 @@ lib/libCaMotion.so
 lib/libcaps.so
 lib/libPanoraMax1.so
 lib/libPlusMe.so
+lib/libs3cjpeg.so
 lib/libseccamera.so
 lib/libseccameraadaptor.so
 lib/libsecjpegencoder.so
@@ -231,6 +232,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libcaps.so:system/lib/libcaps.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libPanoraMax1.so:system/lib/libPanoraMax1.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libPlusMe.so:system/lib/libPlusMe.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libs3cjpeg.so:system/lib/libs3cjpeg.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libseccamera.so:system/lib/libseccamera.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libseccameraadaptor.so:system/lib/libseccameraadaptor.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecjpegencoder.so:system/lib/libsecjpegencoder.so \\
