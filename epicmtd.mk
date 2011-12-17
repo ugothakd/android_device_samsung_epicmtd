@@ -93,7 +93,9 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     libs3cjpeg
-
+# tvout 
+PRODUCT_PACKAGES += \
+	tvouthack
 # apns config file
 PRODUCT_COPY_FILES += \
         device/samsung/epicmtd/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml
