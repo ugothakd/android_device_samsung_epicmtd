@@ -51,6 +51,10 @@ FILES="
 bin/BCM4329B1_002.002.023.0746.0832.hcd
 
 etc/wifi/nvram_net.txt
+etc/wifi/nvram_mfg.txt
+etc/wifi/bcm4329_aps.bin
+etc/wifi/bcm4329_mfg.bin
+etc/wifi/bcm4329_sta.bin
 
 bin/tvoutserver
 cameradata/datapattern_420sp.yuv
@@ -66,6 +70,7 @@ lib/libCaMotion.so
 lib/libcaps.so
 lib/libPanoraMax1.so
 lib/libPlusMe.so
+lib/libs3cjpeg.so
 lib/libseccamera.so
 lib/libseccameraadaptor.so
 lib/libsecjpegencoder.so
@@ -174,7 +179,11 @@ PRODUCT_COPY_FILES += \\
 # Wifi
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_aps.bin:system/etc/wifi/bcm4329_aps.bin \\
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_mfg.bin:system/etc/wifi/bcm4329_mfg.bin \\
+    vendor/samsung/__DEVICE__/proprietary/etc/wifi/bcm4329_sta.bin:system/etc/wifi/bcm4329_sta.bin
 
 #
 # Display (3D)
@@ -231,6 +240,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libcaps.so:system/lib/libcaps.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libPanoraMax1.so:system/lib/libPanoraMax1.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libPlusMe.so:system/lib/libPlusMe.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libs3cjpeg.so:system/lib/libs3cjpeg.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libseccamera.so:system/lib/libseccamera.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libseccameraadaptor.so:system/lib/libseccameraadaptor.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsecjpegencoder.so:system/lib/libsecjpegencoder.so \\
