@@ -98,6 +98,7 @@ lib/libpvrANDROID_WSEGL.so
 lib/libglslcompiler.so
 lib/libPVRScopeServices.so
 lib/libusc.so
+lib/hw/overlay.s5pc110.so
 
 bin/geomagneticd
 bin/orientationd
@@ -108,6 +109,7 @@ lib/hw/sensors.default.so
 lib/hw/copybit.s5pc110.so
 lib/hw/lights.s5pc110.so
 lib/hw/gralloc.s5pc110.so
+lib/hw/overlay.s5pc110.so
 
 bin/playlpm
 bin/charging_mode
@@ -205,6 +207,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so
 
 #
