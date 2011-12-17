@@ -17,10 +17,7 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-
-
 DEVICE_PACKAGE_OVERLAYS := device/samsung/epicmtd/overlay
-
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
@@ -69,8 +66,11 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/epicmtd/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
-	device/samsung/epicmtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+    device/samsung/epicmtd/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+
+# These are the OpenMAX IL configuration files
+PRODUCT_COPY_FILES += \
+    device/samsung/epicmtd/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry
 
 # These are the OpenMAX IL modules
 PRODUCT_PACKAGES += \
@@ -89,10 +89,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	bml_over_mtd \
 	setup_fs
-
-# Camera
-PRODUCT_PACKAGES += \
-    libs3cjpeg
 
 # apns config file
 PRODUCT_COPY_FILES += \
@@ -120,7 +116,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # Device-specific packages
 	PRODUCT_PACKAGES += \
-	EpicParts
+	AriesParts
 
 # Telephony property for CDMA
 PRODUCT_PROPERTY_OVERRIDES += \
