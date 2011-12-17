@@ -1,4 +1,4 @@
-ifeq ($(TARGET_DEVICE),epicmtdboobs)
+ifeq ($(TARGET_DEVICE),epicmtd)
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
